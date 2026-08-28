@@ -1,15 +1,94 @@
 export const portfolioData = {
   name: "Abdrezak Shemsedin",
+  initials: "AS",
   role: "Full-Stack Web and App Developer",
   bio: "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
+  about:
+    "I&apos;m a full-stack developer and ECE student based in Addis Ababa. I combine engineering rigor with product thinking to ship fast, reliable software. I care deeply about clean architecture, accessible UIs, and real-world impact.",
   availability: "Available for new projects",
   location: "Addis Ababa, Ethiopia",
+  resumeUrl: "/resume.pdf",
   socials: {
     github: "https://github.com/real1editor",
     linkedin: "abdrezak-shemsedin",
     upwork: "abdrezak",
     email: "real1editor@gmail.com",
   },
+  skills: [
+    {
+      category: "Frontend",
+      items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "React Native", "Expo"],
+    },
+    {
+      category: "Backend",
+      items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "Prisma", "Supabase"],
+    },
+    {
+      category: "Tools & Platforms",
+      items: ["Git", "Docker", "Vercel", "Mapbox", "Recharts", "Framer Motion"],
+    },
+  ],
+  experience: [
+    {
+      title: "Freelance Full-Stack Developer",
+      company: "Self-employed",
+      period: "2024 — Present",
+      description:
+        "Delivering web and mobile solutions for clients across e-commerce, tourism, and SaaS. Owned product requirements, architecture, and launch.",
+    },
+    {
+      title: "Frontend Developer Intern",
+      company: "Tech Startup",
+      period: "2023 — 2024",
+      description:
+        "Built responsive UI components and improved site performance by 35%. Collaborated with designers and backend engineers.",
+    },
+  ],
+  education: [
+    {
+      title: "BSc in Electrical and Computer Engineering",
+      company: "University",
+      period: "2021 — 2026",
+      description:
+        "Focus on software systems, embedded computing, and applied machine learning. Active in coding clubs and hackathons.",
+    },
+  ],
+  techStack: [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js",
+    "Express",
+    "PostgreSQL",
+    "MongoDB",
+    "Supabase",
+    "Prisma",
+    "React Native",
+    "Expo",
+    "Docker",
+    "Git",
+  ],
+  testimonials: [
+    {
+      quote:
+        "Abdrezak delivered our marketplace faster than expected and the codebase was production-ready from day one.",
+      author: "Sarah K.",
+      role: "Founder, Retail Startup",
+    },
+    {
+      quote:
+        "He turned a rough concept into a polished platform with real-time tracking and clean UX. Highly recommended.",
+      author: "Daniel T.",
+      role: "Product Manager",
+    },
+    {
+      quote:
+        "Responsive, detail-oriented, and great at translating business needs into technical solutions.",
+      author: "Marta G.",
+      role: "Freelance Client",
+    },
+  ],
   projects: [
     {
       title: "NuroTewedede Platform",
