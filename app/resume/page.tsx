@@ -1,20 +1,10 @@
 import { portfolioData } from "@/data/projects";
+import PrintButton from "@/components/print-button";
 
 export const metadata = {
   title: `Resume — ${portfolioData.name}`,
   description: "Resume of Abdrezak Shemsedin",
 };
-
-function PrintButton() {
-  return (
-    <button
-      onClick={() => window.print()}
-      className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 px-5 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
-    >
-      Save as PDF
-    </button>
-  );
-}
 
 export default function ResumePage() {
   return (
@@ -26,13 +16,7 @@ export default function ResumePage() {
             {portfolioData.name} — {portfolioData.role}
           </p>
         </div>
-        <button
-          onClick={() => window.print()}
-          className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 px-5 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
-        >
-          <Download className="h-4 w-4" />
-          Save as PDF
-        </button>
+        <PrintButton />
       </div>
 
       <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-8">
