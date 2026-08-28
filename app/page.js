@@ -82,7 +82,7 @@ function Header({ initials }) {
             {portfolioData.name}
           </span>
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-6 md:flex">
           {links.map((item) => (
             <a
               key={item.href}
@@ -95,6 +95,8 @@ function Header({ initials }) {
         </nav>
         <button
           aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-zinc-300 md:hidden"
           onClick={() => setOpen((prev) => !prev)}
         >
@@ -104,6 +106,8 @@ function Header({ initials }) {
       <AnimatePresence>
         {open && (
           <motion.nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -119,7 +123,7 @@ function Header({ initials }) {
                   className="flex items-center justify-between py-3 text-sm text-zinc-300 transition-colors hover:text-white"
                 >
                   <span>{item.label}</span>
-                  <ChevronRight className="h-4 w-4 text-zinc-500" />
+                  <ChevronRight className="h-4 w-4 text-zinc-500" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -169,7 +173,7 @@ import React from "react";
 
 function Hero({ socials }) {
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section id="top" aria-labelledby="hero-heading" className="relative overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[140px]"
@@ -181,7 +185,7 @@ function Hero({ socials }) {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400"
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2 w-2" aria-hidden="true">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
@@ -189,6 +193,7 @@ function Hero({ socials }) {
         </motion.span>
 
         <motion.h1
+          id="hero-heading"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -202,6 +207,7 @@ function Hero({ socials }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-4 bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl"
+          aria-label={portfolioData.role}
         >
           {portfolioData.role}
         </motion.p>
@@ -221,8 +227,8 @@ function Hero({ socials }) {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-5 flex items-center gap-1.5 text-sm text-zinc-500"
         >
-          <MapPin className="h-3.5 w-3.5" />
-          {portfolioData.location}
+          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+          <address className="not-italic">{portfolioData.location}</address>
         </motion.p>
 
         <motion.div
@@ -236,7 +242,7 @@ function Hero({ socials }) {
             className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
           >
             View Projects
-            <ArrowDown className="h-4 w-4" />
+            <ArrowDown className="h-4 w-4" aria-hidden="true" />
           </a>
           <a
             href="#contact"
@@ -248,7 +254,7 @@ function Hero({ socials }) {
             href="/resume"
             className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
           >
-            <Download className="h-4 w-4" />
+            <Download className="h-4 w-4" aria-hidden="true" />
             Resume
           </a>
         </motion.div>
@@ -268,7 +274,7 @@ function Hero({ socials }) {
 
 function About() {
   return (
-    <section id="about" className="border-t border-white/5">
+    <section id="about" aria-labelledby="about-heading" className="border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <SectionHeading
@@ -295,7 +301,7 @@ function About() {
 
 function Skills() {
   return (
-    <section id="skills" className="border-t border-white/5">
+    <section id="skills" aria-labelledby="skills-heading" className="border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <SectionHeading
@@ -312,7 +318,7 @@ function Skills() {
                 <h3 className="text-sm font-semibold text-zinc-200">
                   {group.category}
                 </h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
+                <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${group.category} skills`}>
                   {group.items.map((item) => (
                     <li
                       key={item}
@@ -333,11 +339,13 @@ function Skills() {
 
 function TimelineItem({ item }) {
   return (
-    <div className="relative pl-8 md:pl-12">
-      <div className="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-emerald-400/60 bg-zinc-950 md:left-0" />
-      <div className="absolute left-[7px] top-6 h-full w-px bg-gradient-to-b from-emerald-500/40 via-white/10 to-transparent md:left-[7px]" />
+    <article className="relative pl-8 md:pl-12">
+      <div className="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-emerald-400/60 bg-zinc-950 md:left-0" aria-hidden="true" />
+      <div className="absolute left-[7px] top-6 h-full w-px bg-gradient-to-b from-emerald-500/40 via-white/10 to-transparent md:left-[7px]" aria-hidden="true" />
       <div className="pb-10">
-        <p className="text-xs font-medium text-emerald-400">{item.period}</p>
+        <time className="text-xs font-medium text-emerald-400" dateTime={item.period}>
+          {item.period}
+        </time>
         <h3 className="mt-1 text-base font-semibold text-zinc-100">
           {item.title}
         </h3>
@@ -346,13 +354,13 @@ function TimelineItem({ item }) {
           {item.description}
         </p>
       </div>
-    </div>
+    </article>
   );
 }
 
 function Experience() {
   return (
-    <section id="experience" className="border-t border-white/5">
+    <section id="experience" aria-labelledby="experience-heading" className="border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <SectionHeading
@@ -365,7 +373,7 @@ function Experience() {
               <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
                 Work
               </h3>
-              <div className="mt-6">
+              <div className="mt-6" role="list" aria-label="Work experience">
                 {portfolioData.experience.map((item) => (
                   <TimelineItem key={item.title} item={item} />
                 ))}
@@ -375,7 +383,7 @@ function Experience() {
               <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
                 Education
               </h3>
-              <div className="mt-6">
+              <div className="mt-6" role="list" aria-label="Education history">
                 {portfolioData.education.map((item) => (
                   <TimelineItem key={item.title} item={item} />
                 ))}
@@ -390,7 +398,7 @@ function Experience() {
 
 function TechStack() {
   return (
-    <section className="border-t border-white/5">
+    <section aria-labelledby="techstack-heading" className="border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <SectionHeading
@@ -398,10 +406,11 @@ function TechStack() {
             title="Tools I use"
             description="Technologies I reach for depending on the problem."
           />
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3" role="list" aria-label="Technologies">
             {portfolioData.techStack.map((tool) => (
               <span
                 key={tool}
+                role="listitem"
                 className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-emerald-500/30 hover:text-white"
               >
                 {tool}
@@ -416,17 +425,18 @@ function TechStack() {
 
 function Testimonials() {
   return (
-    <section className="border-t border-white/5">
+    <section aria-labelledby="testimonials-heading" className="border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <SectionHeading
             label="Testimonials"
             title="Kind words from people I&apos;ve worked with"
           />
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3" role="list" aria-label="Testimonials">
             {portfolioData.testimonials.map((item) => (
               <blockquote
                 key={item.author}
+                role="listitem"
                 className="flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 p-6"
               >
                 <p className="text-sm leading-relaxed text-zinc-300">
@@ -543,14 +553,14 @@ function Projects({ projects }) {
   const [activeFilter, setActiveFilter] = useState("All");
 
   return (
-    <section id="projects" className="scroll-mt-20 border-t border-white/5">
+    <section id="projects" aria-labelledby="projects-heading" className="scroll-mt-20 border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
               Portfolio
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 id="projects-heading" className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Selected Projects
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
@@ -582,7 +592,7 @@ function Contact({ socials }) {
   };
 
   return (
-    <section id="contact" className="scroll-mt-20 border-t border-white/5">
+    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-t border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-28 text-center">
         <SectionHeading
           label="Contact"
@@ -595,43 +605,51 @@ function Contact({ socials }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300"
+              role="status"
+              aria-live="polite"
             >
-              <CheckCircle2 className="h-4 w-4" />
+              <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
               Thanks! This form is a demo. Use the email button below to reach me.
             </motion.div>
           ) : (
             <form
               onSubmit={handleSubmit}
               className="grid gap-4 text-left"
+              aria-label="Contact form"
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-zinc-400">
+                  <label htmlFor="name" className="mb-1 block text-xs font-medium text-zinc-400">
                     Name
                   </label>
                   <input
+                    id="name"
                     required
                     className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
                     placeholder="Your name"
+                    autoComplete="name"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-zinc-400">
+                  <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-400">
                     Email
                   </label>
                   <input
+                    id="email"
                     required
                     type="email"
                     className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
                     placeholder="you@example.com"
+                    autoComplete="email"
                   />
                 </div>
               </div>
               <div>
-                <label className="mb-1 block text-xs font-medium text-zinc-400">
+                <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">
                   Message
                 </label>
                 <textarea
+                  id="message"
                   required
                   rows={5}
                   className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
@@ -642,7 +660,7 @@ function Contact({ socials }) {
                 type="submit"
                 className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto"
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-4 w-4" aria-hidden="true" />
                 Send Message
               </button>
             </form>
@@ -652,13 +670,13 @@ function Contact({ socials }) {
               href={`mailto:${portfolioData.socials.email}`}
               className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
             >
-              <Mail className="h-4 w-4" />
+              <Mail className="h-4 w-4" aria-hidden="true" />
               {portfolioData.socials.email}
             </a>
           </div>
-          <div className="mt-8 flex justify-center">
+          <address className="mt-8 flex not-italic justify-center">
             <SocialLinks socials={socials} />
-          </div>
+          </address>
         </div>
       </div>
     </section>
@@ -673,7 +691,6 @@ function Footer() {
           © {new Date().getFullYear()} {portfolioData.name}. All rights
           reserved.
         </p>
-        <p>Built with Next.js &amp; Tailwind CSS</p>
       </div>
     </footer>
   );
@@ -715,8 +732,11 @@ export default function Home() {
 
   return (
     <>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-zinc-900">
+        Skip to main content
+      </a>
       <Header initials={initials} />
-      <main>
+      <main id="main-content">
         <Hero socials={socials} />
         <About />
         <Skills />
