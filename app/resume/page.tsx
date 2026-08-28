@@ -1,3 +1,5 @@
+"use client";
+
 import { portfolioData } from "@/data/projects";
 import { Download } from "lucide-react";
 
@@ -146,24 +148,6 @@ export default function ResumePage() {
           </div>
         </section>
       </div>
-
-      <style jsx global>{`
-        @media print {
-          body {
-            background: white !important;
-            color: black !important;
-          }
-          .no-print {
-            display: none !important;
-          }
-          nav,
-          header,
-          footer,
-          button {
-            display: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -26,3 +26,16 @@ body {
   background-color: rgba(16, 185, 129, 0.25);
   color: #ffffff;
 }
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  nav,
+  header,
+  footer,
+  button {
+    display: none !important;
+  }
+}
