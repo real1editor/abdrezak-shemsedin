@@ -3,17 +3,49 @@ export const portfolioData = {
   initials: "AS",
   role: "Full-Stack Web and App Developer",
   bio: "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
+  image: "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto/photo_2026-08-31_12-22-01",
   about:
     "I&apos;m a full-stack developer and ECE student based in Addis Ababa. I combine engineering rigor with product thinking to ship fast, reliable software. I care deeply about clean architecture, accessible UIs, and real-world impact.",
   availability: "Available for new projects",
   location: "Addis Ababa, Ethiopia",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/resume",
   socials: {
     github: "https://github.com/real1editor",
-    linkedin: "abdrezak-shemsedin",
-    upwork: "abdrezak",
+    linkedin: "https://www.linkedin.com/in/abdrezak-shemsedin",
+    upwork: "https://www.upwork.com/freelancers/abdrezak",
     email: "real1editor@gmail.com",
+    telegram: "https://t.me/real1editor",
+    phone: "tel:+251900000000",
   },
+  metrics: [
+    { value: "6+", label: "Featured Projects" },
+    { value: "14+", label: "Tech & Frameworks" },
+    { value: "3", label: "Languages Spoken" },
+    { value: "5th-Yr", label: "Computer Engineering, WSU" },
+  ],
+  languages: [
+    {
+      name: "Amharic",
+      level: "Native",
+      reading: 100,
+      listening: 100,
+      speaking: 100,
+    },
+    {
+      name: "English",
+      level: "Professional",
+      reading: 85,
+      listening: 80,
+      speaking: 75,
+    },
+    {
+      name: "Afaan Oromo",
+      level: "Conversational",
+      reading: 60,
+      listening: 75,
+      speaking: 70,
+    },
+  ],
   skills: [
     {
       category: "Frontend",
@@ -47,10 +79,71 @@ export const portfolioData = {
   education: [
     {
       title: "BSc in Electrical and Computer Engineering",
-      company: "University",
-      period: "2021 — 2026",
+      institution: "Wolaita Sodo University",
+      period: "2021 — 2026 (5th Year)",
       description:
         "Focus on software systems, embedded computing, and applied machine learning. Active in coding clubs and hackathons.",
+      status: "current",
+    },
+    {
+      title: "Higher Education Entrance Certificate",
+      institution: "Preparatory School",
+      period: "2018 — 2021",
+      description:
+        "Ethiopian Higher Education Entrance Certificate with focus on natural science and mathematics.",
+      status: "completed",
+    },
+    {
+      title: "Primary School Certificate",
+      institution: "Primary School",
+      period: "2011 — 2018",
+      description:
+        "Completed primary education with distinction.",
+      status: "completed",
+    },
+  ],
+  certifications: [
+    {
+      title: "Data Analytics with Python",
+      issuer: "freeCodeCamp",
+      date: "2024",
+      url: "#",
+      description: "Comprehensive training in data analysis, visualization, and statistical methods using Python and Pandas.",
+    },
+    {
+      title: "Responsive Web Design",
+      issuer: "freeCodeCamp",
+      date: "2023",
+      url: "#",
+      description: "Modern responsive layouts using HTML, CSS, and Flexbox/Grid techniques.",
+    },
+    {
+      title: "JavaScript Algorithms and Data Structures",
+      issuer: "freeCodeCamp",
+      date: "2023",
+      url: "#",
+      description: "Core JavaScript concepts, ES6+, algorithmic thinking, and data structure fundamentals.",
+    },
+    {
+      title: "Cybersecurity Fundamentals",
+      issuer: "Cisco Networking Academy",
+      date: "2024",
+      url: "#",
+      description: "Introduction to cybersecurity principles, threat analysis, and network defense strategies.",
+    },
+    {
+      title: "Introduction to IoT",
+      issuer: "Cisco Networking Academy",
+      date: "2023",
+      url: "#",
+      description: "Fundamentals of Internet of Things, embedded systems, and connected device architectures.",
+    },
+    {
+      title: "Git & GitHub Masterclass",
+      issuer: "Udemy",
+      date: "2023",
+      url: "#",
+      description: "Version control workflows, branching strategies, and collaborative development with Git.",
     },
   ],
   techStack: [
@@ -137,6 +230,33 @@ export const portfolioData = {
       tags: ["Next.js", "Recharts", "Prisma", "PostgreSQL"],
       liveUrl: "",
       githubUrl: "",
+    },
+  ],
+  faq: [
+    {
+      question: "Who is Abdrezak Shemsedin?",
+      answer:
+        "Abdrezak Shemsedin is a full-stack web and app developer and a 5th-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
+    },
+    {
+      question: "What tech stack does he use?",
+      answer:
+        "He works with Next.js, React, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL, MongoDB, Supabase, Prisma, React Native, Expo, Docker, and Git.",
+    },
+    {
+      question: "Is he available for freelance work?",
+      answer:
+        "Yes — Abdrezak is currently available for freelance projects and full-time opportunities. You can reach out via the contact section below or email directly.",
+    },
+    {
+      question: "How can I get in touch?",
+      answer:
+        "You can contact him via email (real1editor@gmail.com), GitHub, LinkedIn, Upwork, or Telegram. All links are available in the contact section.",
+    },
+    {
+      question: "What kind of projects does he build?",
+      answer:
+        "He builds e-commerce platforms, tourism websites, analytics dashboards, mobile apps, and SaaS tools — focusing on clean architecture, performance, and real-world impact.",
     },
   ],
 };

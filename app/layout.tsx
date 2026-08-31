@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { portfolioData } from "@/data/projects";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.png",
+        url: portfolioData.image,
         width: 1200,
         height: 630,
         alt: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
     title: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
     description:
       "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
-    images: ["/og-image.png"],
+    images: [portfolioData.image],
     creator: "@real1editor",
   },
   robots: {
@@ -101,7 +102,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     "@type": "Person",
     name: "Abdrezak Shemsedin",
     url: "https://real1editor.vercel.app",
-    image: "https://real1editor.vercel.app/og-image.png",
+    image: portfolioData.image,
     jobTitle: "Full-Stack Web and App Developer",
     worksFor: {
       "@type": "Organization",

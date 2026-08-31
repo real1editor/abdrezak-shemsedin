@@ -14,23 +14,37 @@ import {
   ArrowUp,
   Send,
   CheckCircle2,
+  Phone,
+  MessageCircle,
+  Award,
+  ChevronDown,
+  BookOpen,
+  GraduationCap,
+  HelpCircle,
+  Clock,
 } from "lucide-react";
-import { GithubIcon, LinkedinIcon, UpworkIcon } from "@/components/icons";
+import { GithubIcon, LinkedinIcon, UpworkIcon, TelegramIcon } from "@/components/icons";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/projects";
 
+import React from "react";
+
 const socialBuilders = {
   github: (value) => value,
-  linkedin: (value) => `https://www.linkedin.com/in/${value}`,
-  upwork: (value) => `https://www.upwork.com/freelancers/${value}`,
+  linkedin: (value) => value.startsWith("http") ? value : `https://www.linkedin.com/in/${value}`,
+  upwork: (value) => value.startsWith("http") ? value : `https://www.upwork.com/freelancers/${value}`,
   email: (value) => `mailto:${value}`,
+  telegram: (value) => value.startsWith("http") ? value : `https://t.me/${value}`,
+  phone: (value) => value.startsWith("tel:") ? value : `tel:${value}`,
 };
 
 const socialConfig = [
   { key: "github", label: "GitHub", Icon: GithubIcon },
   { key: "linkedin", label: "LinkedIn", Icon: LinkedinIcon },
   { key: "upwork", label: "Upwork", Icon: UpworkIcon },
+  { key: "telegram", label: "Telegram", Icon: TelegramIcon },
   { key: "email", label: "Email", Icon: Mail },
+  { key: "phone", label: "Phone", Icon: Phone },
 ];
 
 function buildSocials() {
@@ -38,7 +52,7 @@ function buildSocials() {
     label,
     href: socialBuilders[key](portfolioData.socials[key]),
     Icon,
-    external: key !== "email",
+    external: key !== "email" && key !== "phone",
   }));
 }
 
@@ -65,9 +79,12 @@ function Header({ initials }) {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#about", label: "About" },
+    { href: "#languages", label: "Languages" },
     { href: "#skills", label: "Skills" },
+    { href: "#education", label: "Education" },
     { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
+    { href: "#certifications", label: "Certs" },
     { href: "#contact", label: "Contact" },
   ];
 
@@ -169,8 +186,6 @@ function FadeIn({ children, className }) {
   );
 }
 
-import React from "react";
-
 function Hero({ socials }) {
   return (
     <section id="top" aria-labelledby="hero-heading" className="relative overflow-hidden">
@@ -250,7 +265,7 @@ function Hero({ socials }) {
           >
             Get in Touch
           </a>
-            <a
+          <a
             href="/resume"
             className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
           >
@@ -267,6 +282,32 @@ function Hero({ socials }) {
         >
           <SocialLinks socials={socials} />
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function KeyMetrics() {
+  return (
+    <section aria-labelledby="metrics-heading" className="border-t border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-12">
+        <FadeIn>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {portfolioData.metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="flex flex-col items-center rounded-2xl border border-white/10 bg-zinc-900/40 px-4 py-6 text-center transition-colors hover:border-emerald-500/30"
+              >
+                <span className="text-2xl font-bold text-white sm:text-3xl">
+                  {metric.value}
+                </span>
+                <span className="mt-1 text-xs font-medium text-zinc-400 sm:text-sm">
+                  {metric.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -292,6 +333,57 @@ function About() {
               When I&apos;m not coding, I&apos;m usually reading about system design,
               contributing to open source, or mentoring junior developers.
             </p>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+function Languages() {
+  return (
+    <section id="languages" aria-labelledby="languages-heading" className="border-t border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <SectionHeading
+            label="Languages"
+            title="What I speak"
+            description="Communication across cultures and communities is central to collaboration."
+          />
+          <div className="grid gap-5 sm:grid-cols-3">
+            {portfolioData.languages.map((lang) => (
+              <div
+                key={lang.name}
+                className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition-colors hover:border-emerald-500/30"
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-zinc-100">{lang.name}</h3>
+                  <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
+                    {lang.level}
+                  </span>
+                </div>
+                <div className="mt-5 space-y-3">
+                  {[
+                    { label: "Reading", value: lang.reading },
+                    { label: "Listening", value: lang.listening },
+                    { label: "Speaking", value: lang.speaking },
+                  ].map(({ label, value }) => (
+                    <div key={label}>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-zinc-400">{label}</span>
+                        <span className="text-zinc-500">{value}%</span>
+                      </div>
+                      <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400"
+                          style={{ width: `${value}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </FadeIn>
       </div>
@@ -337,6 +429,59 @@ function Skills() {
   );
 }
 
+function EducationTimeline() {
+  return (
+    <section id="education" aria-labelledby="education-heading" className="border-t border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <SectionHeading
+            label="Education"
+            title="Academic history"
+            description="My educational journey from primary school through university."
+          />
+          <div className="relative ml-4 border-l border-emerald-500/20 pl-8">
+            {portfolioData.education.map((item, idx) => (
+              <article
+                key={item.title}
+                className="relative pb-12 last:pb-0"
+              >
+                <div
+                  className={`absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border ${
+                    item.status === "current"
+                      ? "border-emerald-400 bg-emerald-500"
+                      : "border-white/20 bg-zinc-950"
+                  }`}
+                  aria-hidden="true"
+                />
+                {item.status === "current" && (
+                  <div className="absolute -left-[45px] top-0 h-5 w-5 animate-ping rounded-full bg-emerald-500/20" aria-hidden="true" />
+                )}
+                <div className="flex items-center gap-3">
+                  <time className="text-xs font-medium text-emerald-400" dateTime={item.period}>
+                    {item.period}
+                  </time>
+                  {item.status === "current" && (
+                    <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
+                      Current
+                    </span>
+                  )}
+                </div>
+                <h3 className="mt-2 text-base font-semibold text-zinc-100">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-zinc-500">{item.institution}</p>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 function TimelineItem({ item }) {
   return (
     <article className="relative pl-8 md:pl-12">
@@ -368,27 +513,10 @@ function Experience() {
             title="Where I&apos;ve worked"
             description="A mix of full-time, freelance, and hands-on engineering work."
           />
-          <div className="grid gap-10 md:grid-cols-2">
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
-                Work
-              </h3>
-              <div className="mt-6" role="list" aria-label="Work experience">
-                {portfolioData.experience.map((item) => (
-                  <TimelineItem key={item.title} item={item} />
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
-                Education
-              </h3>
-              <div className="mt-6" role="list" aria-label="Education history">
-                {portfolioData.education.map((item) => (
-                  <TimelineItem key={item.title} item={item} />
-                ))}
-              </div>
-            </div>
+          <div role="list" aria-label="Work experience">
+            {portfolioData.experience.map((item) => (
+              <TimelineItem key={item.title} item={item} />
+            ))}
           </div>
         </FadeIn>
       </div>
@@ -583,6 +711,88 @@ function Projects({ projects }) {
   );
 }
 
+function Certifications() {
+  return (
+    <section id="certifications" aria-labelledby="certs-heading" className="border-t border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <SectionHeading
+            label="Certifications"
+            title="Verified credentials"
+            description="Certificates earned from programs and platforms that validate my skills."
+          />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {portfolioData.certifications.map((cert) => (
+              <a
+                key={cert.title}
+                href={cert.url}
+                target={cert.url !== "#" ? "_blank" : undefined}
+                rel={cert.url !== "#" ? "noopener noreferrer" : undefined}
+                className="group flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 transition-colors group-hover:border-emerald-500/40">
+                    <Award className="h-5 w-5" />
+                  </span>
+                  <span className="text-xs text-zinc-500">{cert.date}</span>
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-zinc-100 transition-colors group-hover:text-white">
+                  {cert.title}
+                </h3>
+                <p className="mt-1 text-sm text-emerald-400/80">{cert.issuer}</p>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
+                  {cert.description}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 transition-colors group-hover:text-emerald-400">
+                  View Certificate
+                  <ExternalLink className="h-3 w-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  return (
+    <section id="faq" aria-labelledby="faq-heading" className="border-t border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <SectionHeading
+            label="FAQ"
+            title="Quick answers"
+            description="Common questions visitors ask about me."
+          />
+          <div className="mx-auto max-w-3xl space-y-3">
+            {portfolioData.faq.map((item, idx) => (
+              <details
+                key={idx}
+                className="group rounded-2xl border border-white/10 bg-zinc-900/40 transition-colors hover:border-white/15 [&[open]]:border-emerald-500/30"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-medium text-zinc-100 outline-none [&::-webkit-details-marker]:hidden [&::marker]:hidden">
+                  <span className="flex items-center gap-3">
+                    <HelpCircle className="h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
+                    {item.question}
+                  </span>
+                  <ChevronDown className="h-4 w-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180 group-open:text-emerald-400" aria-hidden="true" />
+                </summary>
+                <div className="border-t border-white/5 px-6 pb-5 pt-4">
+                  <p className="text-sm leading-relaxed text-zinc-400">
+                    {item.answer}
+                  </p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 function Contact({ socials }) {
   const [submitted, setSubmitted] = useState(false);
 
@@ -593,91 +803,121 @@ function Contact({ socials }) {
 
   return (
     <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-t border-white/5">
-      <div className="mx-auto max-w-5xl px-6 py-28 text-center">
-        <SectionHeading
-          label="Contact"
-          title="Let&apos;s build something great together."
-          description="I&apos;m currently open to freelance work and full-time opportunities. Whether you have a project in mind or just want to connect, my inbox is always open."
-        />
-        <div className="mx-auto mt-10 max-w-xl">
-          {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300"
-              role="status"
-              aria-live="polite"
-            >
-              <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-              Thanks! This form is a demo. Use the email button below to reach me.
-            </motion.div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="grid gap-4 text-left"
-              aria-label="Contact form"
-            >
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="name" className="mb-1 block text-xs font-medium text-zinc-400">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    required
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
-                    placeholder="Your name"
-                    autoComplete="name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-400">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    required
-                    type="email"
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
-                    placeholder="you@example.com"
-                    autoComplete="email"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={5}
-                  className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto"
+      <div className="mx-auto max-w-5xl px-6 py-28">
+        <FadeIn>
+          <SectionHeading
+            label="Contact"
+            title="Let&apos;s build something great together."
+            description="I&apos;m currently open to freelance work and full-time opportunities. Reach out on any platform below, send a quick message, or click to copy my details."
+          />
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { icon: Mail, label: "Email", value: portfolioData.socials.email, href: `mailto:${portfolioData.socials.email}` },
+              { icon: Phone, label: "Phone", value: "+251 900 000 000", href: portfolioData.socials.phone },
+              { icon: GithubIcon, label: "GitHub", value: "real1editor", href: portfolioData.socials.github },
+              { icon: LinkedinIcon, label: "LinkedIn", value: "abdrezak-shemsedin", href: portfolioData.socials.linkedin },
+              { icon: TelegramIcon, label: "Telegram", value: "@real1editor", href: portfolioData.socials.telegram },
+              { icon: UpworkIcon, label: "Upwork", value: "abdrezak", href: portfolioData.socials.upwork },
+            ].map(({ icon: Icon, label, value, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900/40 p-5 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-500/30 hover:bg-zinc-900/70"
               >
-                <Send className="h-4 w-4" aria-hidden="true" />
-                Send Message
-              </button>
-            </form>
-          )}
-          <div className="mt-8">
-            <a
-              href={`mailto:${portfolioData.socials.email}`}
-              className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
-            >
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              {portfolioData.socials.email}
-            </a>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-colors group-hover:border-emerald-500/30 group-hover:text-emerald-400">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-zinc-100">{label}</p>
+                  <p className="truncate text-xs text-zinc-500">{value}</p>
+                </div>
+              </a>
+            ))}
           </div>
-          <address className="mt-8 flex not-italic justify-center">
-            <SocialLinks socials={socials} />
-          </address>
-        </div>
+
+          <div className="mx-auto mt-12 max-w-xl">
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300"
+                role="status"
+                aria-live="polite"
+              >
+                <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+                Thanks! This form is a demo. Use the email button below to reach me.
+              </motion.div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="grid gap-4 text-left"
+                aria-label="Contact form"
+              >
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="name" className="mb-1 block text-xs font-medium text-zinc-400">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      required
+                      className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
+                      placeholder="Your name"
+                      autoComplete="name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-400">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      required
+                      type="email"
+                      className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={5}
+                    className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
+                    placeholder="Tell me about your project..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto"
+                >
+                  <Send className="h-4 w-4" aria-hidden="true" />
+                  Send Message
+                </button>
+              </form>
+            )}
+            <div className="mt-8 text-center">
+              <a
+                href={`mailto:${portfolioData.socials.email}`}
+                className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
+              >
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                {portfolioData.socials.email}
+              </a>
+            </div>
+            <address className="mt-8 flex not-italic justify-center">
+              <SocialLinks socials={socials} />
+            </address>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -688,7 +928,7 @@ function Footer() {
     <footer className="border-t border-white/5">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-6 py-8 text-xs text-zinc-600 sm:flex-row">
         <p>
-          © {new Date().getFullYear()} {portfolioData.name}. All rights
+          &copy; {new Date().getFullYear()} {portfolioData.name}. All rights
           reserved.
         </p>
       </div>
@@ -725,25 +965,23 @@ function BackToTop() {
 
 export default function Home() {
   const socials = buildSocials();
-  const initials = portfolioData.initials || portfolioData.name
-    .split(" ")
-    .map((part) => part[0])
-    .join("");
 
   return (
     <>
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-zinc-900">
-        Skip to main content
-      </a>
-      <Header initials={initials} />
+      <Header />
       <main id="main-content">
         <Hero socials={socials} />
+        <KeyMetrics />
         <About />
+        <Languages />
         <Skills />
+        <EducationTimeline />
         <Experience />
         <TechStack />
         <Testimonials />
         <Projects projects={portfolioData.projects} />
+        <Certifications />
+        <FAQ />
         <Contact socials={socials} />
       </main>
       <Footer />
