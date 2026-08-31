@@ -20,6 +20,8 @@ import {
   Check,
   Lock,
   Eye,
+  Sun,
+  Moon,
 } from "lucide-react";
 import {
   GithubIcon,
@@ -103,6 +105,32 @@ function CopyButton({ text, label }) {
   );
 }
 
+function ThemeToggle() {
+  const [theme, setTheme] = useState("dark");
+  useEffect(() => {
+    setTheme(typeof document !== "undefined" ? document.documentElement.getAttribute("data-theme") || "dark" : "dark");
+  }, []);
+  const toggle = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch (e) {}
+  };
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-soft text-zinc-300 transition-colors hover:text-emerald-400"
+    >
+      {theme === "dark" ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+    </button>
+  );
+}
+
 function Header({ initials }) {
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -156,12 +184,14 @@ function Header({ initials }) {
             Resume
           </a>
         </nav>
-        <button
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-zinc-300 md:hidden"
-          onClick={() => setOpen((p) => !p)}
-        >
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-zinc-300 md:hidden"
+            onClick={() => setOpen((p) => !p)}
+          >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>

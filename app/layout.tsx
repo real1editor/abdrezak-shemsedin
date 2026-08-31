@@ -2,9 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { portfolioData } from "@/data/projects";
-import "./globals.css";
-
-const geistSans = Geist({
+import "./globals.css";const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -129,6 +127,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
+          }}
+        />
       </head>
       <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
         {children}
