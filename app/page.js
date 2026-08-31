@@ -221,7 +221,7 @@ function Hero({ socials }) {
           {portfolioData.bio}
         </motion.p>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -229,7 +229,7 @@ function Hero({ socials }) {
         >
           <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
           <address className="not-italic">{portfolioData.location}</address>
-        </motion.p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 18 }}
