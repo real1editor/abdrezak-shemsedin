@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import {
   ArrowDown,
   Code2,
@@ -15,36 +15,39 @@ import {
   Send,
   CheckCircle2,
   Phone,
-  MessageCircle,
   Award,
   ChevronDown,
-  BookOpen,
-  GraduationCap,
   HelpCircle,
-  Clock,
+  Copy,
+  Check,
+  Lock,
+  Eye,
 } from "lucide-react";
-import { GithubIcon, LinkedinIcon, UpworkIcon, TelegramIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  UpworkIcon,
+  TelegramIcon,
+} from "@/components/icons";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/projects";
 
 import React from "react";
 
 const socialBuilders = {
-  github: (value) => value,
-  linkedin: (value) => value.startsWith("http") ? value : `https://www.linkedin.com/in/${value}`,
-  upwork: (value) => value.startsWith("http") ? value : `https://www.upwork.com/freelancers/${value}`,
-  email: (value) => `mailto:${value}`,
-  telegram: (value) => value.startsWith("http") ? value : `https://t.me/${value}`,
-  phone: (value) => value.startsWith("tel:") ? value : `tel:${value}`,
+  github: (v) => v,
+  linkedin: (v) => (v.startsWith("http") ? v : `https://www.linkedin.com/in/${v}`),
+  upwork: (v) => (v.startsWith("http") ? v : `https://www.upwork.com/freelancers/${v}`),
+  email: (v) => `mailto:${v}`,
+  telegram: (v) => (v.startsWith("http") ? v : `https://t.me/${v}`),
+  phone: (v) => (v.startsWith("tel:") ? v : `tel:${v}`),
 };
 
 const socialConfig = [
   { key: "github", label: "GitHub", Icon: GithubIcon },
   { key: "linkedin", label: "LinkedIn", Icon: LinkedinIcon },
-  { key: "upwork", label: "Upwork", Icon: UpworkIcon },
   { key: "telegram", label: "Telegram", Icon: TelegramIcon },
   { key: "email", label: "Email", Icon: Mail },
-  { key: "phone", label: "Phone", Icon: Phone },
 ];
 
 function buildSocials() {
@@ -52,11 +55,13 @@ function buildSocials() {
     label,
     href: socialBuilders[key](portfolioData.socials[key]),
     Icon,
-    external: key !== "email" && key !== "phone",
+    external: key !== "email",
   }));
 }
 
-function SocialLinks({ socials }) {
+function SocialLinks({ socials, size = "md" }) {
+  const s = size === "sm" ? "h-9 w-9" : "h-10 w-10";
+  const i = size === "sm" ? "h-4 w-4" : "h-[18px] w-[18px]";
   return (
     <div className="flex items-center gap-3">
       {socials.map(({ label, href, Icon, external }) => (
@@ -66,23 +71,43 @@ function SocialLinks({ socials }) {
           aria-label={label}
           title={label}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-white"
+          className={`inline-flex ${s} items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-white`}
         >
-          <Icon className="h-[18px] w-[18px]" />
+          <Icon className={i} />
         </a>
       ))}
     </div>
   );
 }
 
+function CopyButton({ text, label }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className="ml-auto shrink-0 rounded-lg border border-white/10 bg-white/[0.03] p-2 text-zinc-500 transition-colors hover:border-emerald-400/40 hover:text-emerald-400"
+      title={`Copy ${label}`}
+      aria-label={`Copy ${label}`}
+    >
+      {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+    </button>
+  );
+}
+
 function Header({ initials }) {
   const [open, setOpen] = useState(false);
   const links = [
+    { href: "#home", label: "Home" },
     { href: "#about", label: "About" },
-    { href: "#languages", label: "Languages" },
     { href: "#skills", label: "Skills" },
     { href: "#education", label: "Education" },
-    { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
     { href: "#certifications", label: "Certs" },
     { href: "#contact", label: "Contact" },
@@ -91,7 +116,7 @@ function Header({ initials }) {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <a href="#top" className="flex items-center gap-3">
+        <a href="#home" className="flex items-center gap-3">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm font-bold text-white">
             {initials}
           </span>
@@ -109,13 +134,19 @@ function Header({ initials }) {
               {item.label}
             </a>
           ))}
+          <a
+            href={portfolioData.resumeUrl}
+            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400 transition-colors hover:bg-emerald-500/20"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Resume
+          </a>
         </nav>
         <button
           aria-label="Toggle menu"
           aria-expanded={open}
-          aria-controls="mobile-navigation"
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-zinc-300 md:hidden"
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => setOpen((p) => !p)}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -123,8 +154,6 @@ function Header({ initials }) {
       <AnimatePresence>
         {open && (
           <motion.nav
-            id="mobile-navigation"
-            aria-label="Mobile navigation"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -140,9 +169,16 @@ function Header({ initials }) {
                   className="flex items-center justify-between py-3 text-sm text-zinc-300 transition-colors hover:text-white"
                 >
                   <span>{item.label}</span>
-                  <ChevronRight className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                  <ChevronRight className="h-4 w-4 text-zinc-500" />
                 </a>
               ))}
+              <a
+                href={portfolioData.resumeUrl}
+                className="mt-2 flex items-center justify-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-400"
+              >
+                <Download className="h-4 w-4" />
+                Download Resume
+              </a>
             </div>
           </motion.nav>
         )}
@@ -151,28 +187,9 @@ function Header({ initials }) {
   );
 }
 
-function SectionHeading({ label, title, description }) {
-  return (
-    <div className="mb-10">
-      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
-        {label}
-      </p>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
-          {description}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
 function FadeIn({ children, className }) {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
     <motion.div
       ref={ref}
@@ -188,100 +205,123 @@ function FadeIn({ children, className }) {
 
 function Hero({ socials }) {
   return (
-    <section id="top" aria-labelledby="hero-heading" className="relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[140px]"
-      />
-      <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-36 sm:pt-44">
-        <motion.span
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400"
-        >
-          <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          {portfolioData.availability}
-        </motion.span>
+    <section id="home" aria-labelledby="hero-heading" className="relative overflow-hidden border-b border-white/5">
+      <div aria-hidden="true" className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[140px]" />
+      <div className="relative mx-auto max-w-5xl px-6 pb-20 pt-36 sm:pt-40">
+        <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              {portfolioData.availability} &bull; Based in Ethiopia
+            </motion.div>
 
-        <motion.h1
-          id="hero-heading"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl sm:leading-[1.1]"
-        >
-          Hi, I&apos;m {portfolioData.name.split(" ")[0]}
-        </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500"
+            >
+              {portfolioData.role}
+            </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl"
-          aria-label={portfolioData.role}
-        >
-          {portfolioData.role}
-        </motion.p>
+            <motion.h1
+              id="hero-heading"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl sm:leading-[1.1]"
+            >
+              {portfolioData.name.split(" ")[0]}
+              <br />
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                {portfolioData.name.split(" ").slice(1).join(" ")}
+              </span>
+            </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg"
-        >
-          {portfolioData.bio}
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg"
+            >
+              {portfolioData.bio}
+            </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-5 flex items-center gap-1.5 text-sm text-zinc-500"
-        >
-          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-          <address className="not-italic">{portfolioData.location}</address>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-4 flex items-center gap-1.5 text-sm text-zinc-500"
+            >
+              <MapPin className="h-3.5 w-3.5" />
+              <address className="not-italic">{portfolioData.location}</address>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-9 flex flex-wrap items-center gap-4"
-        >
-          <a
-            href="#projects"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
+              <a
+                href="#projects"
+                className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
+              >
+                <Code2 className="h-4 w-4" />
+                View My Work
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
+              >
+                <Send className="h-4 w-4" />
+                Get in Touch
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-8"
+            >
+              <SocialLinks socials={socials} />
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="hidden lg:block"
           >
-            View Projects
-            <ArrowDown className="h-4 w-4" aria-hidden="true" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
-          >
-            Get in Touch
-          </a>
-          <a
-            href="/resume"
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
-          >
-            <Download className="h-4 w-4" aria-hidden="true" />
-            Resume
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-10"
-        >
-          <SocialLinks socials={socials} />
-        </motion.div>
+            <div className="relative">
+              <div className="h-72 w-72 overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/40 xl:h-80 xl:w-80">
+                <img
+                  src={portfolioData.profilePhoto}
+                  alt={`Portrait of ${portfolioData.name}`}
+                  className="h-full w-full object-cover"
+                  fetchpriority="high"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-zinc-950/90 px-4 py-3 backdrop-blur">
+                <Code2 className="h-5 w-5 text-emerald-400" />
+                <div>
+                  <p className="text-sm font-semibold text-white">{portfolioData.heroBadge.title}</p>
+                  <p className="text-xs text-zinc-400">{portfolioData.heroBadge.subtitle}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -289,21 +329,62 @@ function Hero({ socials }) {
 
 function KeyMetrics() {
   return (
-    <section aria-labelledby="metrics-heading" className="border-t border-white/5">
-      <div className="mx-auto max-w-5xl px-6 py-12">
+    <section aria-label="Key highlights" className="border-b border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {portfolioData.metrics.map((m) => (
+            <div key={m.label} className="flex flex-col items-center rounded-2xl border border-white/10 bg-zinc-900/40 px-4 py-5 text-center transition-colors hover:border-emerald-500/30">
+              <span className="text-2xl font-bold text-white sm:text-3xl">{m.value}</span>
+              <span className="mt-1 text-xs font-medium text-zinc-400 sm:text-sm">{m.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" aria-labelledby="about-heading" className="border-b border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {portfolioData.metrics.map((metric) => (
-              <div
-                key={metric.label}
-                className="flex flex-col items-center rounded-2xl border border-white/10 bg-zinc-900/40 px-4 py-6 text-center transition-colors hover:border-emerald-500/30"
-              >
-                <span className="text-2xl font-bold text-white sm:text-3xl">
-                  {metric.value}
+          <h2 id="about-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            About <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Me</span>
+          </h2>
+          <div className="mt-8 space-y-4">
+            {portfolioData.about.map((p, i) => (
+              <p key={i} className="text-base leading-relaxed text-zinc-400">
+                {p.includes("Wolaita Sodo University") ? (
+                  <>I am a full-stack developer and 5th-year ECE student at <span className="text-emerald-400">Wolaita Sodo University</span>, based in Addis Ababa, Ethiopia.</>
+                ) : (
+                  p
+                )}
+              </p>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+function WhatIBuild() {
+  return (
+    <section aria-labelledby="build-heading" className="border-b border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <h2 id="build-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            What I <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Build</span>
+          </h2>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {portfolioData.whatIBuild.map((item) => (
+              <div key={item.title} className="group rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
+                  <Code2 className="h-5 w-5" />
                 </span>
-                <span className="mt-1 text-xs font-medium text-zinc-400 sm:text-sm">
-                  {metric.label}
-                </span>
+                <h3 className="mt-4 text-base font-semibold text-zinc-100">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.description}</p>
               </div>
             ))}
           </div>
@@ -313,54 +394,20 @@ function KeyMetrics() {
   );
 }
 
-function About() {
-  return (
-    <section id="about" aria-labelledby="about-heading" className="border-t border-white/5">
-      <div className="mx-auto max-w-5xl px-6 py-24">
-        <FadeIn>
-          <SectionHeading
-            label="About"
-            title="A bit about me"
-            description="Beyond code, I&apos;m interested in how systems scale, how users behave, and how small details shape big products."
-          />
-          <div className="grid gap-10 md:grid-cols-2">
-            <p className="text-base leading-relaxed text-zinc-300">
-              {portfolioData.about}
-            </p>
-            <p className="text-base leading-relaxed text-zinc-400">
-              I&apos;m currently focused on full-stack web and mobile development.
-              I like projects that require both technical depth and product sense.
-              When I&apos;m not coding, I&apos;m usually reading about system design,
-              contributing to open source, or mentoring junior developers.
-            </p>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
 function Languages() {
   return (
-    <section id="languages" aria-labelledby="languages-heading" className="border-t border-white/5">
+    <section id="languages" aria-labelledby="lang-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading
-            label="Languages"
-            title="What I speak"
-            description="Communication across cultures and communities is central to collaboration."
-          />
-          <div className="grid gap-5 sm:grid-cols-3">
+          <h2 id="lang-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Lang<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">uages</span>
+          </h2>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {portfolioData.languages.map((lang) => (
-              <div
-                key={lang.name}
-                className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition-colors hover:border-emerald-500/30"
-              >
+              <div key={lang.name} className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition-colors hover:border-emerald-500/30">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-zinc-100">{lang.name}</h3>
-                  <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
-                    {lang.level}
-                  </span>
+                  <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">{lang.level}</span>
                 </div>
                 <div className="mt-5 space-y-3">
                   {[
@@ -374,10 +421,7 @@ function Languages() {
                         <span className="text-zinc-500">{value}%</span>
                       </div>
                       <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400"
-                          style={{ width: `${value}%` }}
-                        />
+                        <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400" style={{ width: `${value}%` }} />
                       </div>
                     </div>
                   ))}
@@ -392,34 +436,76 @@ function Languages() {
 }
 
 function Skills() {
+  const [unlocked, setUnlocked] = useState(false);
+
   return (
-    <section id="skills" aria-labelledby="skills-heading" className="border-t border-white/5">
+    <section id="skills" aria-labelledby="skills-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading
-            label="Skills"
-            title="What I work with"
-            description="A snapshot of the tools, languages, and platforms I use to ship products."
-          />
-          <div className="grid gap-6 sm:grid-cols-3">
-            {portfolioData.skills.map((group) => (
-              <div
-                key={group.category}
-                className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6"
-              >
-                <h3 className="text-sm font-semibold text-zinc-200">
-                  {group.category}
-                </h3>
-                <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${group.category} skills`}>
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-zinc-300"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+          <div className="flex items-center gap-3">
+            <h2 id="skills-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Ski<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">lls</span>
+            </h2>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+              Core Stack Active
+            </span>
+          </div>
+
+          <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
+            {portfolioData.skills.primary.map((skill) => (
+              <div key={skill} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+                <span className="text-lg font-bold text-emerald-400">{skill[0]}</span>
+                <span className="text-[11px] font-medium text-zinc-400">{skill}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative mt-6">
+            <div className={`grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8 ${!unlocked ? "blur-sm select-none" : ""}`}>
+              {portfolioData.skills.locked.map((skill) => (
+                <div key={skill} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+                  <span className="text-lg font-bold text-zinc-500">{skill[0]}</span>
+                  <span className="text-[11px] font-medium text-zinc-400">{skill}</span>
+                </div>
+              ))}
+            </div>
+            {!unlocked && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-zinc-950/60 backdrop-blur-sm">
+                <div className="text-center">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/10">
+                    <Lock className="h-5 w-5 text-emerald-400" />
+                  </div>
+                  <p className="text-sm font-semibold text-zinc-100">Want to see my full potential?</p>
+                  <button
+                    onClick={() => setUnlocked(true)}
+                    className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-400 transition-colors hover:bg-emerald-500/20"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                    Show all skills
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+function Tools() {
+  return (
+    <section id="tools" aria-labelledby="tools-heading" className="border-b border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <h2 id="tools-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Too<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">ls</span>
+          </h2>
+          <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
+            {portfolioData.tools.map((tool) => (
+              <div key={tool} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30 hover:text-white">
+                <span className="text-lg font-bold text-zinc-300">{tool[0]}</span>
+                <span className="text-[11px] font-medium text-zinc-400">{tool}</span>
               </div>
             ))}
           </div>
@@ -429,50 +515,31 @@ function Skills() {
   );
 }
 
-function EducationTimeline() {
+function Education() {
   return (
-    <section id="education" aria-labelledby="education-heading" className="border-t border-white/5">
+    <section id="education" aria-labelledby="edu-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading
-            label="Education"
-            title="Academic history"
-            description="My educational journey from primary school through university."
-          />
-          <div className="relative ml-4 border-l border-emerald-500/20 pl-8">
-            {portfolioData.education.map((item, idx) => (
-              <article
-                key={item.title}
-                className="relative pb-12 last:pb-0"
-              >
-                <div
-                  className={`absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border ${
-                    item.status === "current"
-                      ? "border-emerald-400 bg-emerald-500"
-                      : "border-white/20 bg-zinc-950"
-                  }`}
-                  aria-hidden="true"
-                />
+          <h2 id="edu-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Edu<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">cation</span>
+          </h2>
+          <div className="relative mt-10 ml-4 border-l border-emerald-500/20 pl-8">
+            {portfolioData.education.map((item) => (
+              <article key={item.title} className="relative pb-12 last:pb-0">
+                <div className={`absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border ${item.status === "current" ? "border-emerald-400 bg-emerald-500" : "border-white/20 bg-zinc-950"}`} />
                 {item.status === "current" && (
-                  <div className="absolute -left-[45px] top-0 h-5 w-5 animate-ping rounded-full bg-emerald-500/20" aria-hidden="true" />
+                  <div className="absolute -left-[45px] top-0 h-5 w-5 animate-ping rounded-full bg-emerald-500/20" />
                 )}
                 <div className="flex items-center gap-3">
-                  <time className="text-xs font-medium text-emerald-400" dateTime={item.period}>
-                    {item.period}
-                  </time>
-                  {item.status === "current" && (
-                    <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
-                      Current
-                    </span>
-                  )}
+                  <h3 className="text-base font-semibold text-zinc-100">{item.title}</h3>
+                  <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${item.status === "current" ? "border border-emerald-500/20 bg-emerald-500/10 text-emerald-400" : "border border-white/10 bg-white/[0.03] text-zinc-500"}`}>
+                    {item.status === "current" ? "Current" : item.period}
+                  </span>
                 </div>
-                <h3 className="mt-2 text-base font-semibold text-zinc-100">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-zinc-500">{item.institution}</p>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  {item.description}
-                </p>
+                <p className="mt-1 text-sm text-zinc-400">{item.degree}</p>
+                {item.description && (
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-500">{item.description}</p>
+                )}
               </article>
             ))}
           </div>
@@ -482,40 +549,24 @@ function EducationTimeline() {
   );
 }
 
-function TimelineItem({ item }) {
-  return (
-    <article className="relative pl-8 md:pl-12">
-      <div className="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-emerald-400/60 bg-zinc-950 md:left-0" aria-hidden="true" />
-      <div className="absolute left-[7px] top-6 h-full w-px bg-gradient-to-b from-emerald-500/40 via-white/10 to-transparent md:left-[7px]" aria-hidden="true" />
-      <div className="pb-10">
-        <time className="text-xs font-medium text-emerald-400" dateTime={item.period}>
-          {item.period}
-        </time>
-        <h3 className="mt-1 text-base font-semibold text-zinc-100">
-          {item.title}
-        </h3>
-        <p className="text-sm text-zinc-400">{item.company}</p>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-          {item.description}
-        </p>
-      </div>
-    </article>
-  );
-}
-
 function Experience() {
   return (
-    <section id="experience" aria-labelledby="experience-heading" className="border-t border-white/5">
+    <section id="experience" aria-labelledby="exp-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading
-            label="Experience"
-            title="Where I&apos;ve worked"
-            description="A mix of full-time, freelance, and hands-on engineering work."
-          />
-          <div role="list" aria-label="Work experience">
+          <h2 id="exp-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Expe<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">rience</span>
+          </h2>
+          <div className="relative mt-10 ml-4 border-l border-emerald-500/20 pl-8">
             {portfolioData.experience.map((item) => (
-              <TimelineItem key={item.title} item={item} />
+              <article key={item.title} className="relative pb-12 last:pb-0">
+                <div className="absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border border-emerald-400/60 bg-zinc-950" />
+                <div className="absolute left-[7px] top-6 h-full w-px bg-gradient-to-b from-emerald-500/40 via-white/10 to-transparent" />
+                <time className="text-xs font-medium text-emerald-400">{item.period}</time>
+                <h3 className="mt-1 text-base font-semibold text-zinc-100">{item.title}</h3>
+                <p className="text-sm text-zinc-400">{item.company}</p>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.description}</p>
+              </article>
             ))}
           </div>
         </FadeIn>
@@ -524,249 +575,193 @@ function Experience() {
   );
 }
 
-function TechStack() {
+function Projects() {
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const categories = useMemo(() => {
+    const counts = { all: portfolioData.projects.length };
+    portfolioData.projects.forEach((p) => {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    });
+    return [
+      { key: "all", label: "All", icon: Code2, count: counts.all },
+      { key: "web", label: "Web & APIs", icon: ExternalLink, count: counts.web || 0 },
+      { key: "mobile", label: "Systems & Mobile", icon: Phone, count: counts.mobile || 0 },
+    ];
+  }, []);
+
+  const filtered = activeFilter === "all" ? portfolioData.projects : portfolioData.projects.filter((p) => p.category === activeFilter);
+
   return (
-    <section aria-labelledby="techstack-heading" className="border-t border-white/5">
+    <section id="projects" aria-labelledby="proj-heading" className="scroll-mt-20 border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading
-            label="Tech Stack"
-            title="Tools I use"
-            description="Technologies I reach for depending on the problem."
-          />
-          <div className="flex flex-wrap gap-3" role="list" aria-label="Technologies">
-            {portfolioData.techStack.map((tool) => (
-              <span
-                key={tool}
-                role="listitem"
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-emerald-500/30 hover:text-white"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
+          <h2 id="proj-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Pro<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">jects</span>
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+            These projects show the type of work I do across web apps, mobile, e-commerce, and developer tools.
+          </p>
 
-function Testimonials() {
-  return (
-    <section aria-labelledby="testimonials-heading" className="border-t border-white/5">
-      <div className="mx-auto max-w-5xl px-6 py-24">
-        <FadeIn>
-          <SectionHeading
-            label="Testimonials"
-            title="Kind words from people I&apos;ve worked with"
-          />
-          <div className="grid gap-5 md:grid-cols-3" role="list" aria-label="Testimonials">
-            {portfolioData.testimonials.map((item) => (
-              <blockquote
-                key={item.author}
-                role="listitem"
-                className="flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 p-6"
-              >
-                <p className="text-sm leading-relaxed text-zinc-300">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-                <footer className="mt-6">
-                  <p className="text-sm font-semibold text-zinc-100">
-                    {item.author}
-                  </p>
-                  <p className="text-xs text-zinc-500">{item.role}</p>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
-function ProjectFilter({ projects, activeFilter, onFilterChange }) {
-  const allTags = useMemo(() => {
-    const tags = new Set();
-    projects.forEach((project) => project.tags.forEach((tag) => tags.add(tag)));
-    return ["All", ...Array.from(tags)];
-  }, [projects]);
-
-  const filteredProjects =
-    activeFilter === "All"
-      ? projects
-      : projects.filter((project) => project.tags.includes(activeFilter));
-
-  return (
-    <div>
-      <div className="mb-8 flex flex-wrap gap-2">
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => onFilterChange(tag)}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-              activeFilter === tag
-                ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
-                : "border-white/10 bg-white/[0.03] text-zinc-400 hover:border-white/20 hover:text-white"
-            }`}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-      <div className="grid gap-5 sm:grid-cols-2">
-        {filteredProjects.map((project) => (
-          <motion.article
-            layout
-            key={project.title}
-            className="group relative flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
-          >
-            <div className="flex items-start justify-between">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-300 transition-colors group-hover:border-emerald-500/30 group-hover:text-emerald-400">
-                <Code2 className="h-5 w-5" />
-              </span>
-              <div className="flex gap-1">
-                {project.githubUrl ? (
-                  <a
-                    href={project.githubUrl}
-                    aria-label={`${project.title} on GitHub`}
-                    title="Source code"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-white/5 hover:text-white"
-                  >
-                    <GithubIcon className="h-[18px] w-[18px]" />
-                  </a>
-                ) : null}
-                {project.liveUrl ? (
-                  <a
-                    href={project.liveUrl}
-                    aria-label={`Visit ${project.title}`}
-                    title="Live demo"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-white/5 hover:text-white"
-                  >
-                    <ExternalLink className="h-[18px] w-[18px]" />
-                  </a>
-                ) : null}
-              </div>
-            </div>
-
-            <h3 className="mt-5 text-lg font-semibold tracking-tight text-zinc-100 transition-colors group-hover:text-white">
-              {project.title}
-            </h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
-              {project.description}
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-400"
+          <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => setActiveFilter(cat.key)}
+                  role="tab"
+                  aria-selected={activeFilter === cat.key}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                    activeFilter === cat.key
+                      ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
+                      : "border-white/10 bg-white/[0.03] text-zinc-400 hover:border-white/20 hover:text-white"
+                  }`}
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Projects({ projects }) {
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  return (
-    <section id="projects" aria-labelledby="projects-heading" className="scroll-mt-20 border-t border-white/5">
-      <div className="mx-auto max-w-5xl px-6 py-24">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
-              Portfolio
-            </p>
-            <h2 id="projects-heading" className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Selected Projects
-            </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
-              A collection of products and platforms I have designed and built,
-              from e-commerce to tourism and developer tools.
-            </p>
+                  <Icon className="h-3.5 w-3.5" />
+                  {cat.label}
+                  <span className="text-zinc-500">({cat.count})</span>
+                </button>
+              );
+            })}
           </div>
-          <span className="rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-medium text-zinc-500">
-            {projects.length} projects
-          </span>
-        </div>
 
-        <ProjectFilter
-          projects={projects}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
+          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            {filtered.map((project) => (
+              <motion.article
+                layout
+                key={project.title}
+                className="group flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
+              >
+                <div className="relative h-44 overflow-hidden rounded-t-2xl bg-zinc-800/50">
+                  <img
+                    src={project.thumb}
+                    alt={`${project.title} preview`}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-lg font-semibold tracking-tight text-zinc-100 transition-colors group-hover:text-white">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
+                    {project.description}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-400">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-4 flex gap-2">
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:border-emerald-400/40 hover:text-white">
+                        <GithubIcon className="h-3.5 w-3.5" />
+                        Source Code
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400 transition-colors hover:bg-emerald-500/20">
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        Live View
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
 }
 
 function Certifications() {
+  const [lightbox, setLightbox] = useState(null);
+
   return (
-    <section id="certifications" aria-labelledby="certs-heading" className="border-t border-white/5">
-      <div className="mx-auto max-w-5xl px-6 py-24">
-        <FadeIn>
-          <SectionHeading
-            label="Certifications"
-            title="Verified credentials"
-            description="Certificates earned from programs and platforms that validate my skills."
-          />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {portfolioData.certifications.map((cert) => (
-              <a
-                key={cert.title}
-                href={cert.url}
-                target={cert.url !== "#" ? "_blank" : undefined}
-                rel={cert.url !== "#" ? "noopener noreferrer" : undefined}
-                className="group flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
+    <>
+      <section id="certifications" aria-labelledby="cert-heading" className="border-b border-white/5">
+        <div className="mx-auto max-w-5xl px-6 py-24">
+          <FadeIn>
+            <h2 id="cert-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Certifi<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">cations</span>
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400">Here are some certificates I earned from different programs and companies.</p>
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {portfolioData.certifications.map((cert) => (
+                <button
+                  key={cert.title}
+                  onClick={() => setLightbox(cert)}
+                  className="group text-left rounded-2xl border border-white/10 bg-zinc-900/40 overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30"
+                >
+                  <div className="relative h-40 overflow-hidden bg-zinc-800/50">
+                    <img src={cert.imageUrl} alt={`${cert.title} certificate`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-sm font-semibold text-zinc-100">{cert.title}</h3>
+                    <p className="mt-1 text-xs text-zinc-500">{cert.issuer} &bull; {cert.date}</p>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-zinc-500 transition-colors group-hover:text-emerald-400">
+                      Click to expand <ExternalLink className="h-3 w-3" />
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={() => setLightbox(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-h-[85vh] max-w-[90vw]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setLightbox(null)}
+                className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-zinc-900 text-zinc-300 hover:text-white"
+                aria-label="Close preview"
               >
-                <div className="flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 transition-colors group-hover:border-emerald-500/40">
-                    <Award className="h-5 w-5" />
-                  </span>
-                  <span className="text-xs text-zinc-500">{cert.date}</span>
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-zinc-100 transition-colors group-hover:text-white">
-                  {cert.title}
-                </h3>
-                <p className="mt-1 text-sm text-emerald-400/80">{cert.issuer}</p>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
-                  {cert.description}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 transition-colors group-hover:text-emerald-400">
-                  View Certificate
-                  <ExternalLink className="h-3 w-3" />
-                </span>
-              </a>
-            ))}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
+                <X className="h-4 w-4" />
+              </button>
+              <img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[80vh] rounded-2xl border border-white/10 object-contain" />
+              <div className="mt-3 text-center">
+                <p className="text-sm font-medium text-zinc-100">{lightbox.title}</p>
+                <p className="text-xs text-zinc-500">{lightbox.issuer}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
 function FAQ() {
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="border-t border-white/5">
+    <section id="faq" aria-labelledby="faq-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading
-            label="FAQ"
-            title="Quick answers"
-            description="Common questions visitors ask about me."
-          />
-          <div className="mx-auto max-w-3xl space-y-3">
+          <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Quick <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Answers</span>
+          </h2>
+          <div className="mx-auto mt-10 max-w-3xl space-y-3">
             {portfolioData.faq.map((item, idx) => (
               <details
                 key={idx}
@@ -774,15 +769,13 @@ function FAQ() {
               >
                 <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-medium text-zinc-100 outline-none [&::-webkit-details-marker]:hidden [&::marker]:hidden">
                   <span className="flex items-center gap-3">
-                    <HelpCircle className="h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
+                    <HelpCircle className="h-4 w-4 shrink-0 text-emerald-400" />
                     {item.question}
                   </span>
-                  <ChevronDown className="h-4 w-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180 group-open:text-emerald-400" aria-hidden="true" />
+                  <ChevronDown className="h-4 w-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180 group-open:text-emerald-400" />
                 </summary>
                 <div className="border-t border-white/5 px-6 pb-5 pt-4">
-                  <p className="text-sm leading-relaxed text-zinc-400">
-                    {item.answer}
-                  </p>
+                  <p className="text-sm leading-relaxed text-zinc-400">{item.answer}</p>
                 </div>
               </details>
             ))}
@@ -793,7 +786,7 @@ function FAQ() {
   );
 }
 
-function Contact({ socials }) {
+function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
@@ -801,120 +794,93 @@ function Contact({ socials }) {
     setSubmitted(true);
   };
 
+  const contactItems = [
+    { icon: Mail, label: "Email", value: portfolioData.socials.email, href: `mailto:${portfolioData.socials.email}`, copy: portfolioData.socials.email },
+    { icon: Phone, label: "Phone", value: "+251 900 000 000", href: portfolioData.socials.phone, copy: "+251900000000" },
+    { icon: GithubIcon, label: "GitHub", value: "real1editor", href: portfolioData.socials.github, copy: portfolioData.socials.github },
+    { icon: LinkedinIcon, label: "LinkedIn", value: "abdrezak-shemsedin", href: portfolioData.socials.linkedin, copy: portfolioData.socials.linkedin },
+    { icon: TelegramIcon, label: "Telegram", value: "@real1editor", href: portfolioData.socials.telegram, copy: "@real1editor" },
+    { icon: UpworkIcon, label: "Upwork", value: "abdrezak", href: portfolioData.socials.upwork, copy: portfolioData.socials.upwork },
+  ];
+
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-t border-white/5">
+    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-28">
         <FadeIn>
-          <SectionHeading
-            label="Contact"
-            title="Let&apos;s build something great together."
-            description="I&apos;m currently open to freelance work and full-time opportunities. Reach out on any platform below, send a quick message, or click to copy my details."
-          />
+          <h2 id="contact-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Con<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">tact</span>
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+            Let&apos;s connect &mdash; reach out on any platform below, send a quick message, or click to copy my details.
+          </p>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { icon: Mail, label: "Email", value: portfolioData.socials.email, href: `mailto:${portfolioData.socials.email}` },
-              { icon: Phone, label: "Phone", value: "+251 900 000 000", href: portfolioData.socials.phone },
-              { icon: GithubIcon, label: "GitHub", value: "real1editor", href: portfolioData.socials.github },
-              { icon: LinkedinIcon, label: "LinkedIn", value: "abdrezak-shemsedin", href: portfolioData.socials.linkedin },
-              { icon: TelegramIcon, label: "Telegram", value: "@real1editor", href: portfolioData.socials.telegram },
-              { icon: UpworkIcon, label: "Upwork", value: "abdrezak", href: portfolioData.socials.upwork },
-            ].map(({ icon: Icon, label, value, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900/40 p-5 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-500/30 hover:bg-zinc-900/70"
-              >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-colors group-hover:border-emerald-500/30 group-hover:text-emerald-400">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-zinc-100">{label}</p>
-                  <p className="truncate text-xs text-zinc-500">{value}</p>
-                </div>
-              </a>
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {contactItems.map(({ icon: Icon, label, value, href, copy }) => (
+              <div key={label} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-zinc-900/40 p-4 transition duration-300 hover:border-emerald-500/30">
+                <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 flex-1 min-w-0">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-zinc-100">{label}</p>
+                    <p className="truncate text-xs text-zinc-500">{value}</p>
+                  </div>
+                </a>
+                <CopyButton text={copy} label={label} />
+              </div>
             ))}
           </div>
 
           <div className="mx-auto mt-12 max-w-xl">
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300"
-                role="status"
-                aria-live="polite"
-              >
-                <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-                Thanks! This form is a demo. Use the email button below to reach me.
-              </motion.div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="grid gap-4 text-left"
-                aria-label="Contact form"
-              >
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="name" className="mb-1 block text-xs font-medium text-zinc-400">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      required
-                      className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
-                      placeholder="Your name"
-                      autoComplete="name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-400">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      required
-                      type="email"
-                      className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
-                      placeholder="you@example.com"
-                      autoComplete="email"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={5}
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto"
+            <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6">
+              <h3 className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
+                <Send className="h-4 w-4 text-emerald-400" />
+                Send a Quick Message
+              </h3>
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300"
                 >
-                  <Send className="h-4 w-4" aria-hidden="true" />
-                  Send Message
-                </button>
-              </form>
-            )}
+                  <CheckCircle2 className="h-4 w-4" />
+                  Thanks! Use the email button to reach me directly.
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="mt-4 grid gap-4" aria-label="Contact form">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="name" className="mb-1 block text-xs font-medium text-zinc-400">Your Name</label>
+                      <input id="name" required className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="John Doe" autoComplete="name" />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-400">Your Email / Telegram</label>
+                      <input id="email" required className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="you@example.com or @username" />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">Message</label>
+                    <textarea id="message" required rows={3} className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="Hi Abdrezak, let&apos;s discuss a project..." />
+                  </div>
+                  <button type="submit" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto">
+                    <Send className="h-4 w-4" />
+                    Send via Telegram / Email
+                  </button>
+                </form>
+              )}
+            </div>
+
             <div className="mt-8 text-center">
               <a
                 href={`mailto:${portfolioData.socials.email}`}
                 className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
               >
-                <Mail className="h-4 w-4" aria-hidden="true" />
+                <Mail className="h-4 w-4" />
                 {portfolioData.socials.email}
               </a>
             </div>
-            <address className="mt-8 flex not-italic justify-center">
-              <SocialLinks socials={socials} />
+            <address className="mt-6 flex not-italic justify-center">
+              <SocialLinks socials={buildSocials()} size="sm" />
             </address>
           </div>
         </FadeIn>
@@ -927,10 +893,7 @@ function Footer() {
   return (
     <footer className="border-t border-white/5">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-6 py-8 text-xs text-zinc-600 sm:flex-row">
-        <p>
-          &copy; {new Date().getFullYear()} {portfolioData.name}. All rights
-          reserved.
-        </p>
+        <p>&copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -938,13 +901,11 @@ function Footer() {
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 500);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
   return (
     <AnimatePresence>
       {visible && (
@@ -952,7 +913,7 @@ function BackToTop() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          href="#top"
+          href="#home"
           aria-label="Back to top"
           className="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-zinc-900/80 text-zinc-300 backdrop-blur transition-colors hover:border-emerald-400/40 hover:text-white"
         >
@@ -965,24 +926,31 @@ function BackToTop() {
 
 export default function Home() {
   const socials = buildSocials();
+  const initials = portfolioData.initials || portfolioData.name
+    .split(" ")
+    .map((p) => p[0])
+    .join("");
 
   return (
     <>
-      <Header />
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-zinc-900">
+        Skip to main content
+      </a>
+      <Header initials={initials} />
       <main id="main-content">
         <Hero socials={socials} />
         <KeyMetrics />
         <About />
+        <WhatIBuild />
         <Languages />
         <Skills />
-        <EducationTimeline />
+        <Tools />
+        <Education />
         <Experience />
-        <TechStack />
-        <Testimonials />
-        <Projects projects={portfolioData.projects} />
+        <Projects />
         <Certifications />
         <FAQ />
-        <Contact socials={socials} />
+        <Contact />
       </main>
       <Footer />
       <BackToTop />

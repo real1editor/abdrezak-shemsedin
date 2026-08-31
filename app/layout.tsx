@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: portfolioData.image,
+        url: portfolioData.profilePhoto,
         width: 1200,
         height: 630,
         alt: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
     description:
       "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
-    images: [portfolioData.image],
+    images: [portfolioData.profilePhoto],
     creator: "@real1editor",
   },
   robots: {
@@ -112,6 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       "https://github.com/real1editor",
       "https://www.linkedin.com/in/abdrezak-shemsedin",
       "https://www.upwork.com/freelancers/abdrezak",
+      "https://t.me/real1editor",
       "https://real1editor.vercel.app",
     ],
     address: {

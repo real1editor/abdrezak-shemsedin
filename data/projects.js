@@ -2,12 +2,18 @@ export const portfolioData = {
   name: "Abdrezak Shemsedin",
   initials: "AS",
   role: "Full-Stack Web and App Developer",
-  bio: "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
-  image: "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto/photo_2026-08-31_12-22-01",
-  about:
-    "I&apos;m a full-stack developer and ECE student based in Addis Ababa. I combine engineering rigor with product thinking to ship fast, reliable software. I care deeply about clean architecture, accessible UIs, and real-world impact.",
+  bio: "Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, mobile apps, and digital platforms.",
+  profilePhoto: "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto/photo_2026-08-31_12-22-01",
+  about: [
+    "I am a full-stack developer and 5th-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
+    "My main areas are full-stack web development, mobile app development, e-commerce platforms, and SaaS products.",
+    "I work with Next.js, React, TypeScript, Tailwind CSS, React Native, Node.js, Express, PostgreSQL, MongoDB, Supabase, and Prisma.",
+    "I also use Git, GitHub, Docker, Vercel, Framer Motion, and Mapbox for development, deployment, and design.",
+    "I am building my experience through real projects in Ethiopia, including e-commerce platforms, tourism websites, and student-focused apps.",
+  ],
   availability: "Available for new projects",
   location: "Addis Ababa, Ethiopia",
+  image: "/og-image.png",
   resumeUrl: "/resume",
   socials: {
     github: "https://github.com/real1editor",
@@ -17,11 +23,15 @@ export const portfolioData = {
     telegram: "https://t.me/real1editor",
     phone: "tel:+251900000000",
   },
+  heroBadge: {
+    title: "Full-Stack",
+    subtitle: "Next.js \u00B7 React \u00B7 Node.js",
+  },
   metrics: [
     { value: "6+", label: "Featured Projects" },
     { value: "14+", label: "Tech & Frameworks" },
     { value: "3", label: "Languages Spoken" },
-    { value: "5th-Yr", label: "Computer Engineering, WSU" },
+    { value: "5th-Yr", label: "Computer Eng., WSU" },
   ],
   languages: [
     {
@@ -46,59 +56,84 @@ export const portfolioData = {
       speaking: 70,
     },
   ],
-  skills: [
+  whatIBuild: [
     {
-      category: "Frontend",
-      items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "React Native", "Expo"],
+      title: "Full-Stack Web Development",
+      description:
+        "End-to-end web applications with modern frameworks, clean APIs, responsive UIs, and production-ready deployment on Vercel and cloud platforms.",
     },
     {
-      category: "Backend",
-      items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "Prisma", "Supabase"],
+      title: "Mobile App Development",
+      description:
+        "Cross-platform mobile apps using React Native and Expo, with offline-first sync, push notifications, and native-feel UX for Android and iOS.",
     },
     {
-      category: "Tools & Platforms",
-      items: ["Git", "Docker", "Vercel", "Mapbox", "Recharts", "Framer Motion"],
+      title: "E-Commerce & SaaS Platforms",
+      description:
+        "Scalable product platforms featuring payment integration, inventory management, real-time tracking, and role-based dashboards for business owners.",
     },
   ],
+  skills: {
+    primary: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "React Native",
+      "Supabase",
+    ],
+    locked: [
+      "PostgreSQL",
+      "MongoDB",
+      "Prisma",
+      "Docker",
+      "Expo",
+      "Framer Motion",
+      "Mapbox",
+      "Recharts",
+    ],
+  },
+  tools: ["Git", "GitHub", "Docker", "Vercel", "VS Code", "Figma", "Postman", "Expo Go"],
   experience: [
     {
       title: "Freelance Full-Stack Developer",
       company: "Self-employed",
-      period: "2024 — Present",
+      period: "2024 \u2014 Present",
       description:
         "Delivering web and mobile solutions for clients across e-commerce, tourism, and SaaS. Owned product requirements, architecture, and launch.",
     },
     {
       title: "Frontend Developer Intern",
       company: "Tech Startup",
-      period: "2023 — 2024",
+      period: "2023 \u2014 2024",
       description:
         "Built responsive UI components and improved site performance by 35%. Collaborated with designers and backend engineers.",
     },
   ],
   education: [
     {
-      title: "BSc in Electrical and Computer Engineering",
-      institution: "Wolaita Sodo University",
-      period: "2021 — 2026 (5th Year)",
+      title: "Wolaita Sodo University",
+      degree: "BSc in Electrical and Computer Engineering",
+      period: "2021 \u2014 2026 (5th Year)",
       description:
         "Focus on software systems, embedded computing, and applied machine learning. Active in coding clubs and hackathons.",
       status: "current",
     },
     {
-      title: "Higher Education Entrance Certificate",
-      institution: "Preparatory School",
-      period: "2018 — 2021",
+      title: "Preparatory School",
+      degree: "Higher Education Entrance Certificate",
+      period: "2018 \u2014 2021",
       description:
         "Ethiopian Higher Education Entrance Certificate with focus on natural science and mathematics.",
       status: "completed",
     },
     {
-      title: "Primary School Certificate",
-      institution: "Primary School",
-      period: "2011 — 2018",
-      description:
-        "Completed primary education with distinction.",
+      title: "Primary School",
+      degree: "Primary School Certificate",
+      period: "2011 \u2014 2018",
+      description: "Completed primary education with distinction.",
       status: "completed",
     },
   ],
@@ -107,127 +142,89 @@ export const portfolioData = {
       title: "Data Analytics with Python",
       issuer: "freeCodeCamp",
       date: "2024",
-      url: "#",
-      description: "Comprehensive training in data analysis, visualization, and statistical methods using Python and Pandas.",
+      imageUrl: "/certs/data-analytics.png",
+      link: "#",
     },
     {
       title: "Responsive Web Design",
       issuer: "freeCodeCamp",
       date: "2023",
-      url: "#",
-      description: "Modern responsive layouts using HTML, CSS, and Flexbox/Grid techniques.",
+      imageUrl: "/certs/responsive-web.png",
+      link: "#",
     },
     {
-      title: "JavaScript Algorithms and Data Structures",
+      title: "JavaScript Algorithms",
       issuer: "freeCodeCamp",
       date: "2023",
-      url: "#",
-      description: "Core JavaScript concepts, ES6+, algorithmic thinking, and data structure fundamentals.",
+      imageUrl: "/certs/js-algorithms.png",
+      link: "#",
     },
     {
       title: "Cybersecurity Fundamentals",
       issuer: "Cisco Networking Academy",
       date: "2024",
-      url: "#",
-      description: "Introduction to cybersecurity principles, threat analysis, and network defense strategies.",
-    },
-    {
-      title: "Introduction to IoT",
-      issuer: "Cisco Networking Academy",
-      date: "2023",
-      url: "#",
-      description: "Fundamentals of Internet of Things, embedded systems, and connected device architectures.",
-    },
-    {
-      title: "Git & GitHub Masterclass",
-      issuer: "Udemy",
-      date: "2023",
-      url: "#",
-      description: "Version control workflows, branching strategies, and collaborative development with Git.",
-    },
-  ],
-  techStack: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Node.js",
-    "Express",
-    "PostgreSQL",
-    "MongoDB",
-    "Supabase",
-    "Prisma",
-    "React Native",
-    "Expo",
-    "Docker",
-    "Git",
-  ],
-  testimonials: [
-    {
-      quote:
-        "Abdrezak delivered our marketplace faster than expected and the codebase was production-ready from day one.",
-      author: "Sarah K.",
-      role: "Founder, Retail Startup",
-    },
-    {
-      quote:
-        "He turned a rough concept into a polished platform with real-time tracking and clean UX. Highly recommended.",
-      author: "Daniel T.",
-      role: "Product Manager",
-    },
-    {
-      quote:
-        "Responsive, detail-oriented, and great at translating business needs into technical solutions.",
-      author: "Marta G.",
-      role: "Freelance Client",
+      imageUrl: "/certs/cybersecurity.png",
+      link: "#",
     },
   ],
   projects: [
     {
       title: "NuroTewedede Platform",
       description:
-        "A full-featured e-commerce platform with a product catalog, cart and checkout flows, secure payments, and an admin dashboard for inventory and order management.",
+        "A full-featured e-commerce platform with a product catalog, cart and checkout flows, secure payments, and an admin dashboard.",
+      category: "web",
       tags: ["Next.js", "React", "Tailwind CSS", "Node.js", "MongoDB"],
+      thumb: "/projects/nurotewedede.jpg",
       liveUrl: "",
       githubUrl: "",
     },
     {
       title: "Merkato",
       description:
-        "A modern e-commerce app inspired by open-air marketplaces, featuring smart search, vendor storefronts, real-time order tracking, and a mobile-first shopping experience.",
+        "A modern e-commerce app inspired by open-air marketplaces, featuring smart search, vendor storefronts, and real-time order tracking.",
+      category: "web",
       tags: ["React", "Node.js", "Express", "PostgreSQL"],
+      thumb: "/projects/merkato.jpg",
       liveUrl: "",
       githubUrl: "",
     },
     {
       title: "Visit Wolaita",
       description:
-        "A tourism website showcasing the culture, destinations, and experiences of Wolaita, with interactive guides, photo galleries, and trip-planning resources.",
+        "A tourism website showcasing the culture, destinations, and experiences of Wolaita, with interactive guides and photo galleries.",
+      category: "web",
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Mapbox"],
+      thumb: "/projects/visit-wolaita.jpg",
       liveUrl: "",
       githubUrl: "",
     },
     {
       title: "Real1Editor",
       description:
-        "My personal freelancer website presenting services, selected work, and client testimonials through a fast, SEO-friendly single-page experience.",
+        "My personal freelancer website presenting services, selected work, and client testimonials through a fast, SEO-friendly experience.",
+      category: "web",
       tags: ["Next.js", "Framer Motion", "Tailwind CSS"],
+      thumb: "/projects/real1editor.jpg",
       liveUrl: "https://real1editor.vercel.app",
       githubUrl: "https://github.com/real1editor",
     },
     {
       title: "CampusConnect",
       description:
-        "A student companion app for course schedules, campus announcements, and study groups, built with offline-first sync for low-connectivity areas.",
+        "A student companion app for course schedules, campus announcements, and study groups, built with offline-first sync.",
+      category: "mobile",
       tags: ["React Native", "Expo", "Supabase"],
+      thumb: "/projects/campusconnect.jpg",
       liveUrl: "",
       githubUrl: "",
     },
     {
       title: "InsightBoard",
       description:
-        "An analytics dashboard that turns raw business data into clean visual reports, with role-based access, filters, and exportable summaries.",
+        "An analytics dashboard that turns raw business data into clean visual reports, with role-based access and exportable summaries.",
+      category: "mobile",
       tags: ["Next.js", "Recharts", "Prisma", "PostgreSQL"],
+      thumb: "/projects/insightboard.jpg",
       liveUrl: "",
       githubUrl: "",
     },
@@ -246,7 +243,7 @@ export const portfolioData = {
     {
       question: "Is he available for freelance work?",
       answer:
-        "Yes — Abdrezak is currently available for freelance projects and full-time opportunities. You can reach out via the contact section below or email directly.",
+        "Yes \u2014 Abdrezak is currently available for freelance projects and full-time opportunities. You can reach out via the contact section below or email directly.",
     },
     {
       question: "How can I get in touch?",
@@ -256,7 +253,7 @@ export const portfolioData = {
     {
       question: "What kind of projects does he build?",
       answer:
-        "He builds e-commerce platforms, tourism websites, analytics dashboards, mobile apps, and SaaS tools — focusing on clean architecture, performance, and real-world impact.",
+        "He builds e-commerce platforms, tourism websites, analytics dashboards, mobile apps, and SaaS tools \u2014 focusing on clean architecture, performance, and real-world impact.",
     },
   ],
 };
