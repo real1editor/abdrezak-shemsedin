@@ -542,7 +542,7 @@ function Skills() {
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.skills.primary.map((skill) => (
               <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                  <Image src={`https://cdn.simpleicons.org/${skill.slug}/ffffff`} alt={`${skill.name} logo`} width={26} height={26} loading="lazy" className="brand-logo" />
+                  <Image src={`https://cdn.simpleicons.org/${skill.slug}/ffffff`} alt={`${skill.name} logo`} width={26} height={26} loading="lazy" unoptimized className="brand-logo" />
                 <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
               </div>
             ))}
@@ -552,7 +552,7 @@ function Skills() {
             <div className={`grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8 ${!unlocked ? "blur-sm select-none" : ""}`}>
               {portfolioData.skills.locked.map((skill) => (
                 <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                <Image src={`https://cdn.simpleicons.org/${skill.slug}/ffffff`} alt={`${skill.name} logo`} width={26} height={26} loading="lazy" className="brand-logo" />
+                <Image src={`https://cdn.simpleicons.org/${skill.slug}/ffffff`} alt={`${skill.name} logo`} width={26} height={26} loading="lazy" unoptimized className="brand-logo" />
                   <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
                 </div>
               ))}
@@ -592,7 +592,7 @@ function Tools() {
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.tools.map((tool) => (
               <div key={tool.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                <Image src={`https://cdn.simpleicons.org/${tool.slug}/ffffff`} alt={`${tool.name} logo`} width={26} height={26} loading="lazy" className="brand-logo" />
+                <Image src={`https://cdn.simpleicons.org/${tool.slug}/ffffff`} alt={`${tool.name} logo`} width={26} height={26} loading="lazy" unoptimized className="brand-logo" />
                 <span className="text-[11px] font-medium text-zinc-400">{tool.name}</span>
               </div>
             ))}
