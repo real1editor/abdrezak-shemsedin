@@ -61,7 +61,7 @@ export default function ResumePage() {
               <h3 className="text-sm font-semibold text-zinc-200">Primary Skills</h3>
               <ul className="mt-2 space-y-1 text-sm text-zinc-400">
                 {portfolioData.skills.primary.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item.name}>{item.name}</li>
                 ))}
               </ul>
             </div>
@@ -69,7 +69,7 @@ export default function ResumePage() {
               <h3 className="text-sm font-semibold text-zinc-200">Additional Skills</h3>
               <ul className="mt-2 space-y-1 text-sm text-zinc-400">
                 {portfolioData.skills.locked.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item.name}>{item.name}</li>
                 ))}
               </ul>
             </div>
@@ -83,10 +83,10 @@ export default function ResumePage() {
           <div className="mt-4 flex flex-wrap gap-2">
             {portfolioData.tools.map((tool) => (
               <span
-                key={tool}
+                key={tool.name}
                 className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-400"
               >
-                {tool}
+                {tool.name}
               </span>
             ))}
           </div>

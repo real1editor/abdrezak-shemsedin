@@ -26,8 +26,12 @@ import {
   LinkedinIcon,
   UpworkIcon,
   TelegramIcon,
+  FacebookIcon,
+  InstagramIcon,
+  XIcon,
+  TiktokIcon,
 } from "@/components/icons";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/projects";
 
 import React from "react";
@@ -101,18 +105,30 @@ function CopyButton({ text, label }) {
 
 function Header({ initials }) {
   const [open, setOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
   const links = [
     { href: "#home", label: "Home" },
     { href: "#about", label: "About" },
+    { href: "#seo-pages", label: "Pages" },
     { href: "#skills", label: "Skills" },
+    { href: "#languages", label: "Languages" },
     { href: "#education", label: "Education" },
-    { href: "#projects", label: "Projects" },
     { href: "#certifications", label: "Certs" },
+    { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
   ];
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md">
+      <motion.div
+        style={{ scaleX: progress }}
+        className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-emerald-500 to-teal-400"
+      />
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <a href="#home" className="flex items-center gap-3">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm font-bold text-white">
@@ -185,7 +201,7 @@ function Header({ initials }) {
   );
 }
 
-function FadeIn({ children, className }) {
+function FadeIn({ children, className, delay = 0 }) {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
@@ -193,7 +209,7 @@ function FadeIn({ children, className }) {
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-      transition={{ duration: 0.55, ease: "easeOut" }}
+      transition={{ duration: 0.55, ease: "easeOut", delay }}
       className={className}
     >
       {children}
@@ -396,6 +412,34 @@ function WhatIBuild() {
   );
 }
 
+function SeoPages() {
+  return (
+    <section id="seo-pages" aria-labelledby="seo-heading" className="border-b border-white/5">
+      <div className="mx-auto max-w-5xl px-6 py-24">
+        <FadeIn>
+          <h2 id="seo-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Search <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Pages</span>
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+            These focused pages target high-intent searches related to Ethiopian developers, full-stack work, and web development in Ethiopia.
+          </p>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {portfolioData.seoPages.map((page) => (
+              <div key={page.title} className="group rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:border-emerald-500/30">
+                <a href={page.href} className="inline-flex items-center gap-2 text-base font-semibold text-zinc-100 transition-colors group-hover:text-emerald-400">
+                  {page.title}
+                  <ExternalLink className="h-4 w-4 text-zinc-500 transition-colors group-hover:text-emerald-400" />
+                </a>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{page.description}</p>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 function Languages() {
   return (
     <section id="languages" aria-labelledby="lang-heading" className="border-b border-white/5">
@@ -455,9 +499,9 @@ function Skills() {
 
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.skills.primary.map((skill) => (
-              <div key={skill} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                <span className="text-lg font-bold text-emerald-400">{skill[0]}</span>
-                <span className="text-[11px] font-medium text-zinc-400">{skill}</span>
+              <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+                <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
+                <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
               </div>
             ))}
           </div>
@@ -465,9 +509,9 @@ function Skills() {
           <div className="relative mt-6">
             <div className={`grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8 ${!unlocked ? "blur-sm select-none" : ""}`}>
               {portfolioData.skills.locked.map((skill) => (
-                <div key={skill} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                  <span className="text-lg font-bold text-zinc-500">{skill[0]}</span>
-                  <span className="text-[11px] font-medium text-zinc-400">{skill}</span>
+                <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+                  <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
+                  <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
                 </div>
               ))}
             </div>
@@ -505,9 +549,9 @@ function Tools() {
           </h2>
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.tools.map((tool) => (
-              <div key={tool} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30 hover:text-white">
-                <span className="text-lg font-bold text-zinc-300">{tool[0]}</span>
-                <span className="text-[11px] font-medium text-zinc-400">{tool}</span>
+              <div key={tool.name} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+                <img src={`https://cdn.simpleicons.org/${tool.slug}`} alt={`${tool.name} logo`} className="h-6 w-6" loading="lazy" />
+                <span className="text-[11px] font-medium text-zinc-400">{tool.name}</span>
               </div>
             ))}
           </div>
@@ -803,6 +847,10 @@ function Contact() {
     { icon: LinkedinIcon, label: "LinkedIn", value: "abdrezak-shemsedin", href: portfolioData.socials.linkedin, copy: portfolioData.socials.linkedin },
     { icon: TelegramIcon, label: "Telegram", value: "@real1editor", href: portfolioData.socials.telegram, copy: "@real1editor" },
     { icon: UpworkIcon, label: "Upwork", value: "abdrezak", href: portfolioData.socials.upwork, copy: portfolioData.socials.upwork },
+    { icon: FacebookIcon, label: "Facebook", value: "real1editor", href: portfolioData.socials.facebook, copy: portfolioData.socials.facebook },
+    { icon: InstagramIcon, label: "Instagram", value: "@real1editor", href: portfolioData.socials.instagram, copy: "@real1editor" },
+    { icon: TiktokIcon, label: "TikTok", value: "@real1editor", href: portfolioData.socials.tiktok, copy: "@real1editor" },
+    { icon: XIcon, label: "X", value: "@real1editor", href: portfolioData.socials.x, copy: "@real1editor" },
   ];
 
   return (
@@ -944,6 +992,7 @@ export default function Home() {
         <KeyMetrics />
         <About />
         <WhatIBuild />
+        <SeoPages />
         <Languages />
         <Skills />
         <Tools />
