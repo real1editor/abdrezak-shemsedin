@@ -1,35 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #13100e;
+  --foreground: #f8f1e9;
+  --accent: #c99877;
+  --accent-soft: #e2b18e;
+  --accent-light: #f0d9c3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Warm dark-earth background scale (was zinc) */
+  --color-zinc-50: #f7f1e9;
+  --color-zinc-100: #f3ece5;
+  --color-zinc-200: #e8dbcf;
+  --color-zinc-300: #d7c4b2;
+  --color-zinc-400: #c7b8ad;
+  --color-zinc-500: #a99a8d;
+  --color-zinc-600: #8a7a6d;
+  --color-zinc-700: #5c4d41;
+  --color-zinc-800: #382d25;
+  --color-zinc-900: #1a1512;
+  --color-zinc-950: #13100e;
+
+  /* Bronze accent scale (was emerald) */
+  --color-emerald-300: #ecc9a6;
+  --color-emerald-400: #e2b18e;
+  --color-emerald-500: #c99877;
+  --color-emerald-600: #a97a58;
+  --color-emerald-700: #7c5639;
+
+  /* Warm gold gradient companions (was teal/cyan) */
+  --color-teal-300: #eecfb0;
+  --color-teal-400: #ddb38f;
+  --color-cyan-400: #f0d9c3;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background-color: rgba(16, 185, 129, 0.25);
+  background-color: rgba(201, 152, 119, 0.3);
   color: #ffffff;
 }
 
+/* Warm custom scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #27272a transparent;
+  scrollbar-color: #3e3229 transparent;
 }
 
 ::-webkit-scrollbar {
@@ -38,19 +71,21 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #13100e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #3f3f46;
+  background-color: #3e3229;
   border-radius: 9999px;
-  border: 2px solid #09090b;
+  border: 2px solid #13100e;
+  transition: background-color 0.25s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #52525b;
+  background-color: #c99877;
 }
 
+/* Reveal transition used by FadeIn with framer-motion */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -72,6 +107,27 @@ body {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+@keyframes floatBadge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes heroPhotoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 @media print {

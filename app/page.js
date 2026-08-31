@@ -219,122 +219,134 @@ function FadeIn({ children, className, delay = 0 }) {
 
 function Hero({ socials }) {
   return (
-    <section id="home" aria-labelledby="hero-heading" className="relative overflow-hidden border-b border-white/5">
-      <div aria-hidden="true" className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[140px]" />
-      <div className="relative mx-auto max-w-5xl px-6 pb-20 pt-36 sm:pt-40">
-        <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
+    <section id="home" aria-labelledby="hero-heading" className="relative border-b border-white/5">
+      <div className="relative mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <div className="relative flex flex-col overflow-hidden rounded-3xl border border-[#382d25] shadow-[0_16px_40px_rgba(22,19,17,0.4)]"
+          style={{
+            background:
+              "radial-gradient(circle at 85% 15%, rgba(201,152,119,0.22), transparent 45%), radial-gradient(circle at 8% 85%, rgba(109,125,99,0.14), transparent 40%), linear-gradient(135deg, #181412 0%, #201915 55%, #2a1e16 100%)",
+          }}
+        >
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="z-10 flex flex-col justify-center px-6 py-16 sm:px-12 lg:px-16">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="mb-6 inline-flex w-fit items-center gap-2.5 rounded-full border border-[#c99877]/30 bg-white/8 px-4 py-1.5 text-xs font-medium text-[#f7e8da]"
+              >
+                <span className="relative flex h-2 w-2" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#52b788] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#52b788]" />
+                </span>
+                {portfolioData.availability} &bull; Based in Ethiopia
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+                className="text-xs font-bold uppercase tracking-[0.2em] text-[#e2b18e]"
+              >
+                {portfolioData.role}
+              </motion.p>
+
+              <motion.h1
+                id="hero-heading"
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mt-3 text-5xl font-extrabold leading-[0.95] tracking-tight text-[#f3ece5] sm:text-6xl lg:text-7xl"
+              >
+                {portfolioData.name.split(" ")[0]}
+                <br />
+                <span className="text-[#e2b18e]">{portfolioData.name.split(" ").slice(1).join(" ")}</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mt-5 max-w-xl text-base leading-relaxed text-[#d0c1b2] sm:text-lg"
+              >
+                I am a <span className="font-bold text-[#e2b18e]">5th-year Electrical &amp; Computer Engineering student</span> at{" "}
+                <span className="font-bold text-[#e2b18e]">Wolaita Sodo University</span> — building high-performance web apps, mobile apps, and digital platforms for local and global users.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-5 flex items-center gap-1.5 text-sm text-[#c99877]"
+              >
+                <MapPin className="h-4 w-4" />
+                <address className="not-italic">{portfolioData.location}</address>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="mt-8 flex flex-wrap items-center gap-4"
+              >
+                <a
+                  href="#projects"
+                  className="inline-flex h-11 items-center gap-2 rounded-full bg-[#e2b18e] px-6 text-sm font-semibold text-[#161311] shadow-[0_6px_18px_rgba(201,152,119,0.28)] transition-transform duration-300 hover:-translate-y-0.5 hover:bg-[#d9ab8b]"
+                >
+                  <Code2 className="h-4 w-4" />
+                  View My Work
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex h-11 items-center gap-2 rounded-full border border-white/20 bg-white/6 px-6 text-sm font-semibold text-[#f3ece5] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f3ece5] hover:bg-white/15"
+                >
+                  <Send className="h-4 w-4" />
+                  Get in Touch
+                </a>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mt-8"
+              >
+                <SocialLinks socials={socials} />
+              </motion.div>
+            </div>
+
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400"
+              transition={{ duration: 0.7, delay: 0.25 }}
+              className="relative order-first lg:order-none"
             >
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              {portfolioData.availability} &bull; Based in Ethiopia
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500"
-            >
-              {portfolioData.role}
-            </motion.p>
-
-            <motion.h1
-              id="hero-heading"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl sm:leading-[1.1]"
-            >
-              {portfolioData.name.split(" ")[0]}
-              <br />
-              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
-                {portfolioData.name.split(" ").slice(1).join(" ")}
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg"
-            >
-              {portfolioData.bio}
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-4 flex items-center gap-1.5 text-sm text-zinc-500"
-            >
-              <MapPin className="h-3.5 w-3.5" />
-              <address className="not-italic">{portfolioData.location}</address>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
-            >
-              <a
-                href="#projects"
-                className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
-              >
-                <Code2 className="h-4 w-4" />
-                View My Work
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
-              >
-                <Send className="h-4 w-4" />
-                Get in Touch
-              </a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-8"
-            >
-              <SocialLinks socials={socials} />
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="hidden lg:block"
-          >
-            <div className="relative">
-              <div className="h-72 w-72 overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/40 xl:h-80 xl:w-80">
+              <div className="relative h-72 w-full overflow-hidden sm:h-96 lg:h-full lg:min-h-[590px]">
                 <img
                   src={portfolioData.profilePhoto}
                   alt={`Portrait of ${portfolioData.name}`}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  style={{ objectPosition: "60% center", filter: "contrast(1.03) saturate(0.96)" }}
                   fetchpriority="high"
                 />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(24,20,18,0) 45%, rgba(24,20,18,0.55) 100%), linear-gradient(75deg, rgba(24,20,18,0.35), transparent 30%)",
+                  }}
+                />
               </div>
-              <div className="absolute -bottom-4 -left-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-zinc-950/90 px-4 py-3 backdrop-blur">
-                <Code2 className="h-5 w-5 text-emerald-400" />
+              <div className="absolute bottom-5 left-5 flex animate-[floatBadge_4s_ease-in-out_infinite] items-center gap-3 rounded-xl border border-[#c99877]/35 bg-[#131010]/85 px-4 py-2.5 backdrop-blur-md">
+                <Code2 className="h-6 w-6 text-[#e2b18e]" />
                 <div>
-                  <p className="text-sm font-semibold text-white">{portfolioData.heroBadge.title}</p>
-                  <p className="text-xs text-zinc-400">{portfolioData.heroBadge.subtitle}</p>
+                  <p className="text-sm font-semibold text-[#f3ece5]">{portfolioData.heroBadge.title}</p>
+                  <p className="text-xs text-[#c99877]">{portfolioData.heroBadge.subtitle}</p>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -348,7 +360,7 @@ function KeyMetrics() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {portfolioData.metrics.map((m) => (
             <div key={m.label} className="flex flex-col items-center rounded-2xl border border-white/10 bg-zinc-900/40 px-4 py-5 text-center transition-colors hover:border-emerald-500/30">
-              <span className="text-2xl font-bold text-white sm:text-3xl">{m.value}</span>
+              <span className="text-2xl font-bold text-zinc-100 sm:text-3xl">{m.value}</span>
               <span className="mt-1 text-xs font-medium text-zinc-400 sm:text-sm">{m.label}</span>
             </div>
           ))}
@@ -363,7 +375,7 @@ function About() {
     <section id="about" aria-labelledby="about-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="about-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="about-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             About <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Me</span>
           </h2>
           <div className="mt-8 space-y-4">
@@ -392,7 +404,7 @@ function WhatIBuild() {
     <section aria-labelledby="build-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="build-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="build-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             What I <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Build</span>
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
@@ -417,7 +429,7 @@ function SeoPages() {
     <section id="seo-pages" aria-labelledby="seo-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="seo-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="seo-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Search <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Pages</span>
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
@@ -445,7 +457,7 @@ function Languages() {
     <section id="languages" aria-labelledby="lang-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="lang-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="lang-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Lang<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">uages</span>
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
@@ -458,6 +470,7 @@ function Languages() {
                 <div className="mt-5 space-y-3">
                   {[
                     { label: "Reading", value: lang.reading },
+                    { label: "Writing", value: lang.writing ?? 0 },
                     { label: "Listening", value: lang.listening },
                     { label: "Speaking", value: lang.speaking },
                   ].map(({ label, value }) => (
@@ -489,7 +502,7 @@ function Skills() {
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <div className="flex items-center gap-3">
-            <h2 id="skills-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 id="skills-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
               Ski<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">lls</span>
             </h2>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
@@ -544,7 +557,7 @@ function Tools() {
     <section id="tools" aria-labelledby="tools-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="tools-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="tools-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Too<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">ls</span>
           </h2>
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
@@ -566,7 +579,7 @@ function Education() {
     <section id="education" aria-labelledby="edu-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="edu-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="edu-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Edu<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">cation</span>
           </h2>
           <div className="relative mt-10 ml-4 border-l border-emerald-500/20 pl-8">
@@ -600,7 +613,7 @@ function Experience() {
     <section id="experience" aria-labelledby="exp-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="exp-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="exp-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Expe<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">rience</span>
           </h2>
           <div className="relative mt-10 ml-4 border-l border-emerald-500/20 pl-8">
@@ -642,7 +655,7 @@ function Projects() {
     <section id="projects" aria-labelledby="proj-heading" className="scroll-mt-20 border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="proj-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="proj-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Pro<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">jects</span>
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
@@ -734,7 +747,7 @@ function Certifications() {
       <section id="certifications" aria-labelledby="cert-heading" className="border-b border-white/5">
         <div className="mx-auto max-w-5xl px-6 py-24">
           <FadeIn>
-            <h2 id="cert-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 id="cert-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
               Certifi<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">cations</span>
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400">Here are some certificates I earned from different programs and companies.</p>
@@ -804,7 +817,7 @@ function FAQ() {
     <section id="faq" aria-labelledby="faq-heading" className="border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Quick <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Answers</span>
           </h2>
           <div className="mx-auto mt-10 max-w-3xl space-y-3">
@@ -857,7 +870,7 @@ function Contact() {
     <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-b border-white/5">
       <div className="mx-auto max-w-5xl px-6 py-28">
         <FadeIn>
-          <h2 id="contact-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 id="contact-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Con<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">tact</span>
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
@@ -942,7 +955,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="border-t border-white/5">
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-6 py-8 text-xs text-zinc-600 sm:flex-row">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 text-center text-xs text-zinc-600">
         <p>&copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
       </div>
     </footer>
