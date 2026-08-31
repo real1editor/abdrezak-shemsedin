@@ -8,7 +8,7 @@ export default function SeoLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-line bg-zinc-950/80 backdrop-blur">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <Link href="/" className="text-sm font-semibold text-zinc-100">
             {portfolioData.name}
@@ -33,7 +33,7 @@ export default function SeoLayout({
         </div>
       </header>
       {children}
-      <footer className="mt-auto border-t border-white/5 bg-zinc-950">
+      <footer className="mt-auto border-t border-line bg-zinc-950">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 px-6 py-8 text-center">
           <p className="text-sm font-medium text-zinc-200">
             © {new Date().getFullYear()} {portfolioData.name}

@@ -11,7 +11,7 @@ export default function ResumePage() {
     <div className="mx-auto max-w-3xl px-6 py-20">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">Resume</h1>
+          <h1 className="text-3xl font-bold text-zinc-100">Resume</h1>
           <p className="mt-1 text-sm text-zinc-400">
             {portfolioData.name} — {portfolioData.role}
           </p>

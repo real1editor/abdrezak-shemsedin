@@ -23,7 +23,7 @@ export default function SeoLanding({
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
           {content.eyebrow}
         </p>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
           {content.title}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">
@@ -62,7 +62,7 @@ export default function SeoLanding({
         </section>
 
         <section className="mt-10 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center">
-          <h2 className="text-xl font-bold text-white">{content.cta}</h2>
+          <h2 className="text-xl font-bold text-zinc-100">{content.cta}</h2>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             <a
               href="mailto:real1editor@gmail.com"

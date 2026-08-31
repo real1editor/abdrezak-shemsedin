@@ -75,7 +75,7 @@ function SocialLinks({ socials, size = "md" }) {
           aria-label={label}
           title={label}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className={`inline-flex ${s} items-center justify-center rounded-full border border-line bg-soft text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-white`}
+          className={`inline-flex ${s} items-center justify-center rounded-full border border-line bg-soft text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-zinc-100`}
         >
           <Icon className={i} />
         </a>
@@ -152,14 +152,14 @@ function Header({ initials }) {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-zinc-950/80 backdrop-blur-md">
       <motion.div
         style={{ scaleX: progress }}
         className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-emerald-500 to-teal-400"
       />
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <a href="#home" className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-soft text-sm font-bold text-white">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-soft text-sm font-bold text-zinc-100">
             {initials}
           </span>
           <span className="hidden font-medium tracking-tight text-zinc-200 sm:block">
@@ -171,7 +171,7 @@ function Header({ initials }) {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-zinc-400 transition-colors hover:text-white"
+              className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
             >
               {item.label}
             </a>
@@ -203,7 +203,7 @@ function Header({ initials }) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden border-t border-white/5 md:hidden"
+            className="overflow-hidden border-t border-line md:hidden"
           >
             <div className="mx-auto max-w-5xl px-6 py-4">
               {links.map((item) => (
@@ -211,7 +211,7 @@ function Header({ initials }) {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-3 text-sm text-zinc-300 transition-colors hover:text-white"
+                  className="flex items-center justify-between py-3 text-sm text-zinc-300 transition-colors hover:text-zinc-100"
                 >
                   <span>{item.label}</span>
                   <ChevronRight className="h-4 w-4 text-zinc-500" />
@@ -250,7 +250,7 @@ function FadeIn({ children, className, delay = 0 }) {
 
 function Hero({ socials }) {
   return (
-    <section id="home" aria-labelledby="hero-heading" className="relative border-b border-white/5">
+    <section id="home" aria-labelledby="hero-heading" className="relative border-b border-line">
       <div className="relative mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="relative flex flex-col overflow-hidden rounded-3xl border border-[#382d25] shadow-[0_16px_40px_rgba(22,19,17,0.4)]"
           style={{
@@ -386,7 +386,7 @@ function Hero({ socials }) {
 
 function KeyMetrics() {
   return (
-    <section aria-label="Key highlights" className="border-b border-white/5">
+    <section aria-label="Key highlights" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-8">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {portfolioData.metrics.map((m) => (
@@ -403,7 +403,7 @@ function KeyMetrics() {
 
 function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="border-b border-white/5">
+    <section id="about" aria-labelledby="about-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="about-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -432,7 +432,7 @@ function About() {
 
 function WhatIBuild() {
   return (
-    <section aria-labelledby="build-heading" className="border-b border-white/5">
+    <section aria-labelledby="build-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="build-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -457,7 +457,7 @@ function WhatIBuild() {
 
 function SeoPages() {
   return (
-    <section id="seo-pages" aria-labelledby="seo-heading" className="border-b border-white/5">
+    <section id="seo-pages" aria-labelledby="seo-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="seo-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -485,7 +485,7 @@ function SeoPages() {
 
 function Languages() {
   return (
-    <section id="languages" aria-labelledby="lang-heading" className="border-b border-white/5">
+    <section id="languages" aria-labelledby="lang-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="lang-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -529,7 +529,7 @@ function Skills() {
   const [unlocked, setUnlocked] = useState(false);
 
   return (
-    <section id="skills" aria-labelledby="skills-heading" className="border-b border-white/5">
+    <section id="skills" aria-labelledby="skills-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <div className="flex items-center gap-3">
@@ -585,7 +585,7 @@ function Skills() {
 
 function Tools() {
   return (
-    <section id="tools" aria-labelledby="tools-heading" className="border-b border-white/5">
+    <section id="tools" aria-labelledby="tools-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="tools-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -607,7 +607,7 @@ function Tools() {
 
 function Education() {
   return (
-    <section id="education" aria-labelledby="edu-heading" className="border-b border-white/5">
+    <section id="education" aria-labelledby="edu-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="edu-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -616,7 +616,7 @@ function Education() {
           <div className="relative mt-10 ml-4 border-l border-emerald-500/20 pl-8">
             {portfolioData.education.map((item) => (
               <article key={item.title} className="relative pb-12 last:pb-0">
-                <div className={`absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border ${item.status === "current" ? "border-emerald-400 bg-emerald-500" : "border-white/20 bg-zinc-950"}`} />
+                <div className={`absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border ${item.status === "current" ? "border-emerald-400 bg-emerald-500" : "border-line bg-zinc-950"}`} />
                 {item.status === "current" && (
                   <div className="absolute -left-[45px] top-0 h-5 w-5 animate-ping rounded-full bg-emerald-500/20" />
                 )}
@@ -641,7 +641,7 @@ function Education() {
 
 function Experience() {
   return (
-    <section id="experience" aria-labelledby="exp-heading" className="border-b border-white/5">
+    <section id="experience" aria-labelledby="exp-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="exp-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -651,7 +651,7 @@ function Experience() {
             {portfolioData.experience.map((item) => (
               <article key={item.title} className="relative pb-12 last:pb-0">
                 <div className="absolute -left-[41px] top-1.5 h-3 w-3 rounded-full border border-emerald-400/60 bg-zinc-950" />
-                <div className="absolute left-[7px] top-6 h-full w-px bg-gradient-to-b from-emerald-500/40 via-white/10 to-transparent" />
+                <div className="absolute left-[7px] top-6 h-full w-px bg-gradient-to-b from-emerald-500/40 via-line to-transparent" />
                 <time className="text-xs font-medium text-emerald-400">{item.period}</time>
                 <h3 className="mt-1 text-base font-semibold text-zinc-100">{item.title}</h3>
                 <p className="text-sm text-zinc-400">{item.company}</p>
@@ -683,7 +683,7 @@ function Projects() {
   const filtered = activeFilter === "all" ? portfolioData.projects : portfolioData.projects.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="projects" aria-labelledby="proj-heading" className="scroll-mt-20 border-b border-white/5">
+    <section id="projects" aria-labelledby="proj-heading" className="scroll-mt-20 border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="proj-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -705,7 +705,7 @@ function Projects() {
                   className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
                     activeFilter === cat.key
                       ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
-                      : "border-line bg-soft text-zinc-400 hover:border-white/20 hover:text-white"
+                      : "border-line bg-soft text-zinc-400 hover:border-line hover:text-zinc-100"
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -733,7 +733,7 @@ function Projects() {
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg font-semibold tracking-tight text-zinc-100 transition-colors group-hover:text-white">
+                  <h3 className="text-lg font-semibold tracking-tight text-zinc-100 transition-colors group-hover:text-zinc-200">
                     {project.title}
                   </h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
@@ -748,7 +748,7 @@ function Projects() {
                   </div>
                   <div className="mt-4 flex gap-2">
                     {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:border-emerald-400/40 hover:text-white">
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:border-emerald-400/40 hover:text-zinc-100">
                         <GithubIcon className="h-3.5 w-3.5" />
                         Source Code
                       </a>
@@ -775,7 +775,7 @@ function Certifications() {
 
   return (
     <>
-      <section id="certifications" aria-labelledby="cert-heading" className="border-b border-white/5">
+      <section id="certifications" aria-labelledby="cert-heading" className="border-b border-line">
         <div className="mx-auto max-w-5xl px-6 py-24">
           <FadeIn>
             <h2 id="cert-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -845,7 +845,7 @@ function Certifications() {
 
 function FAQ() {
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="border-b border-white/5">
+    <section id="faq" aria-labelledby="faq-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -864,7 +864,7 @@ function FAQ() {
                   </span>
                   <ChevronDown className="h-4 w-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180 group-open:text-emerald-400" />
                 </summary>
-                <div className="border-t border-white/5 px-6 pb-5 pt-4">
+                <div className="border-t border-line px-6 pb-5 pt-4">
                   <p className="text-sm leading-relaxed text-zinc-400">{item.answer}</p>
                 </div>
               </details>
@@ -898,7 +898,7 @@ function Contact() {
   ];
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-b border-white/5">
+    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-28">
         <FadeIn>
           <h2 id="contact-heading" className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -956,7 +956,7 @@ function Contact() {
                     <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">Message</label>
                     <textarea id="message" required rows={3} className="w-full rounded-xl border border-line bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="Hi Abdrezak, let&apos;s discuss a project..." />
                   </div>
-                  <button type="submit" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto">
+                  <button type="submit" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#2f2119] transition-colors hover:bg-[#e8dbcf] sm:w-auto">
                     <Send className="h-4 w-4" />
                     Send via Telegram / Email
                   </button>
@@ -967,7 +967,7 @@ function Contact() {
             <div className="mt-8 text-center">
               <a
                 href={`mailto:${portfolioData.socials.email}`}
-                className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300"
+                className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-[#2f2119] transition-colors hover:bg-[#e8dbcf]"
               >
                 <Mail className="h-4 w-4" />
                 {portfolioData.socials.email}
@@ -985,7 +985,7 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5">
+    <footer className="border-t border-line">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 text-center text-xs text-zinc-600">
         <p>&copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
       </div>
@@ -1009,7 +1009,7 @@ function BackToTop() {
           exit={{ opacity: 0, y: 10 }}
           href="#home"
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-zinc-900/80 text-zinc-300 backdrop-blur transition-colors hover:border-emerald-400/40 hover:text-white"
+          className="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-zinc-900/80 text-zinc-300 backdrop-blur transition-colors hover:border-emerald-400/40 hover:text-zinc-100"
         >
           <ArrowUp className="h-4 w-4" />
         </motion.a>
