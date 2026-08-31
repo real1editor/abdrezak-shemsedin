@@ -22,6 +22,10 @@ export const portfolioData = {
     email: "real1editor@gmail.com",
     telegram: "https://t.me/real1editor",
     phone: "tel:+251900000000",
+    facebook: "https://facebook.com/real1editor",
+    instagram: "https://instagram.com/real1editor",
+    tiktok: "https://tiktok.com/@real1editor",
+    x: "https://x.com/real1editor",
   },
   heroBadge: {
     title: "Full-Stack",
