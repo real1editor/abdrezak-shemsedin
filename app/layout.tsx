@@ -2,7 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { portfolioData } from "@/data/projects";
-import "./globals.css";const geistSans = Geist({
+import "./globals.css";
+
+const siteUrl = "https://real1editor.vercel.app";
+const profileImage = portfolioData.profilePhoto;
+
+const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -42,7 +47,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://real1editor.vercel.app"),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },
@@ -50,13 +55,13 @@ export const metadata: Metadata = {
     title: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
     description:
       "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
-    url: "https://real1editor.vercel.app",
+    url: siteUrl,
     siteName: "Abdrezak Shemsedin",
-    type: "website",
+    type: "profile",
     locale: "en_US",
     images: [
       {
-        url: portfolioData.profilePhoto,
+        url: "/og-image",
         width: 1200,
         height: 630,
         alt: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
@@ -68,7 +73,7 @@ export const metadata: Metadata = {
     title: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
     description:
       "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
-    images: [portfolioData.profilePhoto],
+    images: ["/og-image"],
     creator: "@real1editor",
   },
   robots: {
@@ -82,36 +87,46 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#161311",
+  themeColor: "#13100e",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Abdrezak Shemsedin",
-    url: "https://real1editor.vercel.app",
-    image: portfolioData.image,
-    jobTitle: "Full-Stack Web and App Developer",
+    name: portfolioData.name,
+    url: siteUrl,
+    image: profileImage,
+    jobTitle: portfolioData.role,
+    description: portfolioData.bio,
+    email: "mailto:" + portfolioData.socials.email,
+    telephone: portfolioData.socials.phone,
     worksFor: {
       "@type": "Organization",
       name: "Self-employed",
     },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Wolaita Sodo University",
+    },
+    knowsAbout: [...portfolioData.skills.primary, ...portfolioData.skills.locked, ...portfolioData.tools].map(
+      (s) => s.name
+    ),
     sameAs: [
-      "https://github.com/real1editor",
-      "https://www.linkedin.com/in/abdrezak-shemsedin",
-      "https://www.upwork.com/freelancers/abdrezak",
-      "https://t.me/real1editor",
-      "https://real1editor.vercel.app",
+      portfolioData.socials.github,
+      portfolioData.socials.linkedin,
+      portfolioData.socials.upwork,
+      portfolioData.socials.telegram,
+      portfolioData.socials.facebook,
+      portfolioData.socials.instagram,
+      portfolioData.socials.tiktok,
+      portfolioData.socials.x,
     ],
     address: {
       "@type": "PostalAddress",
@@ -132,13 +147,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: `(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
       </head>
       <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
         {children}
-        <Script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <Script
           src="https://vercel.live/analytics/script.js"
           strategy="afterInteractive"

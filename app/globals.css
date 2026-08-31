@@ -5,6 +5,7 @@
 [data-theme="dark"] {
   --background: #13100e;
   --foreground: #f8f1e9;
+  color-scheme: dark;
 
   /* Background scale (was zinc) */
   --color-zinc-50: #f7f1e9;
@@ -39,6 +40,7 @@
 [data-theme="light"] {
   --background: #ebe8e1;
   --foreground: #2f2119;
+  color-scheme: light;
 
   /* Light warm-neutral scale */
   --color-zinc-50: #fcf8f2;
@@ -127,6 +129,14 @@ body {
   scrollbar-color: #3e3229 transparent;
 }
 
+/* Brand logos (simpleicons, monochrome white SVGs) adapt to each theme */
+.brand-logo {
+  filter: none;
+}
+[data-theme="light"] .brand-logo {
+  filter: invert(1) brightness(0.28);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -181,6 +191,19 @@ body {
   }
   50% {
     transform: translateY(-7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

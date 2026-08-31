@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
 import {
   Code2,
   ExternalLink,
@@ -54,32 +55,27 @@ const socialConfig = [
   { key: "email", label: "Email", Icon: Mail },
 ];
 
-function buildSocials() {
-  return socialConfig.map(({ key, label, Icon }) => ({
-    label,
-    href: socialBuilders[key](portfolioData.socials[key]),
-    Icon,
-    external: key !== "email",
-  }));
-}
-
-function SocialLinks({ socials, size = "md" }) {
+function SocialLinks({ size = "md" }) {
   const s = size === "sm" ? "h-9 w-9" : "h-10 w-10";
   const i = size === "sm" ? "h-4 w-4" : "h-[18px] w-[18px]";
   return (
     <div className="flex items-center gap-3">
-      {socials.map(({ label, href, Icon, external }) => (
-        <a
-          key={label}
-          href={href}
-          aria-label={label}
-          title={label}
-          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className={`inline-flex ${s} items-center justify-center rounded-full border border-line bg-soft text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-zinc-100`}
-        >
-          <Icon className={i} />
-        </a>
-      ))}
+      {socialConfig.map(({ key, label, Icon }) => {
+        const href = socialBuilders[key](portfolioData.socials[key]);
+        const external = key !== "email";
+        return (
+          <a
+            key={label}
+            href={href}
+            aria-label={label}
+            title={label}
+            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className={`inline-flex ${s} items-center justify-center rounded-full border border-line bg-soft text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-zinc-100`}
+          >
+            <Icon className={i} />
+          </a>
+        );
+      })}
     </div>
   );
 }
@@ -106,17 +102,17 @@ function CopyButton({ text, label }) {
 }
 
 function ThemeToggle() {
-  const [theme, setTheme] = useState("dark");
-  useEffect(() => {
-    setTheme(typeof document !== "undefined" ? document.documentElement.getAttribute("data-theme") || "dark" : "dark");
-  }, []);
+  const [theme, setTheme] = useState(() => {
+    if (typeof document === "undefined") return "dark";
+    return document.documentElement.getAttribute("data-theme") || "dark";
+  });
   const toggle = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
     try {
       localStorage.setItem("theme", next);
-    } catch (e) {}
+    } catch {} 
   };
   return (
     <button
@@ -248,7 +244,7 @@ function FadeIn({ children, className, delay = 0 }) {
   );
 }
 
-function Hero({ socials }) {
+function Hero() {
   return (
     <section id="home" aria-labelledby="hero-heading" className="relative border-b border-line">
       <div className="relative mx-auto max-w-6xl px-4 py-8 sm:px-6">
@@ -342,7 +338,7 @@ function Hero({ socials }) {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="mt-8"
               >
-                <SocialLinks socials={socials} />
+                <SocialLinks />
               </motion.div>
             </div>
 
@@ -353,12 +349,14 @@ function Hero({ socials }) {
               className="relative order-first lg:order-none"
             >
               <div className="relative h-72 w-full overflow-hidden sm:h-96 lg:h-full lg:min-h-[590px]">
-                <img
+                <Image
                   src={portfolioData.profilePhoto}
                   alt={`Portrait of ${portfolioData.name}`}
-                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
                   style={{ objectPosition: "60% center", filter: "contrast(1.03) saturate(0.96)" }}
-                  fetchpriority="high"
                 />
                 <div
                   aria-hidden="true"
@@ -544,7 +542,7 @@ function Skills() {
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.skills.primary.map((skill) => (
               <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
+                  <Image src={`https://cdn.simpleicons.org/${skill.slug}/ffffff`} alt={`${skill.name} logo`} width={26} height={26} loading="lazy" className="brand-logo" />
                 <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
               </div>
             ))}
@@ -554,7 +552,7 @@ function Skills() {
             <div className={`grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8 ${!unlocked ? "blur-sm select-none" : ""}`}>
               {portfolioData.skills.locked.map((skill) => (
                 <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                  <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
+                <Image src={`https://cdn.simpleicons.org/${skill.slug}/ffffff`} alt={`${skill.name} logo`} width={26} height={26} loading="lazy" className="brand-logo" />
                   <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
                 </div>
               ))}
@@ -594,7 +592,7 @@ function Tools() {
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.tools.map((tool) => (
               <div key={tool.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
-                <img src={`https://cdn.simpleicons.org/${tool.slug}`} alt={`${tool.name} logo`} className="h-6 w-6" loading="lazy" />
+                <Image src={`https://cdn.simpleicons.org/${tool.slug}/ffffff`} alt={`${tool.name} logo`} width={26} height={26} loading="lazy" className="brand-logo" />
                 <span className="text-[11px] font-medium text-zinc-400">{tool.name}</span>
               </div>
             ))}
@@ -724,10 +722,12 @@ function Projects() {
                 className="group flex flex-col rounded-2xl border border-line bg-zinc-900/40 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
               >
                 <div className="relative h-44 overflow-hidden rounded-t-2xl bg-zinc-800/50">
-                  <img
+                  <Image
                     src={project.thumb}
                     alt={`${project.title} preview`}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
@@ -790,7 +790,7 @@ function Certifications() {
                   className="group text-left rounded-2xl border border-line bg-zinc-900/40 overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30"
                 >
                   <div className="relative h-40 overflow-hidden bg-zinc-800/50">
-                    <img src={cert.imageUrl} alt={`${cert.title} certificate`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    <Image src={cert.imageUrl} alt={`${cert.title} certificate`} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
                   </div>
                   <div className="p-4">
@@ -830,7 +830,7 @@ function Certifications() {
               >
                 <X className="h-4 w-4" />
               </button>
-              <img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[80vh] rounded-2xl border border-white/20 object-contain" />
+              <Image src={lightbox.imageUrl} alt={lightbox.title} width={800} height={600} className="max-h-[80vh] w-auto rounded-2xl border border-white/20 object-contain" />
               <div className="mt-3 text-center">
                 <p className="text-sm font-medium text-[#f3ece5]">{lightbox.title}</p>
                 <p className="text-xs text-[#a99a8d]">{lightbox.issuer}</p>
@@ -974,7 +974,7 @@ function Contact() {
               </a>
             </div>
             <address className="mt-6 flex not-italic justify-center">
-              <SocialLinks socials={buildSocials()} size="sm" />
+              <SocialLinks size="sm" />
             </address>
           </div>
         </FadeIn>
@@ -1019,7 +1019,6 @@ function BackToTop() {
 }
 
 export default function Home() {
-  const socials = buildSocials();
   const initials = portfolioData.initials || portfolioData.name
     .split(" ")
     .map((p) => p[0])
@@ -1032,7 +1031,7 @@ export default function Home() {
       </a>
       <Header initials={initials} />
       <main id="main-content">
-        <Hero socials={socials} />
+        <Hero />
         <KeyMetrics />
         <About />
         <WhatIBuild />

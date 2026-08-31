@@ -13,7 +13,6 @@ export const portfolioData = {
   ],
   availability: "Available for new projects",
   location: "Addis Ababa, Ethiopia",
-  image: "/og-image.png",
   resumeUrl: "/resume",
   socials: {
     github: "https://github.com/real1editor",

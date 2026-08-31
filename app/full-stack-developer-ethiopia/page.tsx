@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { portfolioData } from "@/data/projects";
 import SeoLanding from "@/components/seo-landing";
 
 const content = {
@@ -28,6 +27,11 @@ export const metadata: Metadata = {
   description:
     "Full-stack developer in Ethiopia building web apps and e-commerce platforms with Next.js, React, TypeScript, and Node.js.",
   alternates: { canonical: content.route },
+  openGraph: {
+    title: content.title,
+    description: content.intro,
+    url: `https://real1editor.vercel.app${content.route}`,
+  },
 };
 
 export default function Page() {

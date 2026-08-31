@@ -1,5 +1,5 @@
 function createBrandIcon(path, label) {
-  function BrandIcon({ className }) {
+  function BrandIcon({ className = "" }) {
     return (
       <svg
         role="img"
