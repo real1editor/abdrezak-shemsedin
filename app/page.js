@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
-  ArrowDown,
   Code2,
   ExternalLink,
   Mail,
@@ -15,7 +14,6 @@ import {
   Send,
   CheckCircle2,
   Phone,
-  Award,
   ChevronDown,
   HelpCircle,
   Copy,
@@ -355,8 +353,12 @@ function About() {
           <div className="mt-8 space-y-4">
             {portfolioData.about.map((p, i) => (
               <p key={i} className="text-base leading-relaxed text-zinc-400">
-                {p.includes("Wolaita Sodo University") ? (
-                  <>I am a full-stack developer and 5th-year ECE student at <span className="text-emerald-400">Wolaita Sodo University</span>, based in Addis Ababa, Ethiopia.</>
+                {i === 0 ? (
+                  <>
+                    I am a full-stack developer and 5th-year{" "}
+                    <span className="text-emerald-400">Electrical and Computer Engineering</span>{" "}
+                    student at <span className="text-emerald-400">Wolaita Sodo University</span>, based in Addis Ababa, Ethiopia.
+                  </>
                 ) : (
                   p
                 )}

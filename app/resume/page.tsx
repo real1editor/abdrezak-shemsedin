@@ -127,7 +127,7 @@ export default function ResumePage() {
                   </h3>
                   <span className="text-xs text-zinc-500">{item.period}</span>
                 </div>
-                <p className="text-sm text-zinc-400">{item.institution}</p>
+                 <p className="text-sm text-zinc-400">{item.title}</p>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">
                   {item.description}
                 </p>
