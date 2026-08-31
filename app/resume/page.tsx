@@ -19,7 +19,7 @@ export default function ResumePage() {
         <PrintButton />
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-8">
+      <div className="rounded-2xl border border-line bg-zinc-900/40 p-8">
         <section className="mb-10">
           <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-400">
             Profile
@@ -84,7 +84,7 @@ export default function ResumePage() {
             {portfolioData.tools.map((tool) => (
               <span
                 key={tool.name}
-                className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-400"
+                className="rounded-full border border-line bg-soft px-2.5 py-1 text-[11px] font-medium text-zinc-400"
               >
                 {tool.name}
               </span>
@@ -153,7 +153,7 @@ export default function ResumePage() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-400"
+                      className="rounded-full border border-line bg-soft px-2.5 py-1 text-[11px] font-medium text-zinc-400"
                     >
                       {tag}
                     </span>

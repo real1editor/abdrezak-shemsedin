@@ -30,7 +30,7 @@ export default function SeoLanding({
           {content.intro}
         </p>
 
-        <section className="mt-10 rounded-2xl border border-white/10 bg-zinc-900/40 p-8">
+        <section className="mt-10 rounded-2xl border border-line bg-zinc-900/40 p-8">
           <h2 className="text-lg font-semibold text-zinc-100">
             Why {portfolioData.name.split(" ")[0]}?
           </h2>
@@ -50,7 +50,7 @@ export default function SeoLanding({
             {content.services.map((service) => (
               <div
                 key={service.title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+                className="rounded-2xl border border-line bg-soft p-5"
               >
                 <h3 className="text-sm font-semibold text-zinc-100">{service.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">
@@ -72,7 +72,7 @@ export default function SeoLanding({
             </a>
             <Link
               href="/#projects"
-              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition-colors hover:border-emerald-500/40"
+              className="rounded-full border border-line px-6 py-2.5 text-sm font-semibold text-zinc-200 transition-colors hover:border-emerald-500/40"
             >
               View work
             </Link>

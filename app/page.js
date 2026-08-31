@@ -75,7 +75,7 @@ function SocialLinks({ socials, size = "md" }) {
           aria-label={label}
           title={label}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className={`inline-flex ${s} items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-white`}
+          className={`inline-flex ${s} items-center justify-center rounded-full border border-line bg-soft text-zinc-400 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:text-white`}
         >
           <Icon className={i} />
         </a>
@@ -96,7 +96,7 @@ function CopyButton({ text, label }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="ml-auto shrink-0 rounded-lg border border-white/10 bg-white/[0.03] p-2 text-zinc-500 transition-colors hover:border-emerald-400/40 hover:text-emerald-400"
+      className="ml-auto shrink-0 rounded-lg border border-line bg-soft p-2 text-zinc-500 transition-colors hover:border-emerald-400/40 hover:text-emerald-400"
       title={`Copy ${label}`}
       aria-label={`Copy ${label}`}
     >
@@ -159,7 +159,7 @@ function Header({ initials }) {
       />
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <a href="#home" className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm font-bold text-white">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-soft text-sm font-bold text-white">
             {initials}
           </span>
           <span className="hidden font-medium tracking-tight text-zinc-200 sm:block">
@@ -194,6 +194,7 @@ function Header({ initials }) {
           >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
+        </div>
       </div>
       <AnimatePresence>
         {open && (
@@ -389,7 +390,7 @@ function KeyMetrics() {
       <div className="mx-auto max-w-5xl px-6 py-8">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {portfolioData.metrics.map((m) => (
-            <div key={m.label} className="flex flex-col items-center rounded-2xl border border-white/10 bg-zinc-900/40 px-4 py-5 text-center transition-colors hover:border-emerald-500/30">
+            <div key={m.label} className="flex flex-col items-center rounded-2xl border border-line bg-zinc-900/40 px-4 py-5 text-center transition-colors hover:border-emerald-500/30">
               <span className="text-2xl font-bold text-zinc-100 sm:text-3xl">{m.value}</span>
               <span className="mt-1 text-xs font-medium text-zinc-400 sm:text-sm">{m.label}</span>
             </div>
@@ -439,7 +440,7 @@ function WhatIBuild() {
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {portfolioData.whatIBuild.map((item) => (
-              <div key={item.title} className="group rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30">
+              <div key={item.title} className="group rounded-2xl border border-line bg-zinc-900/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
                   <Code2 className="h-5 w-5" />
                 </span>
@@ -467,7 +468,7 @@ function SeoPages() {
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {portfolioData.seoPages.map((page) => (
-              <div key={page.title} className="group rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition duration-300 hover:border-emerald-500/30">
+              <div key={page.title} className="group rounded-2xl border border-line bg-zinc-900/40 p-6 transition duration-300 hover:border-emerald-500/30">
                 <a href={page.href} className="inline-flex items-center gap-2 text-base font-semibold text-zinc-100 transition-colors group-hover:text-emerald-400">
                   {page.title}
                   <ExternalLink className="h-4 w-4 text-zinc-500 transition-colors group-hover:text-emerald-400" />
@@ -492,7 +493,7 @@ function Languages() {
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {portfolioData.languages.map((lang) => (
-              <div key={lang.name} className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition-colors hover:border-emerald-500/30">
+              <div key={lang.name} className="rounded-2xl border border-line bg-zinc-900/40 p-6 transition-colors hover:border-emerald-500/30">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-zinc-100">{lang.name}</h3>
                   <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">{lang.level}</span>
@@ -509,7 +510,7 @@ function Languages() {
                         <span className="text-zinc-400">{label}</span>
                         <span className="text-zinc-500">{value}%</span>
                       </div>
-                      <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                      <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-soft">
                         <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400" style={{ width: `${value}%` }} />
                       </div>
                     </div>
@@ -542,7 +543,7 @@ function Skills() {
 
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.skills.primary.map((skill) => (
-              <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+              <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
                 <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
                 <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
               </div>
@@ -552,7 +553,7 @@ function Skills() {
           <div className="relative mt-6">
             <div className={`grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8 ${!unlocked ? "blur-sm select-none" : ""}`}>
               {portfolioData.skills.locked.map((skill) => (
-                <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+                <div key={skill.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
                   <img src={`https://cdn.simpleicons.org/${skill.slug}`} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
                   <span className="text-[11px] font-medium text-zinc-400">{skill.name}</span>
                 </div>
@@ -592,7 +593,7 @@ function Tools() {
           </h2>
           <div className="mt-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.tools.map((tool) => (
-              <div key={tool.name} className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
+              <div key={tool.name} className="flex flex-col items-center gap-2 rounded-xl border border-line bg-soft px-3 py-4 text-center transition-colors hover:border-emerald-500/30">
                 <img src={`https://cdn.simpleicons.org/${tool.slug}`} alt={`${tool.name} logo`} className="h-6 w-6" loading="lazy" />
                 <span className="text-[11px] font-medium text-zinc-400">{tool.name}</span>
               </div>
@@ -621,7 +622,7 @@ function Education() {
                 )}
                 <div className="flex items-center gap-3">
                   <h3 className="text-base font-semibold text-zinc-100">{item.title}</h3>
-                  <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${item.status === "current" ? "border border-emerald-500/20 bg-emerald-500/10 text-emerald-400" : "border border-white/10 bg-white/[0.03] text-zinc-500"}`}>
+                  <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${item.status === "current" ? "border border-emerald-500/20 bg-emerald-500/10 text-emerald-400" : "border border-line bg-soft text-zinc-500"}`}>
                     {item.status === "current" ? "Current" : item.period}
                   </span>
                 </div>
@@ -704,7 +705,7 @@ function Projects() {
                   className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
                     activeFilter === cat.key
                       ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
-                      : "border-white/10 bg-white/[0.03] text-zinc-400 hover:border-white/20 hover:text-white"
+                      : "border-line bg-soft text-zinc-400 hover:border-white/20 hover:text-white"
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -720,7 +721,7 @@ function Projects() {
               <motion.article
                 layout
                 key={project.title}
-                className="group flex flex-col rounded-2xl border border-white/10 bg-zinc-900/40 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
+                className="group flex flex-col rounded-2xl border border-line bg-zinc-900/40 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/70"
               >
                 <div className="relative h-44 overflow-hidden rounded-t-2xl bg-zinc-800/50">
                   <img
@@ -740,14 +741,14 @@ function Projects() {
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-zinc-400">
+                      <span key={tag} className="rounded-full border border-line bg-soft px-2.5 py-1 text-[11px] font-medium text-zinc-400">
                         {tag}
                       </span>
                     ))}
                   </div>
                   <div className="mt-4 flex gap-2">
                     {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:border-emerald-400/40 hover:text-white">
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:border-emerald-400/40 hover:text-white">
                         <GithubIcon className="h-3.5 w-3.5" />
                         Source Code
                       </a>
@@ -786,7 +787,7 @@ function Certifications() {
                 <button
                   key={cert.title}
                   onClick={() => setLightbox(cert)}
-                  className="group text-left rounded-2xl border border-white/10 bg-zinc-900/40 overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30"
+                  className="group text-left rounded-2xl border border-line bg-zinc-900/40 overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30"
                 >
                   <div className="relative h-40 overflow-hidden bg-zinc-800/50">
                     <img src={cert.imageUrl} alt={`${cert.title} certificate`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
@@ -824,15 +825,15 @@ function Certifications() {
             >
               <button
                 onClick={() => setLightbox(null)}
-                className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-zinc-900 text-zinc-300 hover:text-white"
+                className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-[#1a1512] text-[#d7c4b2] hover:text-white"
                 aria-label="Close preview"
               >
                 <X className="h-4 w-4" />
               </button>
-              <img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[80vh] rounded-2xl border border-white/10 object-contain" />
+              <img src={lightbox.imageUrl} alt={lightbox.title} className="max-h-[80vh] rounded-2xl border border-white/20 object-contain" />
               <div className="mt-3 text-center">
-                <p className="text-sm font-medium text-zinc-100">{lightbox.title}</p>
-                <p className="text-xs text-zinc-500">{lightbox.issuer}</p>
+                <p className="text-sm font-medium text-[#f3ece5]">{lightbox.title}</p>
+                <p className="text-xs text-[#a99a8d]">{lightbox.issuer}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -854,7 +855,7 @@ function FAQ() {
             {portfolioData.faq.map((item, idx) => (
               <details
                 key={idx}
-                className="group rounded-2xl border border-white/10 bg-zinc-900/40 transition-colors hover:border-white/15 [&[open]]:border-emerald-500/30"
+                className="group rounded-2xl border border-line bg-zinc-900/40 transition-colors hover:border-line [&[open]]:border-emerald-500/30"
               >
                 <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-medium text-zinc-100 outline-none [&::-webkit-details-marker]:hidden [&::marker]:hidden">
                   <span className="flex items-center gap-3">
@@ -909,9 +910,9 @@ function Contact() {
 
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {contactItems.map(({ icon: Icon, label, value, href, copy }) => (
-              <div key={label} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-zinc-900/40 p-4 transition duration-300 hover:border-emerald-500/30">
+              <div key={label} className="flex items-center gap-3 rounded-2xl border border-line bg-zinc-900/40 p-4 transition duration-300 hover:border-emerald-500/30">
                 <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 flex-1 min-w-0">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-soft text-zinc-400">
                     <Icon className="h-5 w-5" />
                   </span>
                   <div className="min-w-0">
@@ -925,7 +926,7 @@ function Contact() {
           </div>
 
           <div className="mx-auto mt-12 max-w-xl">
-            <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6">
+            <div className="rounded-2xl border border-line bg-zinc-900/40 p-6">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
                 <Send className="h-4 w-4 text-emerald-400" />
                 Send a Quick Message
@@ -944,16 +945,16 @@ function Contact() {
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label htmlFor="name" className="mb-1 block text-xs font-medium text-zinc-400">Your Name</label>
-                      <input id="name" required className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="John Doe" autoComplete="name" />
+                      <input id="name" required className="w-full rounded-xl border border-line bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="John Doe" autoComplete="name" />
                     </div>
                     <div>
                       <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-400">Your Email / Telegram</label>
-                      <input id="email" required className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="you@example.com or @username" />
+                      <input id="email" required className="w-full rounded-xl border border-line bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="you@example.com or @username" />
                     </div>
                   </div>
                   <div>
                     <label htmlFor="message" className="mb-1 block text-xs font-medium text-zinc-400">Message</label>
-                    <textarea id="message" required rows={3} className="w-full rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="Hi Abdrezak, let&apos;s discuss a project..." />
+                    <textarea id="message" required rows={3} className="w-full rounded-xl border border-line bg-zinc-900/40 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40" placeholder="Hi Abdrezak, let&apos;s discuss a project..." />
                   </div>
                   <button type="submit" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-300 sm:w-auto">
                     <Send className="h-4 w-4" />
@@ -1008,7 +1009,7 @@ function BackToTop() {
           exit={{ opacity: 0, y: 10 }}
           href="#home"
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-zinc-900/80 text-zinc-300 backdrop-blur transition-colors hover:border-emerald-400/40 hover:text-white"
+          className="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-zinc-900/80 text-zinc-300 backdrop-blur transition-colors hover:border-emerald-400/40 hover:text-white"
         >
           <ArrowUp className="h-4 w-4" />
         </motion.a>
