@@ -4,8 +4,11 @@ import Script from "next/script";
 import { portfolioData } from "@/data/projects";
 import "./globals.css";
 
-const siteUrl = "https://real1editor.vercel.app";
+const siteUrl = "https://abdrezak-shemsedin.vercel.app";
 const profileImage = portfolioData.profilePhoto;
+const fullTitle = `${portfolioData.shortName} — Full-Stack Developer & Computer Engineer`;
+const fullDescription =
+  "Abdrezak Shemsedin Hakimo — fifth-year Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, digital platforms, and data-driven products with Next.js, Supabase, and Python.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,26 +22,37 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
-    template: "%s — Abdrezak Shemsedin",
+    default: fullTitle,
+    template: `%s — ${portfolioData.shortName}`,
   },
-  description:
-    "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
+  description: fullDescription,
   keywords: [
     "Abdrezak Shemsedin",
+    "Abdrezak Shemsedin Hakimo",
     "Full-Stack Developer",
-    "Web Developer",
+    "Web Developer Ethiopia",
+    "Ethiopian Developer",
+    "Electrical and Computer Engineering",
     "React",
     "Next.js",
-    "React Native",
+    "Supabase",
+    "Python",
+    "NumPy",
+    "Pandas",
+    "Data Analysis",
     "Portfolio",
     "E-commerce",
     "Tourism",
     "Analytics",
   ],
-  authors: [{ name: "Abdrezak Shemsedin", url: "https://github.com/real1editor" }],
-  creator: "Abdrezak Shemsedin",
-  publisher: "Abdrezak Shemsedin",
+  authors: [
+    {
+      name: "Abdrezak Shemsedin Hakimo",
+      url: "https://github.com/real1editor",
+    },
+  ],
+  creator: "Abdrezak Shemsedin Hakimo",
+  publisher: "Abdrezak Shemsedin Hakimo",
   applicationName: "Abdrezak Shemsedin Portfolio",
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
@@ -52,9 +66,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
-    description:
-      "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
+    title: fullTitle,
+    description: fullDescription,
     url: siteUrl,
     siteName: "Abdrezak Shemsedin",
     type: "profile",
@@ -64,15 +77,14 @@ export const metadata: Metadata = {
         url: "/og-image",
         width: 1200,
         height: 630,
-        alt: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
+        alt: fullTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdrezak Shemsedin — Full-Stack Web and App Developer",
-    description:
-      "Electrical and Computer Engineering student specializing in building high-performance web applications and digital platforms.",
+    title: fullTitle,
+    description: fullDescription,
     images: ["/og-image"],
     creator: "@real1editor",
   },
@@ -93,7 +105,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#13100e",
+  themeColor: "#12100e",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -101,23 +113,34 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     "@context": "https://schema.org",
     "@type": "Person",
     name: portfolioData.name,
+    givenName: portfolioData.firstName,
+    familyName: "Shemsedin Hakimo",
     url: siteUrl,
     image: profileImage,
     jobTitle: portfolioData.role,
     description: portfolioData.bio,
     email: "mailto:" + portfolioData.socials.email,
     telephone: portfolioData.socials.phone,
-    worksFor: {
-      "@type": "Organization",
-      name: "Self-employed",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Addis Ababa",
+      addressCountry: "Ethiopia",
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "Wolaita Sodo University",
     },
-    knowsAbout: [...portfolioData.skills.primary, ...portfolioData.skills.locked, ...portfolioData.tools].map(
-      (s) => s.name
-    ),
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "degree",
+      name: "BSc in Electrical and Computer Engineering",
+    },
+    knowsAbout: [
+      ...portfolioData.skills.primary,
+      ...portfolioData.skills.data,
+      ...portfolioData.skills.locked,
+      ...portfolioData.tools,
+    ].map((s) => s.name),
     sameAs: [
       portfolioData.socials.github,
       portfolioData.socials.linkedin,
@@ -128,11 +151,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       portfolioData.socials.tiktok,
       portfolioData.socials.x,
     ],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Addis Ababa",
-      addressCountry: "Ethiopia",
-    },
   };
 
   return (
@@ -144,6 +162,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <meta name="color-scheme" content="dark light" />
         <script
           suppressHydrationWarning
           type={typeof document === "undefined" ? "text/javascript" : "text/plain"}

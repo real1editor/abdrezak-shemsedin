@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { portfolioData } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://real1editor.vercel.app";
+  const baseUrl = "https://abdrezak-shemsedin.vercel.app";
 
   const seoRoutes: MetadataRoute.Sitemap = portfolioData.seoPages.map((page) => ({
     url: `${baseUrl}${page.href}`,

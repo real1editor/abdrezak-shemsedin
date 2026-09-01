@@ -6,8 +6,8 @@ export const contentType = "image/png";
 export const alt = `${portfolioData.name} — ${portfolioData.role}`;
 
 export default function OgImage() {
-  const firstName = portfolioData.name.split(" ")[0];
-  const lastName = portfolioData.name.split(" ").slice(1).join(" ");
+  const firstName = portfolioData.firstName;
+  const lastName = portfolioData.lastName;
 
   return new ImageResponse(
     (

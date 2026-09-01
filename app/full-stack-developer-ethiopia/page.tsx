@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: content.title,
     description: content.intro,
-    url: `https://real1editor.vercel.app${content.route}`,
+    url: `https://abdrezak-shemsedin.vercel.app${content.route}`,
   },
 };
 

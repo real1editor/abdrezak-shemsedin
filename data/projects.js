@@ -1,15 +1,20 @@
 export const portfolioData = {
-  name: "Abdrezak Shemsedin",
+  firstName: "Abdrezak",
+  lastName: "Shemsedin Hakimo",
+  name: "Abdrezak Shemsedin Hakimo",
+  shortName: "Abdrezak Shemsedin",
   initials: "AS",
-  role: "Full-Stack Web and App Developer",
-  bio: "Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, mobile apps, and digital platforms.",
-  profilePhoto: "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto/photo_2026-08-31_12-22-01",
+  role: "Full-Stack & Electrical/Computer Engineering Developer",
+  roleShort: "Full-Stack Developer",
+  bio: "Fifth-year Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, digital platforms, and data-driven products with a system-minded, engineering-first approach.",
+  profilePhoto:
+    "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto,w_800,h_1000,c_fill/photo_2026-08-31_12-22-01",
   about: [
-    "I am a full-stack developer and 5th-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
-    "My main areas are full-stack web development, mobile app development, e-commerce platforms, and SaaS products.",
-    "I work with Next.js, React, TypeScript, Tailwind CSS, React Native, Node.js, Express, PostgreSQL, MongoDB, Supabase, and Prisma.",
-    "I also use Git, GitHub, Docker, Vercel, Framer Motion, and Mapbox for development, deployment, and design.",
-    "I am building my experience through real projects in Ethiopia, including e-commerce platforms, tourism websites, and student-focused apps.",
+    "I am a fifth-year Electrical and Computer Engineering student (specializing in computer engineering) at Wolaita Sodo University, graduating in 2027. Engineering fundamentals meet modern web and data engineering in everything I ship.",
+    "My main areas are full-stack web development, mobile app development, e-commerce platforms, SaaS products, and data analysis with Python.",
+    "I work with Next.js, React, TypeScript, Tailwind CSS, JavaScript, Supabase, Python, and Git to build fast, reliable, production-ready systems.",
+    "I use data tooling like NumPy, Pandas, Matplotlib, and Seaborn for analysis and visualization, and ship through Git, GitHub, Vercel, and VS Code.",
+    "I am building my experience through real projects in Ethiopia, including e-commerce platforms, tourism websites, analytics dashboards, and student-focused apps.",
   ],
   availability: "Available for new projects",
   location: "Addis Ababa, Ethiopia",
@@ -27,55 +32,65 @@ export const portfolioData = {
     x: "https://x.com/real1editor",
   },
   heroBadge: {
-    title: "Full-Stack",
-    subtitle: "Next.js \u00B7 React \u00B7 Node.js",
+    title: "Full-Stack + Data",
+    subtitle: "Next.js · Supabase · Python",
   },
   metrics: [
     { value: "6+", label: "Featured Projects" },
-    { value: "14+", label: "Tech & Frameworks" },
-    { value: "5", label: "Languages Spoken" },
-    { value: "5th-Yr", label: "Computer Eng., WSU" },
+    { value: "15+", label: "Tech & Frameworks" },
+    { value: "5", label: "Languages Fluent" },
+    { value: "2027", label: "Graduating · ECE WSU" },
   ],
   languages: [
     {
       name: "Amharic",
-      level: "Native",
+      native: "አማርኛ",
+      level: "Native Fluency",
       reading: 100,
       writing: 100,
       listening: 100,
       speaking: 100,
+      tag: "Mother tongue",
     },
     {
       name: "Siltigna",
-      level: "Native",
+      native: "ስልጥኘ",
+      level: "Native Fluency",
       reading: 100,
       writing: 100,
       listening: 100,
       speaking: 100,
+      tag: "Mother tongue",
     },
     {
       name: "English",
+      native: "English",
       level: "Professional",
       reading: 100,
       writing: 100,
-      listening: 85,
-      speaking: 80,
+      listening: 90,
+      speaking: 85,
+      tag: "Working proficiency",
     },
     {
       name: "Arabic",
-      level: "Conversational",
+      native: "العربية",
+      level: "Literate & Conversational",
       reading: 90,
       writing: 75,
-      listening: 55,
-      speaking: 50,
+      listening: 60,
+      speaking: 55,
+      tag: "Reading & comprehension",
     },
     {
       name: "Gurage",
-      level: "Basic",
-      reading: 50,
-      writing: 40,
-      listening: 60,
-      speaking: 40,
+      native: "ጉራጌ",
+      level: "Literate & Conversational",
+      reading: 55,
+      writing: 45,
+      listening: 65,
+      speaking: 50,
+      tag: "Reading & comprehension",
     },
   ],
   whatIBuild: [
@@ -87,12 +102,29 @@ export const portfolioData = {
     {
       title: "Mobile App Development",
       description:
-        "Cross-platform mobile apps using React Native and Expo, with offline-first sync, push notifications, and native-feel UX for Android and iOS.",
+        "Cross-platform mobile apps with offline-first sync, real-time features, and native-feel UX for Android and iOS.",
     },
     {
       title: "E-Commerce & SaaS Platforms",
       description:
-        "Scalable product platforms featuring payment integration, inventory management, real-time tracking, and role-based dashboards for business owners.",
+        "Scalable product platforms featuring secure payment integration, inventory management, real-time tracking, and role-based dashboards.",
+    },
+  ],
+  courseFocus: [
+    {
+      title: "Software Systems",
+      description:
+        "Data structures, algorithms, and object-oriented design applied to real products with clean, maintainable architecture.",
+    },
+    {
+      title: "Embedded & Computer Architecture",
+      description:
+        "Digital logic, microprocessors, and embedded systems — bridging low-level hardware thinking with high-level software.",
+    },
+    {
+      title: "Data Engineering & Analysis",
+      description:
+        "Applied machine learning, signal/data processing, and Python-driven analytics with NumPy, Pandas, Matplotlib, and Seaborn.",
     },
   ],
   seoPages: [
@@ -117,65 +149,71 @@ export const portfolioData = {
   ],
   skills: {
     primary: [
-      { name: "Next.js", slug: "nextdotjs" },
-      { name: "React", slug: "react" },
-      { name: "TypeScript", slug: "typescript" },
-      { name: "Tailwind CSS", slug: "tailwindcss" },
-      { name: "Node.js", slug: "nodedotjs" },
-      { name: "Express", slug: "express" },
-      { name: "React Native", slug: "react" },
-      { name: "Supabase", slug: "supabase" },
+      { name: "Next.js", slug: "nextdotjs", level: 95 },
+      { name: "React", slug: "react", level: 92 },
+      { name: "TypeScript", slug: "typescript", level: 88 },
+      { name: "Tailwind CSS", slug: "tailwindcss", level: 94 },
+      { name: "JavaScript", slug: "javascript", level: 92 },
+      { name: "Supabase", slug: "supabase", level: 85 },
+      { name: "Node.js", slug: "nodedotjs", level: 82 },
+      { name: "Python", slug: "python", level: 86 },
+    ],
+    data: [
+      { name: "NumPy", slug: "numpy", level: 84 },
+      { name: "Pandas", slug: "pandas", level: 84 },
+      { name: "Matplotlib", slug: "matplotlib", level: 80 },
+      { name: "Seaborn", slug: "seaborn", level: 78 },
     ],
     locked: [
-      { name: "PostgreSQL", slug: "postgresql" },
-      { name: "MongoDB", slug: "mongodb" },
-      { name: "Prisma", slug: "prisma" },
-      { name: "Docker", slug: "docker" },
-      { name: "Expo", slug: "expo" },
-      { name: "Framer Motion", slug: "framer" },
-      { name: "Mapbox", slug: "mapbox" },
-      { name: "Recharts", slug: "recharts" },
+      { name: "PostgreSQL", slug: "postgresql", level: 80 },
+      { name: "MongoDB", slug: "mongodb", level: 76 },
+      { name: "Prisma", slug: "prisma", level: 78 },
+      { name: "Docker", slug: "docker", level: 70 },
+      { name: "Expo", slug: "expo", level: 78 },
+      { name: "Framer Motion", slug: "framer", level: 84 },
+      { name: "Mapbox", slug: "mapbox", level: 72 },
+      { name: "Recharts", slug: "recharts", level: 80 },
     ],
   },
   tools: [
     { name: "Git", slug: "git" },
     { name: "GitHub", slug: "github" },
-    { name: "Docker", slug: "docker" },
     { name: "Vercel", slug: "vercel" },
     { name: "VS Code", slug: "visualstudiocode" },
-    { name: "Figma", slug: "figma" },
+    { name: "Node.js", slug: "nodedotjs" },
     { name: "Postman", slug: "postman" },
     { name: "Expo Go", slug: "expo" },
+    { name: "Jupyter", slug: "jupyter" },
   ],
   experience: [
     {
       title: "Freelance Full-Stack Developer",
       company: "Self-employed",
-      period: "2024 \u2014 Present",
+      period: "2024 — Present",
       description:
-        "Delivering web and mobile solutions for clients across e-commerce, tourism, and SaaS. Owned product requirements, architecture, and launch.",
+        "Delivering web and mobile solutions for clients across e-commerce, tourism, and SaaS. Owned product requirements, architecture, and launch end-to-end.",
     },
     {
-      title: "Frontend Developer Intern",
-      company: "Tech Startup",
-      period: "2023 \u2014 2024",
+      title: "Engineering & Data Projects",
+      company: "Wolaita Sodo University",
+      period: "2023 — Present",
       description:
-        "Built responsive UI components and improved site performance by 35%. Collaborated with designers and backend engineers.",
+        "Built student-focused apps and data analysis tooling with Python (NumPy, Pandas) and applied engineering coursework to real systems.",
     },
   ],
   education: [
     {
       title: "Wolaita Sodo University",
-      degree: "BSc in Electrical and Computer Engineering",
-      period: "2021 \u2014 2026 (5th Year)",
+      degree: "BSc in Electrical and Computer Engineering (Computer Engineering)",
+      period: "2022 — 2027 (5th Year)",
       description:
-        "Focus on software systems, embedded computing, and applied machine learning. Active in coding clubs and hackathons.",
+        "Specializing in computer engineering with focus on software systems, embedded computing, and applied machine learning. Graduating 2027. Active in coding clubs and hackathons.",
       status: "current",
     },
     {
       title: "Preparatory School",
       degree: "Higher Education Entrance Certificate",
-      period: "2018 \u2014 2021",
+      period: "2019 — 2022",
       description:
         "Ethiopian Higher Education Entrance Certificate with focus on natural science and mathematics.",
       status: "completed",
@@ -183,7 +221,7 @@ export const portfolioData = {
     {
       title: "Primary School",
       degree: "Primary School Certificate",
-      period: "2011 \u2014 2018",
+      period: "2011 — 2019",
       description: "Completed primary education with distinction.",
       status: "completed",
     },
@@ -273,8 +311,8 @@ export const portfolioData = {
       title: "InsightBoard",
       description:
         "An analytics dashboard that turns raw business data into clean visual reports, with role-based access and exportable summaries.",
-      category: "mobile",
-      tags: ["Next.js", "Recharts", "Prisma", "PostgreSQL"],
+      category: "data",
+      tags: ["Next.js", "Recharts", "Prisma", "PostgreSQL", "Python"],
       thumb: "/projects/insightboard.jpg",
       liveUrl: "",
       githubUrl: "",
@@ -284,17 +322,17 @@ export const portfolioData = {
     {
       question: "Who is Abdrezak Shemsedin?",
       answer:
-        "Abdrezak Shemsedin is a full-stack web and app developer and a 5th-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
+        "Abdrezak Shemsedin Hakimo is a full-stack web and app developer and a fifth-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
     },
     {
       question: "What tech stack does he use?",
       answer:
-        "He works with Next.js, React, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL, MongoDB, Supabase, Prisma, React Native, Expo, Docker, and Git.",
+        "He works with Next.js, React, TypeScript, Tailwind CSS, JavaScript, Supabase, Python (NumPy, Pandas, Matplotlib, Seaborn), PostgreSQL, and Git.",
     },
     {
       question: "Is he available for freelance work?",
       answer:
-        "Yes \u2014 Abdrezak is currently available for freelance projects and full-time opportunities. You can reach out via the contact section below or email directly.",
+        "Yes — Abdrezak is currently available for freelance projects and full-time opportunities. You can reach out via the contact section below or email directly.",
     },
     {
       question: "How can I get in touch?",
@@ -304,7 +342,7 @@ export const portfolioData = {
     {
       question: "What kind of projects does he build?",
       answer:
-        "He builds e-commerce platforms, tourism websites, analytics dashboards, mobile apps, and SaaS tools \u2014 focusing on clean architecture, performance, and real-world impact.",
+        "He builds e-commerce platforms, tourism websites, analytics dashboards, mobile apps, and SaaS tools — focusing on clean architecture, performance, and real-world impact.",
     },
   ],
 };

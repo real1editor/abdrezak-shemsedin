@@ -1,74 +1,107 @@
 @import "tailwindcss";
 
-/* ===== Theme tokens: dark is default, light is opt-in via [data-theme="light"] ===== */
+/* ==========================================================================
+   ABDREZAK SHEMSEDIN — Dark-Earth Editorial Design System
+   Deep charcoal-brown foundations, warm bronze/gold accents, ambient light,
+   micro-grain texture, and refined radii. Dark is default; light is opt-in.
+   ========================================================================== */
+
 :root,
 [data-theme="dark"] {
-  --background: #13100e;
-  --foreground: #f8f1e9;
+  --background: #12100e;
+  --background-soft: #181512;
+  --foreground: #efe8df;
   color-scheme: dark;
 
-  /* Background scale (was zinc) */
-  --color-zinc-50: #f7f1e9;
+  /* Deep earth surface scale */
+  --color-zinc-50: #f9f4ec;
   --color-zinc-100: #f3ece5;
-  --color-zinc-200: #e8dbcf;
-  --color-zinc-300: #d7c4b2;
-  --color-zinc-400: #c7b8ad;
-  --color-zinc-500: #a99a8d;
-  --color-zinc-600: #8a7a6d;
-  --color-zinc-700: #5c4d41;
-  --color-zinc-800: #382d25;
-  --color-zinc-900: #1a1512;
-  --color-zinc-950: #13100e;
+  --color-zinc-200: #e6dacd;
+  --color-zinc-300: #d4c5b9;
+  --color-zinc-400: #b4a294;
+  --color-zinc-500: #94806f;
+  --color-zinc-600: #6f5d4f;
+  --color-zinc-700: #4a3b31;
+  --color-zinc-800: #2a221c;
+  --color-zinc-900: #1c1815;
+  --color-zinc-950: #12100e;
 
-  /* Bronze accent scale (was emerald) */
-  --color-emerald-300: #ecc9a6;
-  --color-emerald-400: #e2b18e;
-  --color-emerald-500: #c99877;
-  --color-emerald-600: #a97a58;
-  --color-emerald-700: #7c5639;
+  /* Warm bronze / gold accent scale */
+  --color-emerald-200: #ecd3b8;
+  --color-emerald-300: #e2bd98;
+  --color-emerald-400: #c5a880;
+  --color-emerald-500: #a98c68;
+  --color-emerald-600: #8a6f50;
+  --color-emerald-700: #644a30;
 
-  /* Warm gold gradient companions (was teal/cyan) */
-  --color-teal-300: #eecfb0;
-  --color-teal-400: #ddb38f;
-  --color-cyan-400: #f0d9c3;
+  --color-teal-200: #e8cbb0;
+  --color-teal-300: #dcb389;
+  --color-teal-400: #c5a880;
+  --color-cyan-300: #e9d4bd;
+  --color-cyan-400: #d4b590;
 
   /* Semantic hairline border & soft surface tokens */
-  --color-line: rgba(239, 232, 224, 0.16);
-  --color-soft: rgba(255, 255, 255, 0.05);
+  --color-line: rgba(212, 197, 185, 0.14);
+  --color-line-strong: rgba(212, 197, 185, 0.24);
+  --color-soft: rgba(255, 255, 255, 0.045);
+  --color-soft-strong: rgba(255, 255, 255, 0.08);
+
+  /* Ambient glow intensities */
+  --glow-bronze: 0 12px 50px -12px rgba(197, 168, 128, 0.45);
+  --glow-warm: 0 20px 70px -20px rgba(210, 150, 90, 0.35);
+  --card-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.03) inset,
+    0 20px 50px -30px rgba(0, 0, 0, 0.8);
+  --card-shadow-hover: 0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+    0 30px 70px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(197, 168, 128, 0.12),
+    0 0 60px -18px rgba(197, 168, 128, 0.35);
+
+  --radius-card: 1.25rem;
+  --radius-pill: 9999px;
 }
 
 [data-theme="light"] {
-  --background: #ebe8e1;
-  --foreground: #2f2119;
+  --background: #ede9e1;
+  --background-soft: #f6f2ea;
+  --foreground: #2b211a;
   color-scheme: light;
 
-  /* Light warm-neutral scale */
-  --color-zinc-50: #fcf8f2;
-  --color-zinc-100: #2f2119;
-  --color-zinc-200: #5c4638;
-  --color-zinc-300: #7a6a5c;
-  --color-zinc-400: #5c4638;
-  --color-zinc-500: #8a7468;
-  --color-zinc-600: #a79a8e;
-  --color-zinc-700: #c7b8ad;
-  --color-zinc-800: #e0d5c8;
-  --color-zinc-900: #f7f3ec;
-  --color-zinc-950: #ebe8e1;
+  --color-zinc-50: #fdfaf4;
+  --color-zinc-100: #2b211a;
+  --color-zinc-200: #4a3b31;
+  --color-zinc-300: #6f5d4f;
+  --color-zinc-400: #5a4a3d;
+  --color-zinc-500: #94806f;
+  --color-zinc-600: #a89a8c;
+  --color-zinc-700: #c4b6a8;
+  --color-zinc-800: #ddd2c4;
+  --color-zinc-900: #f4efe7;
+  --color-zinc-950: #ede9e1;
 
-  /* Bronze accent in light (deeper for contrast) */
-  --color-emerald-300: #c9a48a;
-  --color-emerald-400: #b27f55;
-  --color-emerald-500: #8d634d;
-  --color-emerald-600: #7c5639;
+  --color-emerald-200: #8a6f50;
+  --color-emerald-300: #a98c68;
+  --color-emerald-400: #9a6f4a;
+  --color-emerald-500: #7c573a;
+  --color-emerald-600: #6a4a33;
   --color-emerald-700: #5c4030;
 
-  --color-teal-300: #c9a48a;
-  --color-teal-400: #b27f55;
-  --color-cyan-400: #8d634d;
+  --color-teal-200: #a98c68;
+  --color-teal-300: #9a6f4a;
+  --color-teal-400: #7c573a;
+  --color-cyan-300: #9a6f4a;
+  --color-cyan-400: #7c573a;
 
-  /* Light hairline border & soft surface */
-  --color-line: rgba(47, 33, 25, 0.16);
-  --color-soft: rgba(47, 33, 25, 0.05);
+  --color-line: rgba(43, 33, 26, 0.14);
+  --color-line-strong: rgba(43, 33, 26, 0.24);
+  --color-soft: rgba(43, 33, 26, 0.05);
+  --color-soft-strong: rgba(43, 33, 26, 0.08);
+
+  --glow-bronze: 0 14px 40px -18px rgba(154, 111, 74, 0.4);
+  --glow-warm: 0 18px 60px -20px rgba(160, 110, 70, 0.3);
+  --card-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 18px 40px -30px rgba(43, 33, 26, 0.5);
+  --card-shadow-hover: 0 1px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 26px 60px -28px rgba(43, 33, 26, 0.55), 0 0 0 1px rgba(154, 111, 74, 0.14),
+    0 0 60px -22px rgba(154, 111, 74, 0.3);
 }
 
 @theme inline {
@@ -87,18 +120,23 @@
   --color-zinc-900: var(--color-zinc-900);
   --color-zinc-950: var(--color-zinc-950);
 
+  --color-emerald-200: var(--color-emerald-200);
   --color-emerald-300: var(--color-emerald-300);
   --color-emerald-400: var(--color-emerald-400);
   --color-emerald-500: var(--color-emerald-500);
   --color-emerald-600: var(--color-emerald-600);
   --color-emerald-700: var(--color-emerald-700);
 
+  --color-teal-200: var(--color-teal-200);
   --color-teal-300: var(--color-teal-300);
   --color-teal-400: var(--color-teal-400);
+  --color-cyan-300: var(--color-cyan-300);
   --color-cyan-400: var(--color-cyan-400);
 
   --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
   --color-soft: var(--color-soft);
+  --color-soft-strong: var(--color-soft-strong);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -106,7 +144,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -115,11 +153,49 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  position: relative;
+}
+
+/* Micro-grain texture overlay — eradicates flat, sterile surfaces */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Ambient warm ambient light wash at the top of the viewport */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 60vh;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    58% 60% at 50% -10%,
+    rgba(197, 168, 128, 0.14),
+    transparent 70%
+  );
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+header,
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 ::selection {
-  background-color: rgba(201, 152, 119, 0.3);
+  background-color: rgba(197, 168, 128, 0.34);
   color: #ffffff;
 }
 
@@ -129,7 +205,6 @@ body {
   scrollbar-color: #3e3229 transparent;
 }
 
-/* Brand logos (simpleicons, monochrome white SVGs) adapt to each theme */
 .brand-logo {
   filter: none;
 }
@@ -141,24 +216,19 @@ body {
   width: 10px;
   height: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: #3e3229;
   border-radius: 9999px;
   border: 2px solid var(--background);
-  transition: background-color 0.25s ease;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-emerald-500);
 }
-
 [data-theme="light"]::-webkit-scrollbar-thumb {
-  background-color: #c2b2a1;
+  background-color: #c0b09e;
 }
 
 .sr-only {
@@ -172,16 +242,63 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
-
 .focus\:not-sr-only:focus {
   position: static;
   width: auto;
   height: auto;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   margin: 0;
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* ==========================================================================
+   Reusable editorial primitives
+   ========================================================================== */
+
+/* Warm-gradient heading text (used across section titles) */
+.editorial-gradient {
+  background: linear-gradient(120deg, #e2bd98 0%, #c5a880 40%, #e8cbb0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Elevated hairline card with ambient shadow + border glow on hover */
+.card {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-line);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.015)
+  );
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s ease, box-shadow 0.35s ease,
+    transform 0.35s ease, background-color 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(197, 168, 128, 0.32);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-4px);
+}
+
+/* Soft ambient glow wrapper for hero portrait & key panels */
+.glow-warm {
+  box-shadow: var(--glow-warm);
+}
+
+/* Keyboard focus visibility everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-emerald-400);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 @keyframes floatBadge {
@@ -191,6 +308,18 @@ body {
   }
   50% {
     transform: translateY(-7px);
+  }
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.78);
   }
 }
 
@@ -209,8 +338,12 @@ body {
 
 @media print {
   body {
-    background: white !important;
-    color: black !important;
+    background: #ffffff !important;
+    color: #111 !important;
+  }
+  body::before,
+  body::after {
+    display: none;
   }
   nav,
   header,
