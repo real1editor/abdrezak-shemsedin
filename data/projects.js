@@ -1,7 +1,7 @@
 export const portfolioData = {
   firstName: "Abdrezak",
-  lastName: "Shemsedin Hakimo",
-  name: "Abdrezak Shemsedin Hakimo",
+  lastName: "Shemsedin",
+  name: "Abdrezak Shemsedin",
   shortName: "Abdrezak Shemsedin",
   initials: "AS",
   role: "Full-Stack & Electrical/Computer Engineering Developer",
@@ -322,7 +322,7 @@ export const portfolioData = {
     {
       question: "Who is Abdrezak Shemsedin?",
       answer:
-        "Abdrezak Shemsedin Hakimo is a full-stack web and app developer and a fifth-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
+        "Abdrezak Shemsedin is a full-stack web and app developer and a fifth-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
     },
     {
       question: "What tech stack does he use?",

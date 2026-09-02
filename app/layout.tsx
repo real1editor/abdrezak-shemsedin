@@ -8,7 +8,7 @@ const siteUrl = "https://abdrezak-shemsedin.vercel.app";
 const profileImage = portfolioData.profilePhoto;
 const fullTitle = `${portfolioData.shortName} — Full-Stack Developer & Computer Engineer`;
 const fullDescription =
-  "Abdrezak Shemsedin Hakimo — fifth-year Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, digital platforms, and data-driven products with Next.js, Supabase, and Python.";
+  "Abdrezak Shemsedin — fifth-year Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, digital platforms, and data-driven products with Next.js, Supabase, and Python.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description: fullDescription,
   keywords: [
     "Abdrezak Shemsedin",
-    "Abdrezak Shemsedin Hakimo",
+    "Abdrezak Shemsedin",
     "Full-Stack Developer",
     "Web Developer Ethiopia",
     "Ethiopian Developer",
@@ -47,12 +47,12 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "Abdrezak Shemsedin Hakimo",
+      name: "Abdrezak Shemsedin",
       url: "https://github.com/real1editor",
     },
   ],
-  creator: "Abdrezak Shemsedin Hakimo",
-  publisher: "Abdrezak Shemsedin Hakimo",
+  creator: "Abdrezak Shemsedin",
+  publisher: "Abdrezak Shemsedin",
   applicationName: "Abdrezak Shemsedin Portfolio",
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
@@ -114,7 +114,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     "@type": "Person",
     name: portfolioData.name,
     givenName: portfolioData.firstName,
-    familyName: "Shemsedin Hakimo",
+    familyName: "Shemsedin",
     url: siteUrl,
     image: profileImage,
     jobTitle: portfolioData.role,

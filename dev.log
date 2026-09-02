@@ -13,3 +13,4 @@ See more: https://nextjs.org/docs/app/guides/local-development
 ○ Compiling / ...
  GET / 200 in 120s (next.js: 118s, application-code: 1597ms)
  GET / 200 in 361ms (next.js: 165ms, application-code: 195ms)
+ GET / 200 in 2.5s (next.js: 1263ms, application-code: 1213ms)
