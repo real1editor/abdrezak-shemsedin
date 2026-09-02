@@ -17,7 +17,7 @@ export const portfolioData = {
     "I am building my experience through real projects in Ethiopia, including e-commerce platforms, tourism websites, analytics dashboards, and student-focused apps.",
   ],
   availability: "Available for new projects",
-  location: "Addis Ababa, Ethiopia",
+  location: "Wolaita Sodo, Ethiopia",
   resumeUrl: "/resume",
   socials: {
     github: "https://github.com/real1editor",
@@ -322,7 +322,7 @@ export const portfolioData = {
     {
       question: "Who is Abdrezak Shemsedin?",
       answer:
-        "Abdrezak Shemsedin is a full-stack web and app developer and a fifth-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Addis Ababa, Ethiopia.",
+        "Abdrezak Shemsedin is a full-stack web and app developer and a fifth-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Wolaita Sodo, Ethiopia.",
     },
     {
       question: "What tech stack does he use?",

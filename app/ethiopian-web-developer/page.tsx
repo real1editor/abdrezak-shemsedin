@@ -12,7 +12,7 @@ const content = {
     "Mobile apps for Android and iOS using React Native and Expo",
     "Offline-first sync and push notifications for real-world use",
     "Fast load times, mobile-first design, and clean UX",
-    "From Addis Ababa, serving clients across Ethiopia and abroad",
+    "From Wolaita Sodo, serving clients across Ethiopia and abroad",
   ],
   services: [
     { title: "Websites", description: "Fast, responsive business sites and landing pages." },
@@ -44,7 +44,7 @@ const jsonLd = {
   description: content.intro,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Addis Ababa",
+    addressLocality: "Wolaita Sodo",
     addressCountry: "Ethiopia",
   },
   knowsAbout: ["React", "Next.js", "React Native", "Expo", "TypeScript"],

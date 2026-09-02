@@ -479,7 +479,7 @@ function About() {
                       specialising in computer engineering
                     </span>{" "}
                     at <span className="font-semibold text-emerald-300">Wolaita Sodo University</span>,
-                    based in Addis Ababa, Ethiopia, and graduating in 2027.
+                    based in Wolaita Sodo, Ethiopia, and graduating in 2027.
                   </>
                 ) : (
                   p

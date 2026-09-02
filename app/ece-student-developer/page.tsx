@@ -48,7 +48,7 @@ const jsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Addis Ababa",
+    addressLocality: "Wolaita Sodo",
     addressCountry: "Ethiopia",
   },
   knowsAbout: ["Electrical Engineering", "Computer Engineering", "Web Development", "Python"],

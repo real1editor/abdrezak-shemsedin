@@ -123,7 +123,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     telephone: portfolioData.socials.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Addis Ababa",
+      addressLocality: "Wolaita Sodo",
       addressCountry: "Ethiopia",
     },
     alumniOf: {

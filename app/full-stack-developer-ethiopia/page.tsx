@@ -12,7 +12,7 @@ const content = {
     "Responsive, accessible, and SEO-friendly web applications",
     "Clean REST APIs, authentication, and role-based dashboards",
     "Deployment and CI/CD on Vercel and cloud platforms",
-    "Based in Addis Ababa, available for local and remote projects",
+    "Based in Wolaita Sodo, available for local and remote projects",
   ],
   services: [
     { title: "Web Apps", description: "Custom SaaS and business web applications built with modern frameworks." },
@@ -44,7 +44,7 @@ const jsonLd = {
   description: content.intro,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Addis Ababa",
+    addressLocality: "Wolaita Sodo",
     addressCountry: "Ethiopia",
   },
   knowsAbout: ["Next.js", "React", "TypeScript", "Node.js", "Tailwind CSS", "PostgreSQL"],
