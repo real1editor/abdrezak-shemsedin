@@ -162,6 +162,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="color-scheme" content="dark light" />
         <script
           suppressHydrationWarning

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SeoLanding from "@/components/seo-landing";
+import { portfolioData } from "@/data/projects";
 
 const content = {
   title: "ECE Student Developer",
@@ -34,8 +35,35 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolioData.name,
+  url: "https://abdrezak-shemsedin.vercel.app",
+  jobTitle: "ECE Student Developer",
+  description: content.intro,
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Wolaita Sodo University",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Addis Ababa",
+    addressCountry: "Ethiopia",
+  },
+  knowsAbout: ["Electrical Engineering", "Computer Engineering", "Web Development", "Python"],
+};
+
 export default function Page() {
-  return <SeoLanding content={content} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <SeoLanding content={content} />
+    </>
+  );
 }
 
 export const revalidate = 3600;

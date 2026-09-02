@@ -202,9 +202,9 @@ function Header({ initials }) {
           ))}
           <a
             href={portfolioData.resumeUrl}
-            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-4 py-1.5 text-xs font-medium text-emerald-300 transition-all hover:bg-emerald-400/20 hover:shadow-[0_8px_20px_-8px_rgba(197,168,128,0.6)]"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-4 py-1.5 text-xs font-medium text-emerald-300 transition-all hover:bg-emerald-400/20 hover:shadow-[0_8px_20px_-8px_rgba(197,168,128,0.6)]"
           >
-            <Download className="h-3.5 w-3.5" />
+            <Download className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5" />
             Resume
           </a>
         </nav>
@@ -284,6 +284,7 @@ function Hero() {
   return (
     <section id="home" aria-labelledby="hero-heading" className="relative border-b border-line overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 pt-10 pb-4 sm:px-6 sm:pt-16">
+        <div className="relative rounded-[2rem] p-[1px] bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.08),transparent_70%)]">
         <div
           className="card relative grid overflow-hidden glow-warm lg:grid-cols-[1.1fr_0.9fr]"
           style={{
@@ -407,14 +408,14 @@ function Hero() {
                 }}
               />
               {/* Multi-layer ambient shadow + warm directional light cues */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(24,21,18,0) 42%, rgba(24,21,18,0.6) 100%), linear-gradient(72deg, rgba(24,21,18,0.4), transparent 32%), radial-gradient(circle at 30% 8%, rgba(224,180,130,0.22), transparent 45%)",
-                }}
-              />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(24,21,18,0) 42%, rgba(24,21,18,0.6) 100%), linear-gradient(72deg, rgba(24,21,18,0.4), transparent 32%), radial-gradient(circle at 30% 8%, rgba(224,180,130,0.22), transparent 45%), radial-gradient(circle at 60% 30%, rgba(197,168,128,0.18), transparent 55%)",
+                  }}
+                />
             </div>
             <div className="absolute bottom-5 left-5 flex animate-[floatBadge_4.5s_ease-in-out_infinite] items-center gap-3 rounded-2xl border border-emerald-400/35 bg-[#151210]/90 px-4 py-2.5 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-md">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400/15 text-emerald-300">
@@ -426,6 +427,7 @@ function Hero() {
               </div>
             </div>
           </motion.div>
+        </div>
         </div>
       </div>
     </section>
@@ -544,7 +546,7 @@ function CourseFocus() {
               return (
                 <FadeIn key={item.title} delay={i * 0.08}>
                   <div className="card group h-full p-6">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 transition-transform duration-300 group-hover:-translate-y-1">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <h3 className="mt-4 text-base font-semibold text-zinc-100">{item.title}</h3>
@@ -950,9 +952,9 @@ function Projects() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:border-emerald-400/50 hover:text-zinc-100"
+                          className="group/link inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:border-emerald-400/50 hover:text-zinc-100"
                         >
-                          <GithubIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                          <GithubIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
                           Source
                         </a>
                       )}
@@ -961,9 +963,9 @@ function Projects() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1.5 text-xs font-medium text-emerald-300 transition-colors hover:bg-emerald-400/20"
+                          className="group/link inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1.5 text-xs font-medium text-emerald-300 transition-colors hover:bg-emerald-400/20"
                         >
-                          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                          <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
                           Live View
                         </a>
                       )}
@@ -1118,12 +1120,19 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const name = form.get("name") || "";
+    const email = form.get("email") || "";
+    const message = form.get("message") || "";
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:${portfolioData.socials.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
   const contactItems = [
     { icon: Mail, label: "Email", value: portfolioData.socials.email, href: `mailto:${portfolioData.socials.email}`, copy: portfolioData.socials.email },
-    { icon: Phone, label: "Phone", value: "+251 900 000 000", href: portfolioData.socials.phone, copy: "+251900000000" },
+    { icon: Phone, label: "Phone", value: "+251 947 758 994", href: portfolioData.socials.phone, copy: "+251947758994" },
     { icon: GithubIcon, label: "GitHub", value: "real1editor", href: portfolioData.socials.github, copy: portfolioData.socials.github },
     { icon: LinkedinIcon, label: "LinkedIn", value: "abdrezak-shemsedin", href: portfolioData.socials.linkedin, copy: portfolioData.socials.linkedin },
     { icon: TelegramIcon, label: "Telegram", value: "@real1editor", href: portfolioData.socials.telegram, copy: "@real1editor" },
@@ -1147,7 +1156,7 @@ function Contact() {
 
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {contactItems.map(({ icon: Icon, label, value, href, copy }) => (
-              <div key={label} className="card flex items-center gap-3 p-4">
+              <div key={label} className="card group flex items-center gap-3 p-4">
                 <a
                   href={href}
                   target="_blank"

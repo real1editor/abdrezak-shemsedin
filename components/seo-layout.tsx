@@ -14,7 +14,10 @@ export default function SeoLayout({
             {portfolioData.name}
           </Link>
           <nav className="flex items-center gap-4 text-sm">
-            <a href="#contact" className="text-zinc-400 transition-colors hover:text-emerald-400">
+            <a
+              href={`mailto:${portfolioData.socials.email}`}
+              className="text-zinc-400 transition-colors hover:text-emerald-400"
+            >
               Contact
             </a>
             <Link

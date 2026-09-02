@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SeoLanding from "@/components/seo-landing";
+import { portfolioData } from "@/data/projects";
 
 const content = {
   title: "Ethiopian Web & Mobile Developer",
@@ -34,8 +35,31 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolioData.name,
+  url: "https://abdrezak-shemsedin.vercel.app",
+  jobTitle: "Web & Mobile Developer",
+  description: content.intro,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Addis Ababa",
+    addressCountry: "Ethiopia",
+  },
+  knowsAbout: ["React", "Next.js", "React Native", "Expo", "TypeScript"],
+};
+
 export default function Page() {
-  return <SeoLanding content={content} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <SeoLanding content={content} />
+    </>
+  );
 }
 
 export const revalidate = 3600;

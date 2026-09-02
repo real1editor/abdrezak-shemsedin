@@ -280,7 +280,7 @@ footer {
     transform 0.35s ease, background-color 0.3s ease;
 }
 .card:hover {
-  border-color: rgba(197, 168, 128, 0.32);
+  border-color: rgba(197, 168, 128, 0.45);
   box-shadow: var(--card-shadow-hover);
   transform: translateY(-4px);
 }
@@ -348,7 +348,45 @@ summary:focus-visible {
   nav,
   header,
   footer,
-  button {
+  button,
+  .back-to-top,
+  [aria-label="Back to top"] {
+    display: none !important;
+  }
+  main {
+    position: static;
+    z-index: auto;
+  }
+  main > section {
+    break-inside: avoid;
+  }
+  .card {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    transform: none !important;
+  }
+  .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  a {
+    color: #111 !important;
+    text-decoration: underline !important;
+  }
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #666;
+  }
+  nav a[href]::after,
+  header a[href]::after {
+    content: none !important;
+  }
+  #contact form,
+  #contact [role="dialog"],
+  .fixed {
     display: none !important;
   }
 }

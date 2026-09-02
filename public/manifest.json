@@ -1,14 +1,14 @@
 ﻿{
   "name": "Abdrezak Shemsedin",
   "short_name": "Abdrezak",
-  "description": "Full-Stack Web and App Developer",
+  "description": "Full-Stack Web and App Developer — Portfolio",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#13100e",
-  "theme_color": "#13100e",
+  "background_color": "#12100e",
+  "theme_color": "#12100e",
   "icons": [
     {
-      "src": "/window.svg",
+      "src": "/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }
