@@ -41,9 +41,6 @@ export default function SeoLayout({
           <p className="text-sm font-medium text-zinc-200">
             © {new Date().getFullYear()} {portfolioData.name}
           </p>
-          <p className="text-xs text-zinc-500">
-            {portfolioData.role} · {portfolioData.location}
-          </p>
         </div>
       </footer>
     </div>

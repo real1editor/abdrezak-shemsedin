@@ -11,11 +11,11 @@ import {
   X,
   ChevronRight,
   Download,
-  ArrowUp,
   Send,
   CheckCircle2,
   Phone,
   ChevronDown,
+  ChevronUp,
   HelpCircle,
   Copy,
   Check,
@@ -145,7 +145,7 @@ function SectionHeading({ eyebrow, title, highlight, description }) {
         </p>
       )}
       <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-        {title} <span className="editorial-gradient">{highlight}</span>
+        {title}<span className="editorial-gradient">{highlight}</span>
       </h2>
       {description && (
         <p className="mt-4 text-sm leading-relaxed text-zinc-400 sm:text-base">{description}</p>
@@ -464,7 +464,7 @@ function About() {
     <section id="about" aria-labelledby="about-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading eyebrow="Profile" title="About" highlight="Me" />
+          <SectionHeading eyebrow="Profile" title="About " highlight="Me" />
           <div className="mt-8 space-y-4">
             {portfolioData.about.map((p, i) => (
               <p key={i} className="text-base leading-relaxed text-zinc-400">
@@ -502,7 +502,7 @@ function WhatIBuild() {
     <section id="build" aria-labelledby="build-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading eyebrow="Disciplines" title="What I" highlight="Build" />
+          <SectionHeading eyebrow="Disciplines" title="What I " highlight="Build" />
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {portfolioData.whatIBuild.map((item, i) => {
               const Icon = icons[i % icons.length];
@@ -536,7 +536,7 @@ function CourseFocus() {
         <FadeIn>
           <SectionHeading
             eyebrow="Engineering Curriculum"
-            title="Course"
+            title="Course "
             highlight="Focus"
             description="An engineering-first education that keeps me fluent from hardware to high-level software."
           />
@@ -572,7 +572,7 @@ function SeoPages() {
         <FadeIn>
           <SectionHeading
             eyebrow="Find me"
-            title="Search"
+            title="Search "
             highlight="Pages"
             description="These focused pages target high-intent searches related to Ethiopian developers, full-stack work, and web development in Ethiopia."
           />
@@ -715,7 +715,7 @@ function Skills() {
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
           <div className="flex flex-wrap items-center gap-3">
-            <SectionHeading eyebrow="Stack" title="Tech &" highlight="Skills" />
+            <SectionHeading eyebrow="Stack" title="Tech & " highlight="Skills" />
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
               Core Stack Active
@@ -1086,7 +1086,7 @@ function FAQ() {
     <section id="faq" aria-labelledby="faq-heading" className="border-b border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <FadeIn>
-          <SectionHeading eyebrow="FAQ" title="Quick" highlight="Answers" />
+          <SectionHeading eyebrow="FAQ" title="Quick " highlight="Answers" />
           <div className="mx-auto mt-10 max-w-3xl space-y-3">
             {portfolioData.faq.map((item, idx) => (
               <details
@@ -1274,9 +1274,6 @@ function Footer() {
         <p>
           &copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.
         </p>
-        <p className="text-zinc-700">
-          {portfolioData.role} &middot; {portfolioData.shortName}
-        </p>
       </div>
     </footer>
   );
@@ -1301,9 +1298,9 @@ function BackToTop() {
           exit={{ opacity: 0, y: 10 }}
           href="#home"
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-emerald-400/40 bg-zinc-900/80 text-emerald-300 shadow-[0_10px_30px_-12px_rgba(197,168,128,0.6)] backdrop-blur transition-colors hover:bg-zinc-900"
+          className="fixed bottom-4 left-4 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-emerald-400/40 bg-zinc-900/80 text-emerald-300 shadow-[0_10px_30px_-12px_rgba(197,168,128,0.6)] backdrop-blur transition-colors hover:bg-zinc-900 sm:bottom-5 sm:left-5"
         >
-          <ArrowUp className="h-4 w-4" aria-hidden="true" />
+          <ChevronUp className="h-4 w-4" aria-hidden="true" />
         </motion.a>
       )}
     </AnimatePresence>
