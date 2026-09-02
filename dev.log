@@ -1,0 +1,15 @@
+
+> portfolio-app@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.56.1:3000
+✓ Ready in 38.9s
+✓ Running next.config.ts took 754ms
+⚠ Slow filesystem detected. The benchmark took 920ms. If \\?\C:\Back Progm\Coding\abdrezak-shemsedin\portfolio-app\.next\dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development
+
+○ Compiling / ...
+ GET / 200 in 120s (next.js: 118s, application-code: 1597ms)
+ GET / 200 in 361ms (next.js: 165ms, application-code: 195ms)
