@@ -1,6 +1,6 @@
 "use client";
 
-export default function IsoLogo({ size = 36 }: { size?: number }) {
+export default function IsoLogo({ size = 44 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -28,17 +28,17 @@ export default function IsoLogo({ size = 36 }: { size?: number }) {
         d="M24 2 L36 8 L42 18 L42 30 L24 46 L6 30 L6 18 L12 8 Z"
         fill="url(#isoFace)"
         stroke="url(#isoEdge)"
-        strokeWidth="1.5"
+        strokeWidth="2"
         strokeLinejoin="round"
       />
 
       {/* Inner beveled hexagon */}
       <path
         d="M24 12.5 L31.5 16.25 L35.25 22.5 L31.5 28.75 L24 35 L16.5 28.75 L12.75 22.5 L16.5 16.25 Z"
-        fill="rgba(197,168,128,0.06)"
+        fill="rgba(197,168,128,0.07)"
         stroke="#C5A880"
-        strokeOpacity="0.4"
-        strokeWidth="1"
+        strokeOpacity="0.55"
+        strokeWidth="1.25"
         strokeLinejoin="round"
       />
 

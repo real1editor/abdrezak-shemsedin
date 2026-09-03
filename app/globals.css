@@ -328,6 +328,100 @@ summary:focus-visible {
   50% { opacity: 0; }
 }
 
+/* ==========================================================================
+   Site preloader — dark-earth immersive loading overlay
+   ========================================================================== */
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #12100e;
+  transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.5s ease;
+}
+
+.site-preloader--exit {
+  opacity: 0;
+  transform: translateY(-6%);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.site-preloader__logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: preloaderEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.site-preloader--exit .site-preloader__logo {
+  animation: preloaderCursorBlink 1.2s steps(1, end) 2;
+}
+
+.site-preloader__bracket {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  animation: preloaderBreathe 0.9s ease-in-out infinite;
+}
+
+.site-preloader__bracket--open {
+  color: #38bdf8;
+}
+
+.site-preloader__bracket--close {
+  color: #fb923c;
+  animation-delay: 0.15s;
+}
+
+.site-preloader__initials {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #d4c5b9;
+  line-height: 1;
+  animation: preloaderBreathe 0.9s ease-in-out infinite;
+  animation-delay: 0.08s;
+}
+
+@keyframes preloaderEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes preloaderCursorBlink {
+  0%, 49.9% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50%, 100% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes preloaderBreathe {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.82;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

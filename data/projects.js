@@ -6,7 +6,7 @@ export const portfolioData = {
   initials: "AS",
   role: "Full-Stack Developer",
   roleShort: "Full-Stack Developer",
-  bio: "Computer Engineering Student @ Wolaita Sodo University — building high-performance web applications, AI-powered platforms, and data-driven products with a system-minded, engineering-first approach.",
+  bio: "Full-Stack Developer & Future AI Systems Engineer. Computer Engineering GC Student @ WSU. Architecting high-performance web applications, scalable Supabase systems, and production-ready Python pipelines for modern digital products. This portfolio showcases my work as an Ethiopian engineer dedicated to building efficient, high-impact software for local and global users.",
   profilePhoto:
     "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto,w_800,h_1000,c_fill/photo_2026-08-31_12-22-01",
   about: [

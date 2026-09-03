@@ -184,11 +184,8 @@ function Header() {
         className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-emerald-500 via-emerald-300 to-teal-300"
       />
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <a href="#home" className="flex items-center gap-3" aria-label="Go to home">
+        <a href="#home" className="flex items-center" aria-label="Go to home">
           <IsoLogo />
-          <span className="hidden font-medium tracking-tight text-[#D4C5B9] sm:block">
-            {portfolioData.name}
-          </span>
         </a>
         <nav aria-label="Primary navigation" className="hidden items-center gap-6 md:flex">
           {links.map((item) => (
@@ -326,10 +323,10 @@ function Hero() {
               transition={{ duration: 0.6, delay: 0.14 }}
               className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1"
             >
-              <span className="text-base font-semibold text-[#d4c5b9] sm:text-lg">
-                Full-Stack Developer
+              <span className="text-base font-bold text-[#d4c5b9] sm:text-lg">
+                Ethiopian Developer
               </span>
-              <span className="text-zinc-600" aria-hidden="true">&middot;</span>
+              <span className="text-base font-extrabold text-[#c5a880]" aria-hidden="true">&middot;</span>
               <TypewriterRole />
             </motion.div>
 

@@ -3,10 +3,12 @@
 import { useState, useEffect, useCallback } from "react";
 
 const STRINGS = [
+  "ECE GC Student @ WSU",
   "Full-Stack Web Builder",
   "Python & API Developer",
   "Supabase & Next.js Architect",
   "AI & Data Specialist",
+  "Future AI Systems Engineer",
 ] as const;
 
 const TYPING_SPEED = 72;
@@ -48,7 +50,7 @@ export default function TypewriterRole() {
 
   return (
     <span className="inline-flex items-baseline" aria-live="polite" aria-atomic="true">
-      <span className="editorial-gradient">{text}</span>
+      <span className="editorial-gradient font-bold">{text}</span>
       <span
         className="ml-[1px] inline-block h-[1.15em] w-[2px] translate-y-[0.06em] bg-[#c5a880]"
         aria-hidden="true"
