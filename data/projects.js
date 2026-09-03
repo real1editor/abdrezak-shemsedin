@@ -179,7 +179,7 @@ export const portfolioData = {
     { name: "Git", slug: "git" },
     { name: "GitHub", slug: "github" },
     { name: "Vercel", slug: "vercel" },
-    { name: "VS Code", slug: "visualstudiocode" },
+    { name: "VS Code", slug: "visualstudiocode", icon: "/icons/visualstudiocode.svg" },
     { name: "Node.js", slug: "nodedotjs" },
     { name: "Postman", slug: "postman" },
     { name: "Expo Go", slug: "expo" },
