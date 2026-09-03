@@ -6,9 +6,9 @@ import "./globals.css";
 
 const siteUrl = "https://abdrezak-shemsedin.vercel.app";
 const profileImage = portfolioData.profilePhoto;
-const fullTitle = `${portfolioData.shortName} — Full-Stack Developer & Computer Engineer`;
+const fullTitle = `${portfolioData.shortName} — Full-Stack Developer & AI`;
 const fullDescription =
-  "Abdrezak Shemsedin — fifth-year Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, digital platforms, and data-driven products with Next.js, Supabase, and Python.";
+  "Abdrezak Shemsedin — Computer Engineering Student @ Wolaita Sodo University building high-performance web applications, AI-powered platforms, and data-driven products with Next.js, Supabase, Python, and modern AI/ML tooling.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +32,14 @@ export const metadata: Metadata = {
     "Full-Stack Developer",
     "Web Developer Ethiopia",
     "Ethiopian Developer",
-    "Electrical and Computer Engineering",
+    "Computer Engineering",
     "React",
     "Next.js",
     "Supabase",
     "Python",
+    "TensorFlow",
+    "Machine Learning",
+    "AI Developer",
     "NumPy",
     "Pandas",
     "Data Analysis",
@@ -137,6 +140,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     },
     knowsAbout: [
       ...portfolioData.skills.primary,
+      ...portfolioData.skills.ai,
       ...portfolioData.skills.data,
       ...portfolioData.skills.locked,
       ...portfolioData.tools,

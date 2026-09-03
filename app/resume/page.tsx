@@ -66,6 +66,22 @@ export default function ResumePage() {
               </ul>
             </div>
             <div>
+              <h3 className="text-sm font-semibold text-zinc-200">AI / ML Skills</h3>
+              <ul className="mt-2 space-y-1 text-sm text-zinc-400">
+                {portfolioData.skills.ai.map((item) => (
+                  <li key={item.name}>{item.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-zinc-200">Data Skills</h3>
+              <ul className="mt-2 space-y-1 text-sm text-zinc-400">
+                {portfolioData.skills.data.map((item) => (
+                  <li key={item.name}>{item.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
               <h3 className="text-sm font-semibold text-zinc-200">Additional Skills</h3>
               <ul className="mt-2 space-y-1 text-sm text-zinc-400">
                 {portfolioData.skills.locked.map((item) => (

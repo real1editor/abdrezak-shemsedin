@@ -4,17 +4,17 @@ export const portfolioData = {
   name: "Abdrezak Shemsedin",
   shortName: "Abdrezak Shemsedin",
   initials: "AS",
-  role: "Full-Stack & Electrical/Computer Engineering Developer",
+  role: "Full-Stack Developer",
   roleShort: "Full-Stack Developer",
-  bio: "Fifth-year Electrical and Computer Engineering student at Wolaita Sodo University building high-performance web applications, digital platforms, and data-driven products with a system-minded, engineering-first approach.",
+  bio: "Computer Engineering Student @ Wolaita Sodo University — building high-performance web applications, AI-powered platforms, and data-driven products with a system-minded, engineering-first approach.",
   profilePhoto:
     "https://res.cloudinary.com/thco145k/image/upload/f_auto,q_auto,w_800,h_1000,c_fill/photo_2026-08-31_12-22-01",
   about: [
-    "I am a fifth-year Electrical and Computer Engineering student (specializing in computer engineering) at Wolaita Sodo University, graduating in 2027. Engineering fundamentals meet modern web and data engineering in everything I ship.",
-    "My main areas are full-stack web development, mobile app development, e-commerce platforms, SaaS products, and data analysis with Python.",
+    "I am a fifth-year Computer Engineering student @ Wolaita Sodo University, graduating in 2027. Engineering fundamentals meet modern web, AI, and data engineering in everything I ship.",
+    "My main areas are full-stack web development, mobile app development, e-commerce platforms, SaaS products, AI/ML integration, and data analysis with Python.",
     "I work with Next.js, React, TypeScript, Tailwind CSS, JavaScript, Supabase, Python, and Git to build fast, reliable, production-ready systems.",
-    "I use data tooling like NumPy, Pandas, Matplotlib, and Seaborn for analysis and visualization, and ship through Git, GitHub, Vercel, and VS Code.",
-    "I am building my experience through real projects in Ethiopia, including e-commerce platforms, tourism websites, analytics dashboards, and student-focused apps.",
+    "I use AI/ML tooling like TensorFlow, scikit-learn, OpenAI API, and LangChain alongside data tooling like NumPy, Pandas, Matplotlib, and Seaborn — shipping through Git, GitHub, Vercel, and VS Code.",
+    "I am building my experience through real projects in Ethiopia, including e-commerce platforms, tourism websites, analytics dashboards, AI-powered tools, and student-focused apps.",
   ],
   availability: "Available for new projects",
   location: "Wolaita Sodo, Ethiopia",
@@ -32,14 +32,14 @@ export const portfolioData = {
     x: "https://x.com/real1editor",
   },
   heroBadge: {
-    title: "Full-Stack + Data",
-    subtitle: "Next.js · Supabase · Python",
+    title: "Full-Stack + AI & Data",
+    subtitle: "Next.js · Supabase · Python · AI/ML",
   },
   metrics: [
     { value: "6+", label: "Featured Projects" },
     { value: "15+", label: "Tech & Frameworks" },
     { value: "5", label: "Languages Fluent" },
-    { value: "2027", label: "Graduating · ECE WSU" },
+    { value: "2027", label: "Graduating · CE WSU" },
   ],
   languages: [
     {
@@ -100,9 +100,9 @@ export const portfolioData = {
         "End-to-end web applications with modern frameworks, clean APIs, responsive UIs, and production-ready deployment on Vercel and cloud platforms.",
     },
     {
-      title: "Mobile App Development",
+      title: "AI-Powered Platforms",
       description:
-        "Cross-platform mobile apps with offline-first sync, real-time features, and native-feel UX for Android and iOS.",
+        "Integrating machine learning models, LLM APIs, and intelligent automation into web products using Python, TensorFlow, and OpenAI tooling.",
     },
     {
       title: "E-Commerce & SaaS Platforms",
@@ -117,9 +117,9 @@ export const portfolioData = {
         "Data structures, algorithms, and object-oriented design applied to real products with clean, maintainable architecture.",
     },
     {
-      title: "Embedded & Computer Architecture",
+      title: "AI & Machine Learning",
       description:
-        "Digital logic, microprocessors, and embedded systems — bridging low-level hardware thinking with high-level software.",
+        "Applied deep learning, NLP, and intelligent systems using TensorFlow, scikit-learn, and LLM APIs — bridging engineering with AI.",
     },
     {
       title: "Data Engineering & Analysis",
@@ -143,7 +143,7 @@ export const portfolioData = {
     {
       title: "ECE Student Developer",
       description:
-        "A page centered on engineering-driven development, embedded systems, and applied machine learning across real products.",
+        "A page centered on engineering-driven development, AI/ML integration, and applied machine learning across real products.",
       href: "/ece-student-developer",
     },
   ],
@@ -157,6 +157,13 @@ export const portfolioData = {
       { name: "Supabase", slug: "supabase", level: 85 },
       { name: "Node.js", slug: "nodedotjs", level: 82 },
       { name: "Python", slug: "python", level: 86 },
+    ],
+    ai: [
+      { name: "TensorFlow", slug: "tensorflow", level: 74 },
+      { name: "scikit-learn", slug: "scikitlearn", level: 76 },
+      { name: "OpenAI API", slug: "openai", level: 78 },
+      { name: "LangChain", slug: "langchain", level: 70 },
+      { name: "Hugging Face", slug: "huggingface", level: 68 },
     ],
     data: [
       { name: "NumPy", slug: "numpy", level: 84 },
@@ -207,7 +214,7 @@ export const portfolioData = {
       degree: "BSc in Electrical and Computer Engineering (Computer Engineering)",
       period: "2022 — 2027 (5th Year)",
       description:
-        "Specializing in computer engineering with focus on software systems, embedded computing, and applied machine learning. Graduating 2027. Active in coding clubs and hackathons.",
+        "Specializing in computer engineering with focus on software systems, AI/ML, and applied data engineering. Graduating 2027. Active in coding clubs and hackathons.",
       status: "current",
     },
     {
@@ -322,12 +329,12 @@ export const portfolioData = {
     {
       question: "Who is Abdrezak Shemsedin?",
       answer:
-        "Abdrezak Shemsedin is a full-stack web and app developer and a fifth-year Electrical and Computer Engineering student at Wolaita Sodo University, based in Wolaita Sodo, Ethiopia.",
+        "Abdrezak Shemsedin is a full-stack developer and a fifth-year Computer Engineering student @ Wolaita Sodo University, based in Wolaita Sodo, Ethiopia.",
     },
     {
       question: "What tech stack does he use?",
       answer:
-        "He works with Next.js, React, TypeScript, Tailwind CSS, JavaScript, Supabase, Python (NumPy, Pandas, Matplotlib, Seaborn), PostgreSQL, and Git.",
+        "He works with Next.js, React, TypeScript, Tailwind CSS, JavaScript, Supabase, Python, TensorFlow, scikit-learn, OpenAI API, NumPy, Pandas, PostgreSQL, and Git.",
     },
     {
       question: "Is he available for freelance work?",
@@ -342,7 +349,7 @@ export const portfolioData = {
     {
       question: "What kind of projects does he build?",
       answer:
-        "He builds e-commerce platforms, tourism websites, analytics dashboards, mobile apps, and SaaS tools — focusing on clean architecture, performance, and real-world impact.",
+        "He builds e-commerce platforms, tourism websites, analytics dashboards, AI-powered tools, and SaaS products — focusing on clean architecture, performance, and real-world impact.",
     },
   ],
 };

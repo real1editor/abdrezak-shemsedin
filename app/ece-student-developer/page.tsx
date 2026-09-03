@@ -51,7 +51,7 @@ const jsonLd = {
     addressLocality: "Wolaita Sodo",
     addressCountry: "Ethiopia",
   },
-  knowsAbout: ["Electrical Engineering", "Computer Engineering", "Web Development", "Python"],
+  knowsAbout: ["Electrical Engineering", "Computer Engineering", "Web Development", "Python", "Machine Learning", "AI & Data"],
 };
 
 export default function Page() {

@@ -60,7 +60,7 @@ export default function OgImage() {
             </span>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24 }}>
-            {["Web Apps", "Mobile", "E-Commerce", "APIs"].map((tag) => (
+            {["Web Apps", "AI & ML", "E-Commerce", "APIs"].map((tag) => (
               <div
                 key={tag}
                 style={{

@@ -38,6 +38,8 @@ import {
   XIcon,
   TiktokIcon,
 } from "@/components/icons";
+import TypewriterRole from "@/components/type-writer";
+import IsoLogo from "@/components/iso-logo";
 import { motion, useInView, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/projects";
 
@@ -157,7 +159,7 @@ function SectionHeading({ eyebrow, title, highlight, description }) {
 /* ==========================================================================
    Header
    ========================================================================== */
-function Header({ initials }) {
+function Header() {
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
@@ -183,11 +185,9 @@ function Header({ initials }) {
       />
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <a href="#home" className="flex items-center gap-3" aria-label="Go to home">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-400/40 bg-gradient-to-br from-emerald-400/20 to-transparent text-sm font-bold text-emerald-300 shadow-[0_6px_16px_-8px_rgba(197,168,128,0.6)]">
-            {initials}
-          </span>
-          <span className="hidden font-medium tracking-tight text-zinc-100 sm:block">
-            {portfolioData.shortName}
+          <IsoLogo />
+          <span className="hidden font-medium tracking-tight text-[#D4C5B9] sm:block">
+            {portfolioData.name}
           </span>
         </a>
         <nav aria-label="Primary navigation" className="hidden items-center gap-6 md:flex">
@@ -308,15 +308,6 @@ function Hero() {
               {portfolioData.availability} &bull; Based in Ethiopia
             </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-300"
-            >
-              {portfolioData.role}
-            </motion.p>
-
             <motion.h1
               id="hero-heading"
               initial={{ opacity: 0, y: 18 }}
@@ -329,19 +320,30 @@ function Hero() {
               <span className="editorial-gradient">{portfolioData.lastName}</span>
             </motion.h1>
 
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.14 }}
+              className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1"
+            >
+              <span className="text-base font-semibold text-[#d4c5b9] sm:text-lg">
+                Full-Stack Developer
+              </span>
+              <span className="text-zinc-600" aria-hidden="true">&middot;</span>
+              <TypewriterRole />
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
-              className="mt-6 max-w-xl text-base leading-relaxed text-[#d4c5b9] sm:text-lg"
+              className="mt-4 text-sm font-medium text-[#d4c5b9] sm:text-base"
             >
-              I am a fifth-year{" "}
-              <span className="font-bold text-emerald-300">
-                Electrical &amp; Computer Engineering
-              </span>{" "}
-              student at <span className="font-bold text-emerald-300">Wolaita Sodo University</span>{" "}
-              — building high-performance web apps, mobile products, and data-driven platforms for
-              local and global users. Graduating <span className="font-bold text-emerald-300">2027</span>.
+              <span className="font-semibold">Computer Engineering Student</span>{" "}
+              <span className="text-emerald-400">@</span>{" "}
+              <span className="font-bold text-emerald-300">Wolaita Sodo University</span>{" "}
+              <span className="text-zinc-500">&bull;</span>{" "}
+              <span className="text-[#c5a880]">Graduating 2027</span>
             </motion.p>
 
             <motion.div
@@ -468,22 +470,7 @@ function About() {
           <div className="mt-8 space-y-4">
             {portfolioData.about.map((p, i) => (
               <p key={i} className="text-base leading-relaxed text-zinc-400">
-                {i === 0 ? (
-                  <>
-                    I am a fifth-year{" "}
-                    <span className="font-semibold text-emerald-300">
-                      Electrical and Computer Engineering
-                    </span>{" "}
-                    student{" "}
-                    <span className="font-semibold text-emerald-300">
-                      specialising in computer engineering
-                    </span>{" "}
-                    at <span className="font-semibold text-emerald-300">Wolaita Sodo University</span>,
-                    based in Wolaita Sodo, Ethiopia, and graduating in 2027.
-                  </>
-                ) : (
-                  p
-                )}
+                {p}
               </p>
             ))}
           </div>
@@ -725,6 +712,11 @@ function Skills() {
           <p className="mt-4 text-sm text-zinc-400">Core development stack</p>
           <div className="mt-5 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
             {portfolioData.skills.primary.map(renderBadge)}
+          </div>
+
+          <p className="mt-8 text-sm text-zinc-400">AI / Machine Learning stack</p>
+          <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+            {portfolioData.skills.ai.map(renderBadge)}
           </div>
 
           <p className="mt-8 text-sm text-zinc-400">Python data &amp; analysis stack</p>
@@ -1311,8 +1303,6 @@ function BackToTop() {
    Page
    ========================================================================== */
 export default function Home() {
-  const initials = portfolioData.initials || portfolioData.firstName[0] + portfolioData.lastName[0];
-
   return (
     <>
       <a
@@ -1321,7 +1311,7 @@ export default function Home() {
       >
         Skip to main content
       </a>
-      <Header initials={initials} />
+      <Header />
       <main id="main-content">
         <Hero />
         <KeyMetrics />
