@@ -39,6 +39,7 @@ yarn-error.log*
 # local build/dev logs
 dev.log
 build.log
+lint.log
 
 # typescript
 *.tsbuildinfo
