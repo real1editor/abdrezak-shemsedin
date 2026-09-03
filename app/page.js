@@ -336,11 +336,7 @@ function Hero() {
               transition={{ duration: 0.6, delay: 0.18 }}
               className="mt-4 text-sm font-medium text-[#d4c5b9] sm:text-base"
             >
-              <span className="font-semibold">Computer Engineering Student</span>{" "}
-              <span className="text-emerald-400">@</span>{" "}
-              <span className="font-bold text-emerald-300">Wolaita Sodo University</span>{" "}
-              <span className="text-zinc-500">&bull;</span>{" "}
-              <span className="text-[#c5a880]">Graduating 2027</span>
+              I&apos;m a Computer Engineering GC Student @ WSU, Full-Stack Developer &amp; Future AI Systems Engineer. Architecting high-performance web applications, scalable Supabase systems, and production-ready Python pipelines for modern digital products. This portfolio showcases my work as an Ethiopian engineer dedicated to building efficient, high-impact software for local and global users.
             </motion.p>
 
             <motion.div
@@ -461,10 +457,10 @@ function KeyMetrics() {
 function About() {
   return (
     <section id="about" aria-labelledby="about-heading" className="border-b border-line">
-      <div className="mx-auto max-w-5xl px-6 py-24">
+      <div className="mx-auto max-w-5xl px-6 py-16">
         <FadeIn>
           <SectionHeading eyebrow="Profile" title="About " highlight="Me" />
-          <div className="mt-8 space-y-4">
+          <div className="mt-6 max-w-3xl space-y-3">
             {portfolioData.about.map((p, i) => (
               <p key={i} className="text-base leading-relaxed text-zinc-400">
                 {p}
@@ -1178,7 +1174,7 @@ function Contact() {
                   className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-300"
                 >
                   <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-                  Thanks! Use the email button to reach me directly.
+                  Thanks! Email me directly using the Email card above.
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="mt-4 grid gap-4" aria-label="Contact form">
@@ -1233,19 +1229,6 @@ function Contact() {
                 </form>
               )}
             </div>
-
-            <div className="mt-8 text-center">
-              <a
-                href={`mailto:${portfolioData.socials.email}`}
-                className="inline-flex h-12 items-center gap-2.5 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-7 text-sm font-semibold text-emerald-200 transition-colors hover:bg-emerald-400/20"
-              >
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                {portfolioData.socials.email}
-              </a>
-            </div>
-            <address className="mt-6 flex not-italic justify-center">
-              <SocialLinks size="sm" />
-            </address>
           </div>
         </FadeIn>
       </div>

@@ -30,12 +30,19 @@ export default function SitePreloader() {
       className={`site-preloader bg-[#12100E] ${exiting ? "site-preloader--exit" : ""}`}
     >
       <div className={`site-preloader__logo ${exiting ? "site-preloader__logo--exit" : ""}`}>
-        <span className="site-preloader__bracket site-preloader__bracket--open" aria-hidden="true">
+        <span
+          className="site-preloader__bracket site-preloader__bracket--open text-[#16A34A]"
+          aria-hidden="true"
+        >
           {"<"}
         </span>
-        <span className="site-preloader__initials">AS</span>
+        <span className="site-preloader__initials">
+          <span className="text-[#16A34A]">A</span>
+          <span className="text-[#FACC15]">S</span>
+        </span>
         <span className="site-preloader__bracket site-preloader__bracket--close" aria-hidden="true">
-          {"/>"}
+          <span className="text-[#38BDF8]">{"/"}</span>
+          <span className="text-[#DC2626]">{">"}</span>
         </span>
       </div>
     </div>

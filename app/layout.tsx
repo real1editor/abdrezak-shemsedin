@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { portfolioData } from "@/data/projects";
 import SitePreloader from "@/components/site-preloader";
+import CustomCursor from "@/components/custom-cursor";
 import "./globals.css";
 
 const siteUrl = "https://abdrezak-shemsedin.vercel.app";
@@ -186,6 +187,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
         <SitePreloader />
+        <CustomCursor />
         {children}
         <Script
           src="https://vercel.live/analytics/script.js"
