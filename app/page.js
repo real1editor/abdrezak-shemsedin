@@ -674,7 +674,7 @@ function TooltipBadge({ skill }) {
     >
       <div className="card flex w-full flex-col items-center gap-2 px-3 py-4 text-center cursor-default">
         <Image
-          src={`https://cdn.simpleicons.org/${skill.slug}/c5a880`}
+          src={skill.icon ?? `https://cdn.simpleicons.org/${skill.slug}/c5a880`}
           alt={`${skill.name} logo`}
           width={26}
           height={26}

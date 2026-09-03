@@ -161,8 +161,8 @@ export const portfolioData = {
     data: [
       { name: "NumPy", slug: "numpy", level: 84 },
       { name: "Pandas", slug: "pandas", level: 84 },
-      { name: "Matplotlib", slug: "matplotlib", level: 80 },
-      { name: "Seaborn", slug: "seaborn", level: 78 },
+      { name: "Matplotlib", slug: "matplotlib", icon: "/icons/matplotlib.svg", level: 80 },
+      { name: "Seaborn", slug: "seaborn", icon: "/icons/seaborn.svg", level: 78 },
     ],
     locked: [
       { name: "PostgreSQL", slug: "postgresql", level: 80 },
@@ -172,7 +172,7 @@ export const portfolioData = {
       { name: "Expo", slug: "expo", level: 78 },
       { name: "Framer Motion", slug: "framer", level: 84 },
       { name: "Mapbox", slug: "mapbox", level: 72 },
-      { name: "Recharts", slug: "recharts", level: 80 },
+      { name: "Recharts", slug: "recharts", icon: "/icons/recharts.svg", level: 80 },
     ],
   },
   tools: [
