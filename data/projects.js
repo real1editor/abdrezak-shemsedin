@@ -161,7 +161,7 @@ export const portfolioData = {
     ai: [
       { name: "TensorFlow", slug: "tensorflow", level: 74 },
       { name: "scikit-learn", slug: "scikitlearn", level: 76 },
-      { name: "OpenAI API", slug: "openai", level: 78 },
+      { name: "OpenAI API", slug: "openai", icon: "/icons/openai.svg", level: 78 },
       { name: "LangChain", slug: "langchain", level: 70 },
       { name: "Hugging Face", slug: "huggingface", level: 68 },
     ],

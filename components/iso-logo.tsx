@@ -23,18 +23,18 @@ export default function IsoLogo({ size = 44 }: { size?: number }) {
         </linearGradient>
       </defs>
 
-      {/* Top face (isometric hexagon) */}
+      {/* Outer — equal-angle regular pointy-top hexagon (radius 22, center 24,24) */}
       <path
-        d="M24 2 L36 8 L42 18 L42 30 L24 46 L6 30 L6 18 L12 8 Z"
+        d="M24 2 L43.05 13 L43.05 35 L24 46 L4.95 35 L4.95 13 Z"
         fill="url(#isoFace)"
         stroke="url(#isoEdge)"
         strokeWidth="2"
         strokeLinejoin="round"
       />
 
-      {/* Inner beveled hexagon */}
+      {/* Inner beveled — regular hexagon (radius 13.5) */}
       <path
-        d="M24 12.5 L31.5 16.25 L35.25 22.5 L31.5 28.75 L24 35 L16.5 28.75 L12.75 22.5 L16.5 16.25 Z"
+        d="M24 10.5 L35.69 17.25 L35.69 30.75 L24 37.5 L12.31 30.75 L12.31 17.25 Z"
         fill="rgba(197,168,128,0.07)"
         stroke="#C5A880"
         strokeOpacity="0.55"
@@ -42,16 +42,16 @@ export default function IsoLogo({ size = 44 }: { size?: number }) {
         strokeLinejoin="round"
       />
 
-      {/* Soft inner glow */}
+      {/* Soft inner glow — regular hexagon (radius 9.5) */}
       <path
-        d="M24 14.5 L30.5 17.75 L33.75 22.5 L30.5 27.25 L24 33.5 L17.5 27.25 L14.25 22.5 L17.5 17.75 Z"
+        d="M24 14.5 L32.23 19.25 L32.23 28.75 L24 33.5 L15.77 28.75 L15.77 19.25 Z"
         fill="rgba(224,180,130,0.05)"
       />
 
       {/* Code bracket — opening */}
       <text
-        x="17.2"
-        y="26"
+        x="16.8"
+        y="26.5"
         fontSize="9"
         fontWeight="700"
         fill="#D4C5B9"
@@ -75,8 +75,8 @@ export default function IsoLogo({ size = 44 }: { size?: number }) {
       </text>
       {/* Code bracket — closing */}
       <text
-        x="30.8"
-        y="26"
+        x="31.2"
+        y="26.5"
         fontSize="9"
         fontWeight="700"
         fill="#D4C5B9"
