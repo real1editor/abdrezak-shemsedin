@@ -8,8 +8,8 @@ export default function SeoLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 border-b border-line bg-zinc-950/80 backdrop-blur">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+      <header className="fixed inset-x-0 top-0 z-50 h-16 border-b border-line bg-zinc-950/80 backdrop-blur-md">
+        <div className="mx-auto flex h-full max-w-4xl items-center justify-between px-6">
           <Link href="/" className="text-sm font-semibold text-zinc-100">
             {portfolioData.name}
           </Link>
@@ -35,6 +35,7 @@ export default function SeoLayout({
           </nav>
         </div>
       </header>
+      <div aria-hidden="true" className="h-16 shrink-0" />
       {children}
       <footer className="mt-auto border-t border-line bg-zinc-950">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 px-6 py-8 text-center">

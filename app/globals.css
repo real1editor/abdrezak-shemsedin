@@ -184,14 +184,16 @@ body::after {
   );
 }
 
-main {
-  position: relative;
-  z-index: 1;
-}
-header,
-footer {
-  position: relative;
-  z-index: 1;
+@layer base {
+  main {
+    position: relative;
+    z-index: 1;
+  }
+  header,
+  footer {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 ::selection {
@@ -423,84 +425,45 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-   Custom developer cursor (fine pointers only)
+   Ambient Liquid Spotlight — radial glow that follows the pointer
+   Rears behind content via z-index, no cursor replacement
    ========================================================================== */
 
-/* When custom cursor active, hide the OS cursor over interactive surfaces */
-html.cursor-custom *,
-html.cursor-custom {
-  cursor: none !important;
-}
-
-.cursor-layer {
+.ambient-spotlight {
   position: fixed;
   inset: 0;
-  z-index: 20000;
+  z-index: 1;
   pointer-events: none;
-}
-
-/* --- Precise dot: snaps 1:1 to the pointer, never transitions transform --- */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
-  background: #c5a880;
-  box-shadow: 0 0 12px rgba(197, 168, 128, 0.55);
   opacity: 0;
-  transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease,
-    background-color 0.2s ease, box-shadow 0.25s ease;
-  will-change: transform;
+  transition: opacity 0.6s ease;
+  background: radial-gradient(
+    600px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(197, 168, 128, 0.05) 0%,
+    rgba(197, 168, 128, 0.025) 35%,
+    transparent 70%
+  );
 }
 
-.cursor-dot.is-on {
+.ambient-spotlight.spot-on {
   opacity: 1;
 }
 
-.cursor-dot.is-press {
-  width: 6px;
-  height: 6px;
-  background: #d4c5b9;
-  box-shadow: 0 0 14px rgba(212, 197, 185, 0.7);
+/* Tightened bloom when hovering interactive elements — deep blue reveal */
+.ambient-spotlight.spot-focus {
+  background: radial-gradient(
+    420px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(37, 99, 235, 0.22) 0%,
+    rgba(37, 99, 235, 0.11) 30%,
+    rgba(37, 99, 235, 0.03) 55%,
+    transparent 70%
+  );
 }
 
-/* --- Trailing ring: follows with smooth lerp drive in rAF (no transform transition) --- */
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 9999px;
-  border: 1.5px solid rgba(197, 168, 128, 0.75);
-  background: rgba(197, 168, 128, 0.06);
-  opacity: 0;
-  transition: opacity 0.25s ease, width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease,
-    background-color 0.25s ease, box-shadow 0.35s ease;
-  will-change: transform;
-}
-
-.cursor-ring.is-on {
-  opacity: 1;
-}
-
-.cursor-ring.is-hover {
-  width: 64px;
-  height: 64px;
-  border-color: rgba(212, 197, 185, 0.95);
-  background: rgba(197, 168, 128, 0.1);
-  box-shadow: 0 0 0 1px rgba(197, 168, 128, 0.12),
-    0 0 40px -8px rgba(197, 168, 128, 0.5);
-}
-
-.cursor-ring.is-press {
-  width: 22px;
-  height: 22px;
-  border-color: rgba(232, 203, 176, 1);
-  background: rgba(197, 168, 128, 0.35);
+/* Disable on touch / small screens */
+@media (pointer: coarse), (max-width: 767px) {
+  .ambient-spotlight {
+    display: none;
+  }
 }
 
 /* ==========================================================================
