@@ -125,6 +125,7 @@ export default function Hero() {
                   alt={`Environmental portrait of ${portfolioData.name}`}
                   fill
                   priority
+                  unoptimized
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
                   style={{
