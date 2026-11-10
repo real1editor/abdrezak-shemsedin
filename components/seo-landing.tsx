@@ -65,7 +65,7 @@ export default function SeoLanding({
           <h2 className="text-xl font-bold text-zinc-100">{content.cta}</h2>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="mailto:real1editor@gmail.com"
+              href={`mailto:${portfolioData.socials.email}`}
               className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-zinc-950 transition-colors hover:bg-emerald-400"
             >
               Email me

@@ -1,5 +1,11 @@
-function createBrandIcon(path, label) {
-  function BrandIcon({ className = "" }) {
+import React from "react";
+
+export interface IconProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
+
+function createBrandIcon(path: string, label: string) {
+  return function BrandIcon({ className = "", ...props }: IconProps) {
     return (
       <svg
         role="img"
@@ -9,12 +15,12 @@ function createBrandIcon(path, label) {
         fill="currentColor"
         aria-label={label}
         className={className}
+        {...props}
       >
         <path d={path} />
       </svg>
     );
-  }
-  return BrandIcon;
+  };
 }
 
 export const GithubIcon = createBrandIcon(

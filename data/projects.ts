@@ -1,4 +1,6 @@
-export const portfolioData = {
+import { PortfolioData } from "@/types/portfolio";
+
+export const portfolioData: PortfolioData = {
   firstName: "Abdrezak",
   lastName: "Shemsedin",
   name: "Abdrezak Shemsedin",
@@ -273,6 +275,17 @@ export const portfolioData = {
       thumb: "/projects/nurotewedede.jpg",
       liveUrl: "#",
       githubUrl: "#",
+      role: "Lead Full-Stack Architect",
+      highlights: [
+        "Cart & checkout lifecycle with dynamic order state management",
+        "Role-based admin dashboard with real-time stock notifications",
+        "Optimized MongoDB indexing for sub-100ms catalog queries",
+      ],
+      architecture: [
+        "Next.js App Router for server-rendered storefront",
+        "MongoDB Aggregation Pipeline for fast product filters",
+        "RESTful API routes with JWT session security",
+      ],
     },
     {
       title: "Merkato",
@@ -283,6 +296,17 @@ export const portfolioData = {
       thumb: "/projects/merkato.jpg",
       liveUrl: "#",
       githubUrl: "#",
+      role: "Full-Stack Engineer",
+      highlights: [
+        "Vendor storefront partitioning and product inventory sync",
+        "Real-time order tracking using WebSocket updates",
+        "Optimized PostgreSQL schema with ACID transaction guarantees",
+      ],
+      architecture: [
+        "React frontend paired with Node.js/Express backend",
+        "PostgreSQL database with connection pooling",
+        "State management with React context and custom hooks",
+      ],
     },
     {
       title: "Visit Wolaita",
@@ -293,6 +317,17 @@ export const portfolioData = {
       thumb: "/projects/visit-wolaita.jpg",
       liveUrl: "#",
       githubUrl: "#",
+      role: "Frontend & Geospatial Developer",
+      highlights: [
+        "Interactive Mapbox geospatial overlays of regional attractions",
+        "Dynamic photo gallery with responsive WebP image optimization",
+        "Cultural heritage timeline and curated tour packages",
+      ],
+      architecture: [
+        "Next.js & TypeScript for strict type safety",
+        "Mapbox GL JS with custom geoJSON markers",
+        "Tailwind CSS responsive layout optimized for mobile travelers",
+      ],
     },
     {
       title: "Real1Editor",
@@ -303,6 +338,17 @@ export const portfolioData = {
       thumb: "/projects/real1editor.jpg",
       liveUrl: "https://real1editor.vercel.app",
       githubUrl: "https://github.com/real1editor",
+      role: "Solo Developer & Designer",
+      highlights: [
+        "Custom branding, typography, and dark-earth aesthetic",
+        "95+ Google Lighthouse scores across Performance and SEO",
+        "Modular client-acquisition funnel with direct communication hooks",
+      ],
+      architecture: [
+        "Next.js 16 App Router on Vercel Edge",
+        "Framer Motion 12 hardware-accelerated animations",
+        "Semantic HTML5 and JSON-LD schema integration",
+      ],
     },
     {
       title: "CampusConnect",
@@ -313,6 +359,17 @@ export const portfolioData = {
       thumb: "/projects/campusconnect.jpg",
       liveUrl: "#",
       githubUrl: "#",
+      role: "Mobile App Developer",
+      highlights: [
+        "Offline-first local cache with instant background synchronization",
+        "Push notifications for class cancellations and campus notices",
+        "Student study group discovery with location-aware recommendations",
+      ],
+      architecture: [
+        "React Native with Expo framework",
+        "Supabase PostgreSQL with Row Level Security (RLS)",
+        "AsyncStorage for resilient offline persistence",
+      ],
     },
     {
       title: "InsightBoard",
@@ -323,6 +380,17 @@ export const portfolioData = {
       thumb: "/projects/insightboard.jpg",
       liveUrl: "#",
       githubUrl: "#",
+      role: "Data Engineer & Full-Stack Builder",
+      highlights: [
+        "Python-driven automated data ingestion and aggregation",
+        "Interactive visualization charts with drill-down filters",
+        "One-click PDF and CSV export generation for executive reports",
+      ],
+      architecture: [
+        "Next.js with Recharts visualization suite",
+        "Prisma ORM connecting to PostgreSQL",
+        "Python data processing pipeline using NumPy & Pandas",
+      ],
     },
   ],
   faq: [
