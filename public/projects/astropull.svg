@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Astropull motion design animation cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#181512"/>
+      <stop offset="0.5" stop-color="#1e1712"/>
+      <stop offset="1" stop-color="#241b13"/>
+    </linearGradient>
+    <radialGradient id="planet" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#e2bd98"/>
+      <stop offset="0.55" stop-color="#c5a880"/>
+      <stop offset="1" stop-color="#6f5d4f"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.55" cy="0.38" r="0.5">
+      <stop offset="0" stop-color="#e2bd98" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#e2bd98" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e2bd98" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#8a6a4a" stop-opacity="0.35"/>
+    </linearGradient>
+    <pattern id="stars" width="90" height="90" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="20" r="1" fill="#e2bd98" fill-opacity="0.5"/>
+      <circle cx="62" cy="48" r="1.2" fill="#c5a880" fill-opacity="0.35"/>
+      <circle cx="38" cy="76" r="0.8" fill="#e2bd98" fill-opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#stars)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g transform="translate(500 220)">
+    <circle r="96" fill="url(#planet)"/>
+    <ellipse cx="0" cy="0" rx="168" ry="48" fill="none" stroke="url(#ring)" stroke-width="3" transform="rotate(-18)"/>
+    <ellipse cx="0" cy="0" rx="196" ry="62" fill="none" stroke="#c5a880" stroke-opacity="0.16" stroke-width="1.5" transform="rotate(-18)"/>
+    <circle cx="-30" cy="-34" r="16" fill="#8a6a4a" fill-opacity="0.28"/>
+    <circle cx="34" cy="18" r="24" fill="#8a6a4a" fill-opacity="0.2"/>
+    <circle cx="52" cy="-42" r="10" fill="#8a6a4a" fill-opacity="0.25"/>
+  </g>
+
+  <!-- Motion trails -->
+  <g fill="none" stroke="#c5a880" stroke-linecap="round">
+    <path d="M96 330c64-24 112-64 140-120" stroke-opacity="0.5" stroke-width="2"/>
+    <path d="M120 352c58-18 100-52 126-102" stroke-opacity="0.3" stroke-width="1.5"/>
+    <path d="M150 372c46-14 82-42 104-84" stroke-opacity="0.18" stroke-width="1.2"/>
+  </g>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <text x="64" y="404" fill="#c5a880" font-size="12" font-weight="700" letter-spacing="4">MOTION DESIGN</text>
+    <text x="64" y="442" fill="#f3ece5" font-size="38" font-weight="700" letter-spacing="-1">Astropull</text>
+    <text x="64" y="468" fill="#b4a294" font-size="14" letter-spacing="0.4">Storyboard · Animation · Sound</text>
+  </g>
+
+  <rect x="64" y="72" width="44" height="3" fill="#c5a880"/>
+  <text x="736" y="80" text-anchor="end" fill="#94806f" font-family="ui-monospace, monospace" font-size="10" letter-spacing="2">VIDEO / 2026</text>
+</svg>

@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import PortfolioView from "@/components/portfolio-view";
+import { getDomainMetadata, getDomainView } from "@/data/site";
+
+export const metadata: Metadata = getDomainMetadata("fullstack");
+
+export default function FullStackPage() {
+  return <PortfolioView view={getDomainView("fullstack")} />;
+}

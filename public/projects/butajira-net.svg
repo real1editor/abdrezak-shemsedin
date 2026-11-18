@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Butajira campus network management system cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#181512"/>
+      <stop offset="0.55" stop-color="#1e1712"/>
+      <stop offset="1" stop-color="#241b13"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.16" r="0.7">
+      <stop offset="0" stop-color="#c5a880" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#c5a880" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c5a880"/>
+      <stop offset="1" stop-color="#8a6a4a"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#c5a880" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g opacity="0.55" stroke="#c5a880" stroke-opacity="0.18" fill="none">
+    <path d="M80 120h640M80 190h640M80 260h640M80 330h640"/>
+    <path d="M160 70v360M280 70v360M400 70v360M520 70v360M640 70v360"/>
+  </g>
+
+  <g filter="url(#soft)" opacity="0.45">
+    <circle cx="590" cy="150" r="80" fill="#c5a880" fill-opacity="0.12"/>
+  </g>
+
+  <!-- Network topology -->
+  <g fill="none" stroke="url(#line)" stroke-width="1.6">
+    <path d="M245 175 L390 128 L535 190 L580 300 L455 352 L300 300 Z"/>
+    <path d="M390 128 L455 352"/>
+    <path d="M245 175 L455 352"/>
+    <path d="M535 190 L300 300"/>
+    <path d="M245 175 L580 300"/>
+  </g>
+
+  <g>
+    <circle cx="390" cy="128" r="15" fill="#1a1613" stroke="#e2bd98" stroke-width="2"/>
+    <circle cx="390" cy="128" r="5" fill="#e2bd98"/>
+    <circle cx="245" cy="175" r="11" fill="#1a1613" stroke="#c5a880" stroke-width="1.6"/>
+    <circle cx="535" cy="190" r="11" fill="#1a1613" stroke="#c5a880" stroke-width="1.6"/>
+    <circle cx="580" cy="300" r="11" fill="#1a1613" stroke="#c5a880" stroke-width="1.6"/>
+    <circle cx="455" cy="352" r="13" fill="#1a1613" stroke="#e2bd98" stroke-width="2"/>
+    <circle cx="455" cy="352" r="4" fill="#e2bd98"/>
+    <circle cx="300" cy="300" r="11" fill="#1a1613" stroke="#c5a880" stroke-width="1.6"/>
+  </g>
+
+  <g fill="#b4a294" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="1.2">
+    <text x="408" y="124">CORE SW</text>
+    <text x="473" y="356">RACK 04</text>
+    <text x="596" y="304">AP-12</text>
+    <text x="226" y="166" text-anchor="end">PORT 24</text>
+  </g>
+
+  <!-- Text block -->
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <text x="64" y="392" fill="#c5a880" font-size="12" font-weight="700" letter-spacing="4">CAMPUS INFRASTRUCTURE</text>
+    <text x="64" y="432" fill="#f3ece5" font-size="38" font-weight="700" letter-spacing="-1">Butajira Network</text>
+    <text x="64" y="458" fill="#b4a294" font-size="14" letter-spacing="0.4">Switches · Ports · Cable runs · Audit records</text>
+  </g>
+
+  <rect x="64" y="72" width="44" height="3" fill="#c5a880"/>
+  <text x="736" y="80" text-anchor="end" fill="#94806f" font-family="ui-monospace, monospace" font-size="10" letter-spacing="2">ECE / 2025</text>
+</svg>
