@@ -214,6 +214,17 @@ body::after {
   filter: invert(1) brightness(0.28);
 }
 
+/* Resume sheet: keep small muted text at AA contrast on both paper surfaces. */
+[data-theme="light"] .resume-sheet {
+  --color-zinc-500: #5a4a3d;
+  --color-emerald-300: #6a4a33;
+  --color-emerald-400: #6a4a33;
+  --color-emerald-500: #6a4a33;
+}
+[data-theme="dark"] .resume-sheet {
+  --color-zinc-500: #a2907f;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

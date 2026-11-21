@@ -159,6 +159,27 @@ export function FadeIn({
   );
 }
 
+/* Simple Icons removed several brand marks (Adobe, Canva, CapCut, Power BI, Excel).
+   Render a monogram badge locally so those tools never show a broken image. */
+const localLogoLabels: Record<string, string> = {
+  microsoftexcel: "XLS",
+  powerbi: "PBI",
+  adobepremierepro: "Pr",
+  adobeaftereffects: "Ae",
+  adobephotoshop: "Ps",
+  adobeaudition: "Au",
+  capcut: "CC",
+  canva: "Cv",
+};
+
+function logoSource(skill: Skill | Tool): string {
+  if (skill.icon) return skill.icon;
+  const label = localLogoLabels[skill.slug];
+  if (!label) return `https://cdn.simpleicons.org/${skill.slug}/c5a880`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#241b13"/><rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="#c5a880" stroke-opacity="0.6"/><text x="32" y="41" text-anchor="middle" font-family="Arial,sans-serif" font-size="${label.length > 2 ? 18 : 23}" font-weight="700" fill="#c5a880">${label}</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
 export function TooltipBadge({ skill }: { skill: Skill | Tool }) {
   const [show, setShow] = useState(false);
   const level = "level" in skill ? skill.level : undefined;
@@ -172,7 +193,7 @@ export function TooltipBadge({ skill }: { skill: Skill | Tool }) {
     >
       <div className="card flex w-full flex-col items-center gap-2 px-3 py-4 text-center cursor-default">
         <Image
-          src={skill.icon ?? `https://cdn.simpleicons.org/${skill.slug}/c5a880`}
+          src={logoSource(skill)}
           alt={`${skill.name} logo`}
           width={26}
           height={26}

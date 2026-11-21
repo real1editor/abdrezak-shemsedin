@@ -23,7 +23,7 @@ export default function ResumeView({ view }: { view: PortfolioView }) {
   ].filter((group) => group.items.length > 0);
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16 print:max-w-none print:px-0 print:py-0">
+    <main className="resume-sheet mx-auto max-w-3xl px-6 py-16 print:max-w-none print:px-0 print:py-0">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4 print:hidden">
         <Link
           href={backHref}
@@ -212,6 +212,6 @@ export default function ResumeView({ view }: { view: PortfolioView }) {
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 }

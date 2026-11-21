@@ -7,12 +7,12 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-2 px-6 py-8 text-center text-xs text-zinc-600">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-2 px-6 py-8 text-center text-xs text-zinc-400">
         <p>
           &copy; {new Date().getFullYear()} {data.name}. All rights reserved.
         </p>
         {!meta.isMaster && (
-          <p className="text-zinc-500">
+          <p>
             {meta.title} &middot; {data.location}
           </p>
         )}

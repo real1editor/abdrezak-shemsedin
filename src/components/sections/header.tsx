@@ -35,7 +35,11 @@ export default function Header() {
         className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-emerald-500 via-emerald-300 to-teal-300"
       />
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <a href="#home" className="flex items-center" aria-label="Go to home">
+        <a
+          href="#home"
+          className="flex items-center"
+          aria-label="AS — Abdrezak Shemsedin, go to home"
+        >
           <IsoLogo />
         </a>
         <nav aria-label="Primary navigation" className="hidden items-center gap-5 md:flex">
