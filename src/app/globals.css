@@ -153,7 +153,6 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.35s ease, color 0.35s ease;
   position: relative;
 }
 
